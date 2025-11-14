@@ -30,8 +30,17 @@ export function AnimatedText({
 
   // Set initial hidden state synchronously before paint to prevent flash
   useLayoutEffect(() => {
-    if (textRef.current) {
-      gsap.set(textRef.current, { opacity: 0, y: 50 });
+    if (textRef.current && typeof window !== 'undefined') {
+      try {
+        // Only set hidden if element is not already in viewport
+        const rect = textRef.current.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!isInViewport) {
+          gsap.set(textRef.current, { opacity: 0, y: 50 });
+        }
+      } catch (_err) {
+        // Ignore SecurityError - element will show normally
+      }
     }
   }, []);
 
@@ -48,26 +57,34 @@ export function AnimatedText({
     }
 
     // Kill any remaining ScrollTriggers associated with this element
-    for (const trigger of ScrollTrigger.getAll()) {
-      if (trigger.vars?.trigger === element || trigger.trigger === element) {
-        trigger.kill();
+    try {
+      for (const trigger of ScrollTrigger.getAll()) {
+        if (trigger.vars?.trigger === element || trigger.trigger === element) {
+          trigger.kill();
+        }
       }
+    } catch (_err) {
+      // Ignore SecurityError during cleanup
     }
 
     // Use requestAnimationFrame to ensure layout is complete
     requestAnimationFrame(() => {
-      // Force refresh ScrollTrigger to recalculate positions
+      let rect: DOMRect;
+      let viewportHeight: number;
+      let documentHeight: number;
+      let scrollTop: number;
+
+      // Safely get element position
       try {
-        ScrollTrigger.refresh();
+        rect = element.getBoundingClientRect();
+        viewportHeight = window.innerHeight;
+        documentHeight = document.documentElement.scrollHeight;
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       } catch (_err) {
-        // Ignore SecurityError or browser restrictions (e.g., cross-origin iframes)
+        // SecurityError: show element immediately
+        gsap.set(element, { opacity: 1, y: 0 });
+        return;
       }
-      
-      // Check if element is already in viewport (visible without scrolling)
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
       // More accurate viewport detection - check if element is past the 80% trigger point
       const triggerPoint = viewportHeight * 0.8;
@@ -177,27 +194,38 @@ export function AnimatedText({
         // Check if element is already past trigger point after animation setup
         // If so, manually trigger the animation immediately
         requestAnimationFrame(() => {
-          try {
-            ScrollTrigger.refresh();
-          } catch (_err) {
-            // Ignore SecurityError
-          }
-          const currentRect = element.getBoundingClientRect();
-          const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const currentElementTop = currentRect.top + currentScrollTop;
-          const currentPageBottom = document.documentElement.scrollHeight;
-          
-          // More aggressive check for bottom elements
-          if (isInLastQuarter || currentElementTop > currentPageBottom * 0.75) {
-            // Element is in last quarter, show immediately
-            animation?.play();
-          } else {
-            // Check if past trigger point
-            const currentTriggerPoint = isNearPageBottom ? viewportHeight : viewportHeight * 0.8;
-            if (currentRect.top < currentTriggerPoint) {
-              animation?.play();
+          setTimeout(() => {
+            try {
+              const currentRect = element.getBoundingClientRect();
+              const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const currentElementTop = currentRect.top + currentScrollTop;
+              const currentPageBottom = document.documentElement.scrollHeight;
+              
+              // More aggressive check for bottom elements
+              if (isInLastQuarter || currentElementTop > currentPageBottom * 0.75) {
+                // Element is in last quarter, show immediately
+                animation?.play();
+              } else {
+                // Check if past trigger point
+                const currentTriggerPoint = isNearPageBottom ? viewportHeight : viewportHeight * 0.8;
+                if (currentRect.top < currentTriggerPoint) {
+                  animation?.play();
+                } else {
+                  // Final fallback: show immediately if ScrollTrigger doesn't work
+                  try {
+                    // Try to refresh once, but don't retry if it fails
+                    ScrollTrigger.refresh();
+                  } catch (_err) {
+                    // If refresh fails, show immediately as fallback
+                    gsap.set(element, { opacity: 1, y: 0 });
+                  }
+                }
+              }
+            } catch (_err) {
+              // SecurityError: show immediately
+              gsap.set(element, { opacity: 1, y: 0 });
             }
-          }
+          }, 150);
         });
 
         animationRef.current = animation;
@@ -210,10 +238,14 @@ export function AnimatedText({
         animationRef.current = null;
       }
       // Kill any remaining ScrollTriggers for this element
-      for (const trigger of ScrollTrigger.getAll()) {
-        if (trigger.vars?.trigger === element || trigger.trigger === element) {
-          trigger.kill();
+      try {
+        for (const trigger of ScrollTrigger.getAll()) {
+          if (trigger.vars?.trigger === element || trigger.trigger === element) {
+            trigger.kill();
+          }
         }
+      } catch (_err) {
+        // Ignore SecurityError during cleanup
       }
     };
   }, [children, delay, duration, stagger, split]);

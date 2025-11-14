@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface UseNavbarScrollReturn {
   readonly isInHero: boolean;
@@ -14,45 +15,75 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
   const lastScrollY = useRef(0);
   const heroRef = useRef<HTMLElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Find hero section element (with retry for client-side rendering)
-    const findHeroSection = () => {
-      heroRef.current = document.getElementById('hero-section');
-      return heroRef.current;
+    // Reset state when pathname changes (navigation)
+    setIsInHero(true);
+    setIsVisible(true);
+    lastScrollY.current = 0;
+    
+    // Disconnect previous observer if exists
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    // Find hero section element with multiple retry strategies
+    const findHeroSection = (): HTMLElement | null => {
+      return document.getElementById('hero-section');
     };
 
     // Intersection Observer for hero section
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           setIsInHero(entry.isIntersecting);
-        });
+        }
       },
       {
         threshold: 0.1, // Trigger when 10% of hero is visible
         rootMargin: '-64px 0px 0px 0px', // Account for navbar height
       }
     );
-
-    // Try to find immediately, then retry after a short delay if not found
-    let heroElement = findHeroSection();
-    let timeoutId: NodeJS.Timeout | null = null;
     
-    if (heroElement) {
-      observer.observe(heroElement);
-    } else {
-      timeoutId = setTimeout(() => {
-        heroElement = findHeroSection();
-        if (heroElement) {
-          observer.observe(heroElement);
-        }
-      }, 100);
-    }
+    observerRef.current = observer;
+
+    // Try to find hero element with multiple retry attempts
+    let retryCount = 0;
+    const maxRetries = 20; // Try for ~2 seconds (20 * 100ms)
+    
+    const tryFindAndObserve = () => {
+      const heroElement = findHeroSection();
+      
+      if (heroElement) {
+        heroRef.current = heroElement;
+        observer.observe(heroElement);
+        // Immediately check if element is in viewport
+        const rect = heroElement.getBoundingClientRect();
+        const isVisible = rect.top < globalThis.innerHeight && rect.bottom > 0;
+        setIsInHero(isVisible);
+        return true;
+      }
+      
+      retryCount++;
+      if (retryCount < maxRetries) {
+        // Use requestAnimationFrame for better timing
+        requestAnimationFrame(() => {
+          setTimeout(tryFindAndObserve, 50);
+        });
+      }
+      
+      return false;
+    };
+
+    // Start trying immediately
+    tryFindAndObserve();
 
     // Scroll direction detection
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const currentScrollY = globalThis.scrollY || globalThis.pageYOffset || 0;
 
       // Determine scroll direction
       if (currentScrollY > lastScrollY.current) {
@@ -79,7 +110,7 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
     let ticking = false;
     const throttledHandleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
+        globalThis.requestAnimationFrame(() => {
           handleScroll();
           ticking = false;
         });
@@ -87,16 +118,16 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
       }
     };
 
-    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    globalThis.addEventListener('scroll', throttledHandleScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', throttledHandleScroll);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
       }
+      globalThis.removeEventListener('scroll', throttledHandleScroll);
     };
-  }, []);
+  }, [pathname]); // Re-run when pathname changes
 
   return {
     isInHero,

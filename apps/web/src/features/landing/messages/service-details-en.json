@@ -1,0 +1,192 @@
+{
+  "bpkb-based-financing": {
+    "headline": "BPKB-based Financing",
+    "shortDescription": "Use your vehicle's BPKB as collateral to get quick and secure funding. Easy process and suitable for urgent needs.",
+    "keyBenefits": [
+      "Fast application process",
+      "Easy requirements",
+      "Flexible fund disbursement",
+      "Suitable for short-term needs"
+    ],
+    "fundingDetails": {
+      "collateral": "Motorcycle / Car BPKB",
+      "amount": "adjusted to vehicle value",
+      "tenor": "flexible according to partner assessment",
+      "interest": "follows financing partner policy"
+    },
+    "requirements": [
+      "Original BPKB under applicant or immediate family name",
+      "ID card & supporting documents",
+      "Vehicle photo (optional, depends on partner)"
+    ],
+    "process": [
+      "Submit basic data through Savlo",
+      "Our team connects you to financing partners",
+      "Survey & document verification",
+      "Fund approval",
+      "Disbursement"
+    ],
+    "bestFor": [
+      "Urgent funding needs",
+      "Additional working capital",
+      "Emergency payments"
+    ],
+    "cta": {
+      "heading": "Ready to apply?",
+      "login": "Login",
+      "createAccount": "Create Account"
+    }
+  },
+  "property-based-financing": {
+    "headline": "Property-based Financing",
+    "shortDescription": "Financing with property certificate (SHM/SHGB) collateral with disbursement value up to 65% of property value, maximum IDR 5 Billion.",
+    "keyBenefits": [
+      "Large limit",
+      "Safe & transparent process",
+      "Suitable for large capital needs",
+      "Long & flexible tenor"
+    ],
+    "fundingDetails": {
+      "collateral": "SHM / SHGB",
+      "amount": "up to 65% of property value",
+      "maxLimit": "IDR 5 Billion",
+      "tenor": "adjusted to partner",
+      "interest": "follows partner policy"
+    },
+    "requirements": [
+      "SHM/SHGB certificate",
+      "Owner identity",
+      "Business documents (if required)",
+      "Income proof or cash flow"
+    ],
+    "process": [
+      "Fill property data",
+      "Partner appraisal assessment",
+      "Feasibility analysis",
+      "Fund approval",
+      "Disbursement"
+    ],
+    "bestFor": [
+      "Business expansion",
+      "Project capital",
+      "Debt consolidation"
+    ],
+    "cta": {
+      "heading": "Want to check eligibility?",
+      "login": "Login",
+      "createAccount": "Create Account"
+    }
+  },
+  "ap-invoice-financing": {
+    "headline": "AP Invoice Financing",
+    "shortDescription": "Finance accounts payable invoices up to IDR 2 Billion to help smooth your supplier payments.",
+    "keyBenefits": [
+      "Avoid supplier payment delays",
+      "Maintain good relationships with vendors",
+      "Keep cash flow stable"
+    ],
+    "fundingDetails": {
+      "limit": "up to IDR 2 Billion",
+      "invoiceType": "AP (Accounts Payable)",
+      "tenor": "follows invoice due date",
+      "interest": "follows partner"
+    },
+    "requirements": [
+      "Valid & verified invoice",
+      "Business documents",
+      "Bank statement / cash flow report"
+    ],
+    "process": [
+      "Upload invoice",
+      "Invoice verification by partner",
+      "Funding approval",
+      "Funds disbursed to applicant",
+      "Repayment according to due date"
+    ],
+    "bestFor": [
+      "Businesses that need to maintain cash flow",
+      "Companies with large supplier payments",
+      "Urgent payment situations"
+    ],
+    "cta": {
+      "heading": "Access invoice financing now.",
+      "login": "Login",
+      "createAccount": "Create Account"
+    }
+  },
+  "ar-invoice-financing": {
+    "headline": "AR Invoice Financing",
+    "shortDescription": "Optimize working capital by financing accounts receivable up to IDR 5 Billion. Accelerate cash flow without disrupting operations.",
+    "keyBenefits": [
+      "Accelerate payment receipt",
+      "Strengthen cash flow",
+      "Does not disrupt customer relationships"
+    ],
+    "fundingDetails": {
+      "limit": "up to IDR 5 Billion",
+      "invoiceType": "AR (Accounts Receivable)",
+      "tenor": "follows invoice due date",
+      "interest": "follows partner"
+    },
+    "requirements": [
+      "Valid AR invoice",
+      "Contract / PO from customer",
+      "Business documents & financial reports"
+    ],
+    "process": [
+      "Upload invoice & related documents",
+      "Verification by financing partner",
+      "Approval",
+      "Funds disbursed",
+      "Repayment according to terms"
+    ],
+    "bestFor": [
+      "B2B businesses with large receivables",
+      "Companies wanting to accelerate cash-in",
+      "Daily working capital needs"
+    ],
+    "cta": {
+      "heading": "Start optimizing your working capital.",
+      "login": "Login",
+      "createAccount": "Create Account"
+    }
+  },
+  "ecosystem-banking-solutions": {
+    "headline": "Ecosystem Banking Solutions",
+    "shortDescription": "Premium solution for businesses that have difficulty meeting conventional financing eligibility standards. Designed with a much more flexible approach.",
+    "keyBenefits": [
+      "Access to exclusive financial institutions",
+      "More flexible eligibility analysis",
+      "Personal assistance",
+      "Unlimited consultation"
+    ],
+    "fundingDetails": {
+      "amount": "adjusted to partner analysis results",
+      "products": "varied and customized per case",
+      "process": "more personal compared to regular gateway"
+    },
+    "requirements": [
+      "Savlo+ membership",
+      "Eligibility assessment by partner",
+      "Business documents as requested"
+    ],
+    "process": [
+      "Initial consultation (free)",
+      "Business assessment by Savlo+ team",
+      "Matching with partner financial institutions",
+      "Case presentation",
+      "Approval & funding"
+    ],
+    "bestFor": [
+      "Businesses with non-standard financial structure",
+      "Companies needing very specific solutions",
+      "Situations not suitable for conventional institution requirements"
+    ],
+    "cta": {
+      "heading": "Want to join Savlo+?",
+      "login": "Login",
+      "createAccount": "Create Account"
+    }
+  }
+}
+

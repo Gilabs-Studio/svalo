@@ -10,6 +10,7 @@ import { useParallax } from '../hooks/useParallax';
 import Lottie from 'lottie-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getServiceSlug } from '../lib/service-slug';
 
 interface ServicesSectionProps {
   readonly locale: Locale;
@@ -143,7 +144,7 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
 
         {/* CTA - Always at bottom */}
         <div className="mt-auto pt-4">
-          <Link href={`/${locale}/products`} className="block">
+          <Link href={`/${locale}/services/${getServiceSlug(product.title)}`} className="block">
             <Button
               variant="outline"
               className="w-full border-white/20 text-white hover:bg-white/10 hover:border-white/40 bg-transparent"

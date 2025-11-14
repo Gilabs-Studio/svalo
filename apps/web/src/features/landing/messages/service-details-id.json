@@ -1,0 +1,192 @@
+{
+  "bpkb-based-financing": {
+    "headline": "Pembiayaan Berbasis BPKB",
+    "shortDescription": "Gunakan BPKB kendaraan Anda sebagai jaminan untuk mendapatkan pendanaan cepat dan aman. Proses mudah dan cocok untuk kebutuhan mendesak.",
+    "keyBenefits": [
+      "Proses pengajuan cepat",
+      "Persyaratan mudah",
+      "Pencairan dana fleksibel",
+      "Cocok untuk kebutuhan jangka pendek"
+    ],
+    "fundingDetails": {
+      "collateral": "BPKB Motor / Mobil",
+      "amount": "menyesuaikan nilai kendaraan",
+      "tenor": "fleksibel sesuai penilaian mitra",
+      "interest": "mengikuti kebijakan mitra pembiayaan"
+    },
+    "requirements": [
+      "BPKB asli atas nama pemohon atau keluarga inti",
+      "KTP & dokumen pendukung",
+      "Foto kendaraan (opsional tergantung mitra)"
+    ],
+    "process": [
+      "Ajukan data dasar melalui Savlo",
+      "Tim kami menghubungkan ke mitra pembiayaan",
+      "Survey & verifikasi dokumen",
+      "Persetujuan dana",
+      "Pencairan"
+    ],
+    "bestFor": [
+      "Kebutuhan dana cepat",
+      "Modal kerja tambahan",
+      "Pembayaran darurat"
+    ],
+    "cta": {
+      "heading": "Siap mengajukan?",
+      "login": "Masuk",
+      "createAccount": "Buat Akun"
+    }
+  },
+  "property-based-financing": {
+    "headline": "Pembiayaan Berbasis Properti",
+    "shortDescription": "Pembiayaan dengan jaminan sertifikat properti (SHM/SHGB) dengan nilai pencairan hingga 65% dari nilai properti, maksimum IDR 5 Miliar.",
+    "keyBenefits": [
+      "Limit besar",
+      "Proses aman & transparan",
+      "Cocok untuk kebutuhan modal besar",
+      "Tenor panjang & fleksibel"
+    ],
+    "fundingDetails": {
+      "collateral": "SHM / SHGB",
+      "amount": "hingga 65% dari nilai properti",
+      "maxLimit": "IDR 5 Miliar",
+      "tenor": "menyesuaikan mitra",
+      "interest": "mengikuti kebijakan mitra"
+    },
+    "requirements": [
+      "Sertifikat SHM/SHGB",
+      "Identitas pemilik",
+      "Dokumen usaha (jika diperlukan)",
+      "Bukti penghasilan atau cash flow"
+    ],
+    "process": [
+      "Isi data properti",
+      "Penilaian appraisal mitra",
+      "Analisa kelayakan",
+      "Persetujuan dana",
+      "Pencairan"
+    ],
+    "bestFor": [
+      "Ekspansi usaha",
+      "Modal proyek",
+      "Konsolidasi utang"
+    ],
+    "cta": {
+      "heading": "Ingin cek kelayakan?",
+      "login": "Masuk",
+      "createAccount": "Buat Akun"
+    }
+  },
+  "ap-invoice-financing": {
+    "headline": "Pembiayaan Invoice AP",
+    "shortDescription": "Danai *accounts payable* invoice hingga IDR 2 Miliar untuk membantu kelancaran pembayaran supplier Anda.",
+    "keyBenefits": [
+      "Menghindari keterlambatan pembayaran supplier",
+      "Menjaga hubungan baik dengan vendor",
+      "Menjaga cash flow agar tetap stabil"
+    ],
+    "fundingDetails": {
+      "limit": "hingga IDR 2 Miliar",
+      "invoiceType": "AP (Accounts Payable)",
+      "tenor": "mengikuti jatuh tempo invoice",
+      "interest": "mengikuti mitra"
+    },
+    "requirements": [
+      "Invoice valid & terverifikasi",
+      "Dokumen usaha",
+      "Rekening koran / laporan kas"
+    ],
+    "process": [
+      "Unggah invoice",
+      "Verifikasi invoice oleh mitra",
+      "Persetujuan pendanaan",
+      "Dana cair ke pemohon",
+      "Pelunasan sesuai jatuh tempo"
+    ],
+    "bestFor": [
+      "Bisnis yang perlu menjaga arus kas",
+      "Perusahaan dengan pembayaran supplier besar",
+      "Situasi pembayaran mendesak"
+    ],
+    "cta": {
+      "heading": "Akses pendanaan invoice sekarang.",
+      "login": "Masuk",
+      "createAccount": "Buat Akun"
+    }
+  },
+  "ar-invoice-financing": {
+    "headline": "Pembiayaan Invoice AR",
+    "shortDescription": "Optimalkan modal kerja dengan mendanai *accounts receivable* hingga IDR 5 Miliar. Akselerasi cash flow tanpa mengganggu operasional.",
+    "keyBenefits": [
+      "Mempercepat penerimaan pembayaran",
+      "Memperkuat arus kas",
+      "Tidak mengganggu hubungan dengan pelanggan"
+    ],
+    "fundingDetails": {
+      "limit": "hingga IDR 5 Miliar",
+      "invoiceType": "AR (Accounts Receivable)",
+      "tenor": "mengikuti jatuh tempo invoice",
+      "interest": "mengikuti mitra"
+    },
+    "requirements": [
+      "Invoice AR yang valid",
+      "Kontrak / PO dari customer",
+      "Dokumen usaha & laporan keuangan"
+    ],
+    "process": [
+      "Unggah invoice & dokumen terkait",
+      "Verifikasi oleh mitra pembiayaan",
+      "Persetujuan",
+      "Dana cair",
+      "Pelunasan sesuai ketentuan"
+    ],
+    "bestFor": [
+      "Bisnis B2B dengan piutang besar",
+      "Perusahaan yang ingin mempercepat cash-in",
+      "Kebutuhan modal kerja harian"
+    ],
+    "cta": {
+      "heading": "Mulai optimalkan modal kerja Anda.",
+      "login": "Masuk",
+      "createAccount": "Buat Akun"
+    }
+  },
+  "ecosystem-banking-solutions": {
+    "headline": "Solusi Banking Ekosistem",
+    "shortDescription": "Solusi premium bagi bisnis yang kesulitan memenuhi standar kelayakan pembiayaan konvensional. Dirancang dengan pendekatan yang jauh lebih fleksibel.",
+    "keyBenefits": [
+      "Akses ke institusi finansial eksklusif",
+      "Analisa kelayakan yang lebih fleksibel",
+      "Pendampingan personal",
+      "Konsultasi tanpa batas"
+    ],
+    "fundingDetails": {
+      "amount": "menyesuaikan hasil analisa mitra",
+      "products": "beragam dan disesuaikan per kasus",
+      "process": "lebih personal dibanding gateway reguler"
+    },
+    "requirements": [
+      "Keanggotaan Savlo+",
+      "Penilaian kelayakan oleh mitra",
+      "Dokumen usaha sesuai permintaan"
+    ],
+    "process": [
+      "Konsultasi awal (gratis)",
+      "Penilaian bisnis oleh tim Savlo+",
+      "Pencocokan dengan institusi finansial mitra",
+      "Presentasi kasus",
+      "Persetujuan & pendanaan"
+    ],
+    "bestFor": [
+      "Bisnis dengan struktur finansial tidak standar",
+      "Perusahaan yang butuh solusi sangat spesifik",
+      "Situasi yang tidak cocok dengan syarat lembaga konvensional"
+    ],
+    "cta": {
+      "heading": "Ingin bergabung dengan Savlo+?",
+      "login": "Masuk",
+      "createAccount": "Buat Akun"
+    }
+  }
+}
+

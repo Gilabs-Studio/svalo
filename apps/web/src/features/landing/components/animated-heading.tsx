@@ -29,8 +29,10 @@ export function AnimatedHeading({
 
   useEffect(() => {
     if (!headingRef.current) return;
+    if (typeof window === 'undefined') return;
 
     const element = headingRef.current;
+    let isMounted = true;
 
     // Cleanup previous animations (this will also cleanup associated ScrollTriggers)
     if (animationRef.current) {
@@ -39,11 +41,15 @@ export function AnimatedHeading({
     }
 
     // Kill any remaining ScrollTriggers associated with this element
-    ScrollTrigger.getAll().forEach((trigger) => {
-      if (trigger.vars?.trigger === element || trigger.trigger === element) {
-        trigger.kill();
-      }
-    });
+    try {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars?.trigger === element || trigger.trigger === element) {
+          trigger.kill();
+        }
+      });
+    } catch (_err) {
+      // Ignore SecurityError
+    }
 
     // Reset element to original content
     const text = typeof children === 'string' ? children : element.textContent || '';
@@ -58,43 +64,79 @@ export function AnimatedHeading({
 
     const wordSpans = element.querySelectorAll('span');
 
-    // Create animation with ScrollTrigger
-    const timeline = gsap.fromTo(
-      wordSpans,
-      {
-        opacity: 0,
-        y: 100,
-        rotationX: -90,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration,
-        delay,
-        stagger: 0.05,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    // Wait for next frame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      if (!isMounted || !element) return;
 
-    animationRef.current = timeline;
+      // Check if element is already in viewport
+      let rect: DOMRect;
+      try {
+        rect = element.getBoundingClientRect();
+      } catch (_err) {
+        // SecurityError fallback: show immediately
+        gsap.set(wordSpans, { opacity: 1, y: 0, rotationX: 0 });
+        return;
+      }
+
+      const viewportHeight = window.innerHeight;
+      const triggerPoint = viewportHeight * 0.85;
+      const isAlreadyVisible = rect.top < triggerPoint && rect.bottom > 0;
+
+      // If already visible, show immediately without ScrollTrigger
+      if (isAlreadyVisible) {
+        gsap.set(wordSpans, { opacity: 1, y: 0, rotationX: 0 });
+        return;
+      }
+
+      // Create animation with ScrollTrigger
+      try {
+        const timeline = gsap.fromTo(
+          wordSpans,
+          {
+            opacity: 0,
+            y: 100,
+            rotationX: -90,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            duration,
+            delay,
+            stagger: 0.05,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          }
+        );
+
+        animationRef.current = timeline;
+      } catch (_err) {
+        // SecurityError fallback: show immediately
+        gsap.set(wordSpans, { opacity: 1, y: 0, rotationX: 0 });
+      }
+    });
 
     return () => {
+      isMounted = false;
       if (animationRef.current) {
         animationRef.current.kill();
         animationRef.current = null;
       }
       // Kill any remaining ScrollTriggers for this element
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars?.trigger === element || trigger.trigger === element) {
-          trigger.kill();
-        }
-      });
+      try {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.vars?.trigger === element || trigger.trigger === element) {
+            trigger.kill();
+          }
+        });
+      } catch (_err) {
+        // Ignore SecurityError during cleanup
+      }
     };
   }, [children, delay, duration]);
 

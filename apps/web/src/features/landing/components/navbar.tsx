@@ -66,6 +66,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const messages = getMessages(locale);
   const t = messages.nav;
   const isLandingRoute = pathname === `/${locale}`;
+  const isServiceDetailRoute = pathname.startsWith(`/${locale}/services/`);
 
   const navItems = [
     { href: `/${locale}`, label: t.home },
@@ -98,7 +99,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
       <div
         className={cn(
           'absolute inset-0 border-b transition-all duration-300',
-          isInHero && isLandingRoute
+          isInHero && (isLandingRoute || isServiceDetailRoute)
             ? 'bg-white/0 border-white/0'
             : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
         )}
@@ -108,7 +109,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
           <span
             className={cn(
               'text-lg font-semibold tracking-tight transition-colors',
-              isInHero && isLandingRoute ? 'text-white' : 'text-gray-900'
+              isInHero && (isLandingRoute || isServiceDetailRoute) ? 'text-white' : 'text-gray-900'
             )}
           >
             Savlo
@@ -123,7 +124,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               href={item.href}
               className={cn(
                 'text-sm font-medium transition-colors relative',
-                isInHero && isLandingRoute
+                isInHero && (isLandingRoute || isServiceDetailRoute)
                   ? isActive(item.href)
                     ? 'text-white'
                     : 'text-white/70 hover:text-white'
@@ -137,7 +138,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                 <span
                   className={cn(
                     'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
-                    isInHero && isLandingRoute ? 'bg-white' : 'bg-gray-900'
+                    isInHero && (isLandingRoute || isServiceDetailRoute) ? 'bg-white' : 'bg-gray-900'
                   )}
                 />
               )}
@@ -146,14 +147,14 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
           <div
             className={cn(
               'h-4 w-px transition-colors',
-              isInHero && isLandingRoute ? 'bg-white/20' : 'bg-gray-300'
+              isInHero && (isLandingRoute || isServiceDetailRoute) ? 'bg-white/20' : 'bg-gray-300'
             )}
           />
           <Link
             href={`/${locale}/auth/login`}
             className={cn(
               'text-sm font-medium transition-colors',
-              isInHero && isLandingRoute
+              isInHero && (isLandingRoute || isServiceDetailRoute)
                 ? 'text-white/70 hover:text-white'
                 : 'text-gray-600 hover:text-gray-900'
             )}
@@ -173,7 +174,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               <button
                 className={cn(
                   'flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-all hover:bg-black/5',
-                  isInHero && isLandingRoute
+                  isInHero && (isLandingRoute || isServiceDetailRoute)
                     ? 'text-white hover:bg-white/10'
                     : 'text-gray-700 hover:bg-gray-100'
                 )}
@@ -224,7 +225,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               size="icon"
               className={cn(
                 'transition-colors',
-                isInHero && isLandingRoute
+                isInHero && (isLandingRoute || isServiceDetailRoute)
                   ? 'text-white hover:bg-white/10'
                   : 'text-gray-900 hover:bg-gray-100'
               )}
