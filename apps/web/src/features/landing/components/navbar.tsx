@@ -23,6 +23,7 @@ import { getMessages } from '../lib/get-messages';
 import { cn } from '@/lib/utils';
 import { getServiceSlug } from '../lib/service-slug';
 import Lottie, { type LottieRef } from 'lottie-react';
+import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
 // Lottie animation data type
 type LottieAnimationData = Record<string, unknown>;
@@ -159,6 +160,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const pathname = usePathname();
   const messages = getMessages(locale);
   const t = messages.nav;
+  const { user, isAuthenticated, logout } = useAuthStore();
   const isLandingRoute = pathname === `/${locale}`;
   const isServiceDetailRoute = pathname.startsWith(`/${locale}/services/`);
   const isTransparentNav = isInHero && (isLandingRoute || isServiceDetailRoute);
@@ -305,25 +307,59 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               isTransparentNav ? 'bg-white/20' : 'bg-gray-300'
             )}
           />
-          <Link
-            href={`/${locale}/auth/login`}
-            className={cn(
-              'text-sm font-medium transition-colors',
-              isTransparentNav
-                ? 'text-white/70 hover:text-white'
-                : 'text-gray-600 hover:text-gray-900'
-            )}
-          >
-            {t.signIn}
-          </Link>
-          <Link href={`/${locale}/auth/register`}>
-            <Button
-              size="sm"
-              className="h-8 px-4 text-xs bg-white text-black hover:bg-gray-100 font-medium"
-            >
-              {t.getStarted}
-            </Button>
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                href={`/${locale}/dashboard`}
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  isTransparentNav
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                Dashboard
+              </Link>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  logout();
+                  window.location.href = `/${locale}`;
+                }}
+                className={cn(
+                  'h-8 px-4 text-xs font-medium',
+                  isTransparentNav
+                    ? 'border-white/30 text-white hover:bg-white/10'
+                    : 'border-gray-300'
+                )}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link
+                href={`/${locale}/auth`}
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  isTransparentNav
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                {t.signIn}
+              </Link>
+              <Link href={`/${locale}/auth`}>
+                <Button
+                  size="sm"
+                  className="h-8 px-4 text-xs bg-white text-black hover:bg-gray-100 font-medium"
+                >
+                  {t.getStarted}
+                </Button>
+              </Link>
+            </>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
@@ -453,18 +489,42 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               </Link>
               
               <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
-                <Link
-                  href={`/${locale}/auth/login`}
-                  onClick={() => setOpen(false)}
-                  className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors block px-3 py-2 rounded-md hover:bg-gray-50"
-                >
-                  {t.signIn}
-                </Link>
-                <Link href={`/${locale}/auth/register`} onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 font-medium">
-                    {t.getStarted}
-                  </Button>
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      href={`/${locale}/dashboard`}
+                      onClick={() => setOpen(false)}
+                      className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors block px-3 py-2 rounded-md hover:bg-gray-50"
+                    >
+                      Dashboard
+                    </Link>
+                    <Button
+                      onClick={() => {
+                        logout();
+                        setOpen(false);
+                        window.location.href = `/${locale}`;
+                      }}
+                      className="w-full bg-gray-900 text-white hover:bg-gray-800 font-medium"
+                    >
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href={`/${locale}/auth`}
+                      onClick={() => setOpen(false)}
+                      className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors block px-3 py-2 rounded-md hover:bg-gray-50"
+                    >
+                      {t.signIn}
+                    </Link>
+                    <Link href={`/${locale}/auth`} onClick={() => setOpen(false)}>
+                      <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 font-medium">
+                        {t.getStarted}
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="pt-4 mt-4 border-t border-gray-200">
                 <DropdownMenu>
