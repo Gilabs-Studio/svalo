@@ -53,7 +53,7 @@ interface UseParallaxOptions {
  * ```
  */
 export function useParallax(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   options: UseParallaxOptions = {}
 ): void {
   const {

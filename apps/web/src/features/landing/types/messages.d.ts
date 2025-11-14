@@ -93,6 +93,109 @@ export interface FooterCtaMessages {
   };
 }
 
+export interface AboutMessages {
+  heading: string;
+  body: string[];
+  title?: string;
+  subtitle?: string;
+  story?: {
+    heading: string;
+    content: string;
+  };
+  values?: {
+    heading: string;
+    precision: {
+      title: string;
+      description: string;
+    };
+    excellence: {
+      title: string;
+      description: string;
+    };
+    tradition: {
+      title: string;
+      description: string;
+    };
+  };
+}
+
+export interface WhyPeopleComeBackMessages {
+  heading: string;
+  items: Array<{
+    icon: string;
+    text: string;
+  }>;
+  smallLine: string;
+}
+
+export interface GalleryMessages {
+  heading: string;
+  body: string[];
+  social?: {
+    instagram: string;
+    threads: string;
+  };
+}
+
+export interface ServicesProductMessages {
+  title: string;
+  brand: string;
+  description: string;
+  benefit: string;
+  cta: string;
+}
+
+export interface ServicesMessages {
+  heading: string;
+  subtext: string;
+  intro?: string;
+  products: ServicesProductMessages[];
+  items?: Array<{
+    title: string;
+    description: string;
+    cta: string;
+    image?: string;
+    icon?: string;
+    detail?: string;
+    smallLine?: string;
+  }>;
+  helpSection?: {
+    heading: string;
+    body: string;
+  };
+}
+
+export interface ChoosePlanSavloMessages {
+  name: string;
+  overview: string;
+  description: string;
+  eligibility: string[];
+  partners: string;
+  valueProps: string[];
+}
+
+export interface ChoosePlanSavloPlusMessages {
+  name: string;
+  badge: string;
+  overview: string;
+  description: string;
+  eligibility: string[];
+  partners: string;
+  valueProps: string[];
+}
+
+export interface ChoosePlanMessages {
+  heading: string;
+  subtext: string;
+  savlo: ChoosePlanSavloMessages;
+  savloPlus: ChoosePlanSavloPlusMessages;
+  trustedBy: string;
+}
+
+export interface TestimonialsMessages {
+  heading: string;
+}
+
 export interface Messages {
   metadata: {
     title: string;
@@ -116,5 +219,11 @@ export interface Messages {
   trust: TrustMessages;
   footerCta: FooterCtaMessages;
   contact: ContactMessages;
+  services: ServicesMessages;
+  choosePlan: ChoosePlanMessages;
+  about: AboutMessages;
+  whyPeopleComeBack: WhyPeopleComeBackMessages;
+  gallery: GalleryMessages;
+  testimonials: TestimonialsMessages;
   notFound?: NotFoundMessages;
 }

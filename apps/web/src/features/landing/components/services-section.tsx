@@ -7,7 +7,7 @@ import { AnimatedHeading } from './animated-heading';
 import { AnimatedText } from './animated-text';
 import { Button } from '@/components/ui/button';
 import { useParallax } from '../hooks/useParallax';
-import Lottie from 'lottie-react';
+import Lottie, { type LottieRef } from 'lottie-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getServiceSlug } from '../lib/service-slug';
@@ -32,21 +32,6 @@ const iconMap: Record<string, string> = {
 // Lottie animation data type (simplified structure)
 type LottieAnimationData = Record<string, unknown>;
 
-// Lottie ref type - AnimationItem from lottie-react
-type LottieRef = {
-  play: () => void;
-  pause: () => void;
-  stop: () => void;
-  setSpeed: (speed: number) => void;
-  goToAndStop: (value: number, isFrame?: boolean) => void;
-  goToAndPlay: (value: number, isFrame?: boolean) => void;
-  setDirection: (direction: number) => void;
-  playSegments: (segments: number[] | [number, number], forceFlag?: boolean) => void;
-  setSubframe: (useSubFrames: boolean) => void;
-  getDuration: (inFrames?: boolean) => number;
-  destroy: () => void;
-} | null;
-
 interface LottieIconProps {
   readonly src: string;
   readonly className?: string;
@@ -55,7 +40,7 @@ interface LottieIconProps {
 
 function LottieIcon({ src, className, isPlaying = false }: LottieIconProps) {
   const [animationData, setAnimationData] = useState<LottieAnimationData | null>(null);
-  const lottieRef = useRef<LottieRef>(null);
+  const lottieRef = useRef(null) as LottieRef;
 
   useEffect(() => {
     fetch(src)
@@ -252,7 +237,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.products.map((product) => {
+            {t.products.map((product: { title: string; brand: string; description: string; benefit: string; cta: string }) => {
               const iconPath = iconMap[product.title];
               return (
                 <ProductCard

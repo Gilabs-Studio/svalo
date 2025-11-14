@@ -18,11 +18,11 @@ export default async function AboutPage({
   const messages = getMessages(locale as Locale);
   const t = messages.about;
 
-  const values = [
+  const values = t.values ? [
     t.values.precision,
     t.values.excellence,
     t.values.tradition,
-  ];
+  ] : [];
 
   return (
     <div className="py-16 bg-background">
@@ -48,34 +48,40 @@ export default async function AboutPage({
               />
             </div>
             <div>
-              <h2 className="text-3xl font-bold mb-4">{t.story.heading}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {t.story.content}
-              </p>
+              {t.story && (
+                <>
+                  <h2 className="text-3xl font-bold mb-4">{t.story.heading}</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {t.story.content}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
 
         {/* Values Section */}
-        <div>
-          <h2 className="text-3xl font-bold text-center mb-12">
-            {t.values.heading}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((value, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle className="text-2xl">{value.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {value.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
+        {t.values && (
+          <div>
+            <h2 className="text-3xl font-bold text-center mb-12">
+              {t.values.heading}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {values.map((value, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle className="text-2xl">{value.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base">
+                      {value.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

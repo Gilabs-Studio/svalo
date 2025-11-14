@@ -51,7 +51,7 @@ export function ServicesPageContent({ locale }: ServicesPageContentProps) {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-            {t.items.map((service, index) => (
+            {t.items?.map((service: { title: string; description: string; cta: string; image?: string; icon?: string; detail?: string; smallLine?: string }, index: number) => (
               <div
                 key={`service-wrapper-${index}-${service.title}`}
                 className="space-y-6 flex flex-col items-center"

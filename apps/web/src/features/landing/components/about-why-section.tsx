@@ -31,7 +31,7 @@ export function AboutWhySection({ locale }: AboutWhySectionProps) {
                 </AnimatedHeading>
               </div>
               <div className="space-y-6">
-                {t.about.body.map((line, index) => (
+                {t.about.body.map((line: string, index: number) => (
                   <div key={`about-wrapper-${index}-${line.slice(0, 10)}`} className="overflow-hidden">
                     <AnimatedText
                       key={`about-${index}-${line.slice(0, 10)}`}
@@ -68,7 +68,7 @@ export function AboutWhySection({ locale }: AboutWhySectionProps) {
                 </AnimatedHeading>
               </div>
               <div className="space-y-8">
-                {t.whyPeopleComeBack.items.map((item, index) => {
+                {t.whyPeopleComeBack.items.map((item: { icon: string; text: string }, index: number) => {
                   const IconComponent = iconMap[item.icon] || iconMap.clock;
                   return (
                     <div key={`why-wrapper-${index}-${item.icon}`} className="overflow-hidden">
