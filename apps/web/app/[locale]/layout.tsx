@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { locales, type Locale } from '@/i18n';
 import { NavbarWrapper } from '@/features/landing/components/navbar-wrapper';
 import { getMessages } from '@/features/landing/lib/get-messages';
-import { ContactSection } from '@/features/landing/components/contact-section';
+import { ConditionalContactSection } from '@/features/landing/components/conditional-contact-section';
 import { WhatsAppFab } from '@/features/landing/components/whatsapp-fab';
 
 export function generateStaticParams() {
@@ -44,7 +44,7 @@ export default async function LocaleLayout({
     <>
       <NavbarWrapper locale={safeLocale} />
       <main className="min-h-screen">{children}</main>
-      <ContactSection locale={safeLocale} />
+      <ConditionalContactSection locale={safeLocale} />
       <WhatsAppFab />
     </>
   );
