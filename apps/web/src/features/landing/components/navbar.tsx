@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { type Locale } from '@/i18n';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +21,100 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { getMessages } from '../lib/get-messages';
 import { cn } from '@/lib/utils';
+import { getServiceSlug } from '../lib/service-slug';
+import Lottie, { type LottieRef } from 'lottie-react';
+
+// Lottie animation data type
+type LottieAnimationData = Record<string, unknown>;
+
+interface LottieIconProps {
+  readonly src: string;
+  readonly className?: string;
+  readonly onHover?: boolean;
+}
+
+function LottieIcon({ src, className, onHover = false }: LottieIconProps) {
+  const [animationData, setAnimationData] = useState<LottieAnimationData | null>(null);
+  const lottieRef = useRef(null) as LottieRef;
+
+  useEffect(() => {
+    fetch(src)
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data))
+      .catch(() => {
+        // Silently fail
+      });
+  }, [src]);
+
+  useEffect(() => {
+    if (lottieRef.current && animationData) {
+      if (onHover) {
+        lottieRef.current.play();
+      } else {
+        lottieRef.current.stop();
+        lottieRef.current.goToAndStop(0);
+      }
+    }
+  }, [onHover, animationData]);
+
+  if (!animationData) {
+    return <div className={cn('w-5 h-5', className)} />;
+  }
+
+  return (
+    <Lottie
+      lottieRef={lottieRef}
+      animationData={animationData}
+      loop
+      autoplay={false}
+      className={cn('w-5 h-5', className)}
+    />
+  );
+}
+
+// Service Dropdown Item Component
+interface ServiceDropdownItemProps {
+  readonly service: {
+    readonly title: string;
+    readonly description: string;
+    readonly icon?: string;
+    readonly iconDark?: string;
+  };
+  readonly locale: Locale;
+  readonly pathname: string;
+}
+
+function ServiceDropdownItem({ service, locale, pathname }: ServiceDropdownItemProps) {
+  const slug = getServiceSlug(service.title);
+  const iconPath = service.iconDark || service.icon;
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <DropdownMenuItem asChild>
+      <Link
+        href={`/${locale}/services/${slug}`}
+        className={cn(
+          'flex items-center gap-3 cursor-pointer py-2.5 group',
+          pathname === `/${locale}/services/${slug}` && 'bg-gray-100'
+        )}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {iconPath && (
+          <div className="shrink-0">
+            <LottieIcon src={iconPath} onHover={isHovered} />
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <span className="text-sm font-medium block">{service.title}</span>
+          <span className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
+            {service.description}
+          </span>
+        </div>
+      </Link>
+    </DropdownMenuItem>
+  );
+}
 
 // Flag SVG Components
 const FlagEN = ({ className }: { className?: string }) => (
@@ -67,21 +161,35 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const t = messages.nav;
   const isLandingRoute = pathname === `/${locale}`;
   const isServiceDetailRoute = pathname.startsWith(`/${locale}/services/`);
+  const isTransparentNav = isInHero && (isLandingRoute || isServiceDetailRoute);
 
   const navItems = [
     { href: `/${locale}`, label: t.home },
-    { href: `/${locale}/how-it-works`, label: t.howItWorks },
-    { href: `/${locale}/products`, label: t.products },
-    { href: `/${locale}/pricing`, label: t.pricing },
-    { href: `/${locale}/resources`, label: t.resources },
-    { href: `/${locale}/contact`, label: t.contact },
   ];
+
+  // Get services for Products dropdown
+  const services = messages.services?.products || [];
 
   const isActive = (href: string) => {
     if (href === `/${locale}`) {
       return pathname === `/${locale}`;
     }
     return pathname.startsWith(href);
+  };
+
+  const getNavItemClassName = (href: string) => {
+    const active = isActive(href);
+    if (isTransparentNav) {
+      return active ? 'text-white' : 'text-white/70 hover:text-white';
+    }
+    return active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900';
+  };
+
+  const getProductsButtonClassName = () => {
+    if (isTransparentNav) {
+      return isServiceDetailRoute ? 'text-white' : 'text-white/70 hover:text-white';
+    }
+    return isServiceDetailRoute ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900';
   };
 
   const getLocaleUrl = (targetLocale: Locale) => {
@@ -99,17 +207,17 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
       <div
         className={cn(
           'absolute inset-0 border-b transition-all duration-300',
-          isInHero && (isLandingRoute || isServiceDetailRoute)
+          isTransparentNav
             ? 'bg-white/0 border-white/0'
             : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
         )}
       />
-      <div className="relative container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
+      <div className="relative container mx-auto flex h-12 items-center justify-between px-4 md:px-6">
         <Link href={`/${locale}`} className="flex items-center space-x-2 z-10">
           <span
             className={cn(
               'text-lg font-semibold tracking-tight transition-colors',
-              isInHero && (isLandingRoute || isServiceDetailRoute) ? 'text-white' : 'text-gray-900'
+              isTransparentNav ? 'text-white' : 'text-gray-900'
             )}
           >
             Savlo
@@ -117,20 +225,14 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 z-10">
+        <div className="hidden md:flex items-center gap-4 z-10">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
                 'text-sm font-medium transition-colors relative',
-                isInHero && (isLandingRoute || isServiceDetailRoute)
-                  ? isActive(item.href)
-                    ? 'text-white'
-                    : 'text-white/70 hover:text-white'
-                  : isActive(item.href)
-                    ? 'text-gray-900'
-                    : 'text-gray-600 hover:text-gray-900'
+                getNavItemClassName(item.href)
               )}
             >
               {item.label}
@@ -138,23 +240,76 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                 <span
                   className={cn(
                     'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
-                    isInHero && (isLandingRoute || isServiceDetailRoute) ? 'bg-white' : 'bg-gray-900'
+                    isTransparentNav ? 'bg-white' : 'bg-gray-900'
                   )}
                 />
               )}
             </Link>
           ))}
+          
+          {/* Products Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={cn(
+                  'text-sm font-medium transition-colors relative flex items-center gap-1',
+                  getProductsButtonClassName()
+                )}
+              >
+                {t.products}
+                <ChevronDown className="w-3 h-3 opacity-70" />
+                {isServiceDetailRoute && (
+                  <span
+                    className={cn(
+                      'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
+                      isTransparentNav ? 'bg-white' : 'bg-gray-900'
+                    )}
+                  />
+                )}
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-72">
+              {services.map((service) => (
+                <ServiceDropdownItem
+                  key={service.title}
+                  service={service}
+                  locale={locale}
+                  pathname={pathname}
+                />
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+          {/* FAQ Link */}
+          <Link
+            href={`/${locale}/faq`}
+            className={cn(
+              'text-sm font-medium transition-colors relative',
+              getNavItemClassName(`/${locale}/faq`)
+            )}
+          >
+            FAQ
+            {isActive(`/${locale}/faq`) && (
+              <span
+                className={cn(
+                  'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
+                  isTransparentNav ? 'bg-white' : 'bg-gray-900'
+                )}
+              />
+            )}
+          </Link>
+          
           <div
             className={cn(
               'h-4 w-px transition-colors',
-              isInHero && (isLandingRoute || isServiceDetailRoute) ? 'bg-white/20' : 'bg-gray-300'
+              isTransparentNav ? 'bg-white/20' : 'bg-gray-300'
             )}
           />
           <Link
             href={`/${locale}/auth/login`}
             className={cn(
               'text-sm font-medium transition-colors',
-              isInHero && (isLandingRoute || isServiceDetailRoute)
+              isTransparentNav
                 ? 'text-white/70 hover:text-white'
                 : 'text-gray-600 hover:text-gray-900'
             )}
@@ -164,7 +319,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
           <Link href={`/${locale}/auth/register`}>
             <Button
               size="sm"
-              className="bg-white text-black hover:bg-gray-100 font-medium"
+              className="h-8 px-4 text-xs bg-white text-black hover:bg-gray-100 font-medium"
             >
               {t.getStarted}
             </Button>
@@ -173,16 +328,16 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
             <DropdownMenuTrigger asChild>
               <button
                 className={cn(
-                  'flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-all hover:bg-black/5',
-                  isInHero && (isLandingRoute || isServiceDetailRoute)
+                  'flex items-center gap-1 px-2 py-1 rounded-md transition-all hover:bg-black/5',
+                  isTransparentNav
                     ? 'text-white hover:bg-white/10'
                     : 'text-gray-700 hover:bg-gray-100'
                 )}
               >
                 {locale === 'en' ? (
-                  <FlagEN className="w-4 h-3 shrink-0" />
+                  <FlagEN className="w-3.5 h-2.5 shrink-0" />
                 ) : (
-                  <FlagID className="w-4 h-3 shrink-0" />
+                  <FlagID className="w-3.5 h-2.5 shrink-0" />
                 )}
                 <span className="text-xs font-medium uppercase">{locale}</span>
                 <ChevronDown className="w-3 h-3 opacity-50" />
@@ -225,7 +380,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               size="icon"
               className={cn(
                 'transition-colors',
-                isInHero && (isLandingRoute || isServiceDetailRoute)
+                isTransparentNav
                   ? 'text-white hover:bg-white/10'
                   : 'text-gray-900 hover:bg-gray-100'
               )}
@@ -254,6 +409,49 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                   {item.label}
                 </Link>
               ))}
+              
+              {/* Products Dropdown for Mobile */}
+              <div className="px-3 py-2">
+                <div className="text-sm font-medium text-gray-900 mb-2">{t.products}</div>
+                <div className="flex flex-col space-y-1 ml-2">
+                  {services.map((service) => {
+                    const slug = getServiceSlug(service.title);
+                    const serviceWithIcon = service as { icon?: string; iconDark?: string };
+                    const iconPath = serviceWithIcon.iconDark || serviceWithIcon.icon;
+                    return (
+                      <Link
+                        key={service.title}
+                        href={`/${locale}/services/${slug}`}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          'flex items-center gap-2 text-sm transition-colors px-2 py-2 rounded-md',
+                          pathname === `/${locale}/services/${slug}`
+                            ? 'text-gray-900 bg-gray-100 font-medium'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        )}
+                      >
+                        {iconPath && <LottieIcon src={iconPath} onHover={false} />}
+                        <span className="flex-1">{service.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              {/* FAQ Link for Mobile */}
+              <Link
+                href={`/${locale}/faq`}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  'text-base font-medium transition-colors px-3 py-2 rounded-md',
+                  isActive(`/${locale}/faq`)
+                    ? 'text-gray-900 bg-gray-100'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                )}
+              >
+                FAQ
+              </Link>
+              
               <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
                 <Link
                   href={`/${locale}/auth/login`}

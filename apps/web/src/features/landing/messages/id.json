@@ -97,35 +97,45 @@
         "brand": "Savlo",
         "description": "Gunakan BPKB kendaraan sebagai jaminan untuk mendapatkan dana cepat.",
         "benefit": "Proses mudah dan cocok untuk kebutuhan mendesak.",
-        "cta": "Pelajari Lebih Lanjut"
+        "cta": "Pelajari Lebih Lanjut",
+        "icon": "/icon/BPKB-based-Financing.json",
+        "iconDark": "/icon/BPKB-based-Financing-dark.json"
       },
       {
         "title": "Pembiayaan Berbasis Properti",
         "brand": "Savlo",
         "description": "Pembiayaan menggunakan sertifikat properti (SHM/SHGB).",
         "benefit": "Nilai pencairan hingga 65% dari nilai properti, maksimal IDR 5 Miliar.",
-        "cta": "Pelajari Lebih Lanjut"
+        "cta": "Pelajari Lebih Lanjut",
+        "icon": "/icon/Property-based-Financing.json",
+        "iconDark": "/icon/Property-based-Financing-dark.json"
       },
       {
         "title": "Pembiayaan Invoice AP",
         "brand": "Savlo",
         "description": "Danai invoice accounts payable hingga IDR 2 Miliar.",
         "benefit": "Bantu kelancaran pembayaran supplier dan arus kas bisnis Anda.",
-        "cta": "Pelajari Lebih Lanjut"
+        "cta": "Pelajari Lebih Lanjut",
+        "icon": "/icon/AP-Invoice-Financing.json",
+        "iconDark": "/icon/AP-Invoice-Financing-dark.json"
       },
       {
         "title": "Pembiayaan Invoice AR",
         "brand": "Savlo",
         "description": "Optimalkan modal kerja dengan mendanai accounts receivable hingga IDR 5 Miliar.",
         "benefit": "Akselerasi cash flow tanpa mengganggu operasional.",
-        "cta": "Pelajari Lebih Lanjut"
+        "cta": "Pelajari Lebih Lanjut",
+        "icon": "/icon/AR-Invoice-Financing.json",
+        "iconDark": "/icon/AR-Invoice-Financing-dark.json"
       },
       {
         "title": "Solusi Banking Ekosistem",
         "brand": "Savlo+",
         "description": "Solusi khusus bagi bisnis yang kesulitan memenuhi standar kelayakan pembiayaan konvensional.",
         "benefit": "Dirancang untuk memberi jalan keluar yang lebih fleksibel.",
-        "cta": "Pelajari Lebih Lanjut"
+        "cta": "Pelajari Lebih Lanjut",
+        "icon": "/icon/Ecosystem-Banking-Solutions.json",
+        "iconDark": "/icon/Ecosystem-Banking-Solutions-dark.json"
       }
     ]
   },

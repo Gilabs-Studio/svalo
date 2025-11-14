@@ -97,35 +97,45 @@
         "brand": "Savlo",
         "description": "Use your vehicle's BPKB as collateral to get quick funding.",
         "benefit": "Easy process and suitable for urgent needs.",
-        "cta": "Learn More"
+        "cta": "Learn More",
+        "icon": "/icon/BPKB-based-Financing.json",
+        "iconDark": "/icon/BPKB-based-Financing-dark.json"
       },
       {
         "title": "Property-based Financing",
         "brand": "Savlo",
         "description": "Financing using property certificates (SHM/SHGB).",
         "benefit": "Funding value up to 65% of property value, maximum IDR 5 Billion.",
-        "cta": "Learn More"
+        "cta": "Learn More",
+        "icon": "/icon/Property-based-Financing.json",
+        "iconDark": "/icon/Property-based-Financing-dark.json"
       },
       {
         "title": "AP Invoice Financing",
         "brand": "Savlo",
         "description": "Finance accounts payable invoices up to IDR 2 Billion.",
         "benefit": "Help smooth supplier payments and your business cash flow.",
-        "cta": "Learn More"
+        "cta": "Learn More",
+        "icon": "/icon/AP-Invoice-Financing.json",
+        "iconDark": "/icon/AP-Invoice-Financing-dark.json"
       },
       {
         "title": "AR Invoice Financing",
         "brand": "Savlo",
         "description": "Optimize working capital by financing accounts receivable up to IDR 5 Billion.",
         "benefit": "Accelerate cash flow without disrupting operations.",
-        "cta": "Learn More"
+        "cta": "Learn More",
+        "icon": "/icon/AR-Invoice-Financing.json",
+        "iconDark": "/icon/AR-Invoice-Financing-dark.json"
       },
       {
         "title": "Ecosystem Banking Solutions",
         "brand": "Savlo+",
         "description": "Special solutions for businesses that have difficulty meeting conventional financing eligibility standards.",
         "benefit": "Designed to provide more flexible solutions.",
-        "cta": "Learn More"
+        "cta": "Learn More",
+        "icon": "/icon/Ecosystem-Banking-Solutions.json",
+        "iconDark": "/icon/Ecosystem-Banking-Solutions-dark.json"
       }
     ]
   },
