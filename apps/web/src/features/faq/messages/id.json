@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "title": "FAQ - Pusat Bantuan | Savlo",
+    "description": "Temukan jawaban untuk pertanyaan yang sering diajukan tentang solusi pembiayaan Savlo, proses aplikasi, dan layanan. Dapatkan bantuan dengan pembiayaan BPKB, pembiayaan properti, pembiayaan invoice, dan Savlo+."
+  },
+  "heading": "Pusat Bantuan",
+  "subtext": "Panduan Anda untuk memahami layanan kami dan memaksimalkan penggunaan Savlo.",
+  "categories": [
+    {
+      "title": "Pertanyaan Umum",
+      "items": [
+        {
+          "question": "Apa itu Savlo?",
+          "answer": "Savlo adalah gateway pembiayaan yang menghubungkan individu dan bisnis dengan berbagai solusi pembiayaan dari mitra keuangan terpercaya kami. Kami menyederhanakan proses aplikasi, memudahkan Anda mendapatkan dana yang dibutuhkan."
+        },
+        {
+          "question": "Siapa saja Mitra Savlo?",
+          "answer": "Kami bermitra dengan lembaga keuangan terpercaya untuk menyediakan berbagai produk pembiayaan."
+        },
+        {
+          "question": "Apakah data saya aman di Savlo?",
+          "answer": "Tentu saja. Kami menggunakan enkripsi dan protokol keamanan standar industri untuk melindungi informasi pribadi dan keuangan Anda. Privasi dan keamanan Anda adalah prioritas utama kami."
+        }
+      ]
+    },
+    {
+      "title": "Savlo+",
+      "items": [
+        {
+          "question": "Apa itu Savlo+?",
+          "answer": "Savlo+ adalah program langganan premium yang membuka akses ke solusi pembiayaan eksklusif untuk bisnis yang biasanya kesulitan memenuhi syarat pembiayaan standar. Dengan berlangganan Savlo+, anggota menerima solusi yang dipersonalisasi, bantuan menyelesaikan masalah kelayakan, dan akses prioritas ke peluang pendanaan yang dikurasi."
+        },
+        {
+          "question": "Apa perbedaan utama antara Savlo dan Savlo+?",
+          "answer": "Savlo adalah gateway pembiayaan digital gratis yang menghubungkan UMKM ke perusahaan multi-finance dan fintech lender. Ideal untuk bisnis dengan minimal 2 tahun operasi dan kinerja keuangan positif, atau individu dengan jaminan. Savlo+ menawarkan kelayakan fleksibel melalui keanggotaan dan penilaian mitra, akses ke institusi keuangan rahasia kami, dan solusi yang dipersonalisasi untuk kasus kelayakan yang sulit."
+        },
+        {
+          "question": "Bagaimana cara berlangganan Savlo+?",
+          "answer": "Untuk mengetahui lebih lanjut tentang Savlo+ dan membahas opsi keanggotaan, silakan hubungi tim kami langsung melalui WhatsApp. Konsultan kami akan menilai kebutuhan Anda dan memandu Anda melalui proses keanggotaan."
+        }
+      ]
+    },
+    {
+      "title": "Pembiayaan Berbasis BPKB",
+      "items": [
+        {
+          "question": "Apa itu pembiayaan berbasis BPKB?",
+          "answer": "Jenis pembiayaan ini memungkinkan Anda menggunakan dokumen kepemilikan kendaraan (BPKB) sebagai jaminan untuk mendapatkan pinjaman. Ini adalah cara cepat untuk mendapatkan uang tunai untuk berbagai kebutuhan."
+        },
+        {
+          "question": "Jenis kendaraan apa yang diterima?",
+          "answer": "Umumnya, mobil dan sepeda motor yang memenuhi kriteria usia dan kondisi tertentu diterima. Persyaratan spesifik dapat bervariasi menurut mitra."
+        },
+        {
+          "question": "Berapa lama prosesnya?",
+          "answer": "Prosesnya biasanya sangat cepat. Setelah mengirimkan semua dokumen yang diperlukan, Anda sering kali dapat menerima keputusan dan dana dalam 1-3 hari kerja."
+        }
+      ]
+    },
+    {
+      "title": "Pembiayaan Berbasis Properti",
+      "items": [
+        {
+          "question": "Untuk apa saya bisa menggunakan pembiayaan berbasis properti?",
+          "answer": "Pembiayaan ini ideal untuk kebutuhan yang lebih besar seperti ekspansi bisnis, investasi besar, biaya pendidikan, atau renovasi rumah. Ini menawarkan jumlah pinjaman yang lebih tinggi dan tenor yang lebih lama."
+        },
+        {
+          "question": "Jenis properti apa yang bisa digunakan sebagai jaminan?",
+          "answer": "Anda biasanya dapat menggunakan sertifikat rumah, apartemen, atau properti komersial (ruko) sebagai jaminan. Properti harus memiliki sertifikat yang valid (SHM/HGB)."
+        }
+      ]
+    },
+    {
+      "title": "Pembiayaan Invoice",
+      "items": [
+        {
+          "question": "Apa perbedaan antara Pembiayaan Invoice AP dan AR?",
+          "answer": "Pembiayaan AP (Accounts Payable) membantu Anda membayar supplier tepat waktu dengan menyediakan dana terhadap tagihan yang belum dibayar. Pembiayaan AR (Accounts Receivable) memungkinkan Anda mendapatkan uang tunai di muka untuk invoice yang telah Anda terbitkan kepada pelanggan, meningkatkan arus kas Anda sambil menunggu mereka membayar."
+        },
+        {
+          "question": "Apa manfaat pembiayaan invoice?",
+          "answer": "Ini adalah cara yang sangat baik untuk mengelola arus kas tanpa mengambil hutang tradisional. Ini membuka modal yang terikat dalam invoice Anda, memungkinkan Anda menjalankan operasi bisnis dengan lancar."
+        }
+      ]
+    }
+  ],
+  "howToApply": {
+    "heading": "Cara Mengajukan",
+    "steps": [
+      {
+        "title": "Daftar Akun",
+        "description": "Buat akun Savlo Anda hanya dalam beberapa menit."
+      },
+      {
+        "title": "Pilih Jenis Pembiayaan",
+        "description": "Pilih produk yang paling sesuai dengan kebutuhan Anda."
+      },
+      {
+        "title": "Isi Formulir Aplikasi",
+        "description": "Berikan detail pribadi dan keuangan yang diperlukan."
+      },
+      {
+        "title": "Unggah Dokumen yang Diperlukan",
+        "description": "Unggah dokumen seperti KTP, BPKB, atau invoice dengan aman."
+      },
+      {
+        "title": "Kirim dan Lacak Aplikasi Anda",
+        "description": "Pantau status aplikasi Anda langsung dari dashboard Anda."
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Masih ada pertanyaan?",
+    "subtext": "Tim dukungan kami siap membantu Anda.",
+    "buttonText": "Hubungi via WhatsApp",
+    "whatsappUrl": "https://api.whatsapp.com/send/?phone=628118820990&text=Saya+mau+tanya+mengenai+savlo+financing&type=phone_number&app_absent=0"
+  }
+}
+

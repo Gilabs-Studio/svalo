@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "title": "FAQ - Help Center | Savlo",
+    "description": "Find answers to frequently asked questions about Savlo financing solutions, application process, and services. Get help with BPKB financing, property financing, invoice financing, and Savlo+."
+  },
+  "heading": "Help Center",
+  "subtext": "Your guide to understanding our services and getting the most out of Savlo.",
+  "categories": [
+    {
+      "title": "General Questions",
+      "items": [
+        {
+          "question": "What is Savlo?",
+          "answer": "Savlo is a financing gateway that connects individuals and businesses with various financing solutions from our trusted financial partners. We simplify the application process, making it easier to get the funding you need."
+        },
+        {
+          "question": "Who are Savlo's Partners?",
+          "answer": "We partner with reputable financial institutions to provide a diverse range of financing products."
+        },
+        {
+          "question": "Is my data secure with Savlo?",
+          "answer": "Absolutely. We use industry-standard encryption and security protocols to protect your personal and financial information. Your privacy and security are our top priorities."
+        }
+      ]
+    },
+    {
+      "title": "Savlo+",
+      "items": [
+        {
+          "question": "What is Savlo+?",
+          "answer": "Savlo+ is a premium subscription program that unlocks exclusive financing solutions for businesses that typically struggle to qualify under standard financing requirements. By subscribing to Savlo+, members receive personalized solutions, help solving eligibility issues, and priority access to curated funding opportunities."
+        },
+        {
+          "question": "What are the main differences between Savlo and Savlo+?",
+          "answer": "Savlo is a free digital financing gateway connecting SMEs to multi-finance companies and fintech lenders. It's ideal for businesses with at least 2 years of operation and positive financial performance, or individuals with collaterals. Savlo+ offers flexible eligibility via membership and partner assessment, access to our secret financial institutions, and personalized solutions for difficult eligibility cases."
+        },
+        {
+          "question": "How do I subscribe to Savlo+?",
+          "answer": "To learn more about Savlo+ and discuss membership options, please contact our team directly via WhatsApp. Our consultants will assess your needs and guide you through the membership process."
+        }
+      ]
+    },
+    {
+      "title": "BPKB-based Financing",
+      "items": [
+        {
+          "question": "What is BPKB-based financing?",
+          "answer": "This type of financing allows you to use your vehicle's ownership document (BPKB) as collateral to secure a loan. It's a quick way to get cash for various needs."
+        },
+        {
+          "question": "What types of vehicles are accepted?",
+          "answer": "Generally, cars and motorcycles that meet certain age and condition criteria are accepted. Specific requirements may vary by partner."
+        },
+        {
+          "question": "How long does the process take?",
+          "answer": "The process is typically very fast. After submitting all required documents, you can often receive a decision and funds within 1-3 business days."
+        }
+      ]
+    },
+    {
+      "title": "Property-based Financing",
+      "items": [
+        {
+          "question": "What can I use Property-based financing for?",
+          "answer": "This financing is ideal for larger needs such as business expansion, major investments, education costs, or home renovation. It offers higher loan amounts and longer tenors."
+        },
+        {
+          "question": "What kind of property can be used as collateral?",
+          "answer": "You can typically use a house, apartment, or commercial property (ruko) certificate as collateral. The property must have a valid certificate (SHM/HGB)."
+        }
+      ]
+    },
+    {
+      "title": "Invoice Financing",
+      "items": [
+        {
+          "question": "What is the difference between AP and AR Invoice Financing?",
+          "answer": "AP (Accounts Payable) Financing helps you pay your suppliers on time by providing funds against your outstanding bills. AR (Accounts Receivable) Financing allows you to get cash upfront for the invoices you've issued to your customers, improving your cash flow while you wait for them to pay."
+        },
+        {
+          "question": "What are the benefits of invoice financing?",
+          "answer": "It's an excellent way to manage cash flow without taking on traditional debt. It unlocks the capital tied up in your invoices, allowing you to run your business operations smoothly."
+        }
+      ]
+    }
+  ],
+  "howToApply": {
+    "heading": "How to Apply",
+    "steps": [
+      {
+        "title": "Register an Account",
+        "description": "Create your Savlo account in just a few minutes."
+      },
+      {
+        "title": "Choose Your Financing Type",
+        "description": "Select the product that best suits your needs."
+      },
+      {
+        "title": "Fill Out the Application Form",
+        "description": "Provide the necessary personal and financial details."
+      },
+      {
+        "title": "Upload Required Documents",
+        "description": "Securely upload documents like your ID, BPKB, or invoices."
+      },
+      {
+        "title": "Submit and Track Your Application",
+        "description": "Monitor the status of your application directly from your dashboard."
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Still have questions?",
+    "subtext": "Our support team is ready to help you.",
+    "buttonText": "Contact via WhatsApp",
+    "whatsappUrl": "https://api.whatsapp.com/send/?phone=628118820990&text=Saya+mau+tanya+mengenai+savlo+financing&type=phone_number&app_absent=0"
+  }
+}
+
