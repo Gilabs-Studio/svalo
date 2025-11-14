@@ -216,7 +216,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
           className="absolute inset-0 w-full h-full"
         >
           <Image
-            src="/image/hero.webp"
+            src="/image/service.webp"
             alt="Services background"
             fill
             className="object-cover scale-110"
