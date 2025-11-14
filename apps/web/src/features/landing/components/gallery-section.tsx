@@ -17,6 +17,10 @@ export function GallerySection({ locale }: GallerySectionProps) {
   const messages = getMessages(locale);
   const t = messages.gallery;
 
+  if (!t) {
+    return null;
+  }
+
   // Using available images and repeating to fill the gallery
   const galleryImages = [
     '/image/haircut.webp',

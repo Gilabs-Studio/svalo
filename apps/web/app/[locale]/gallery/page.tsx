@@ -18,6 +18,10 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   const messages = getMessages(locale);
   const t = messages.gallery;
 
+  if (!t) {
+    notFound();
+  }
+
   const images = Array.from({ length: 12 }, (_, i) => i + 1);
 
   return (

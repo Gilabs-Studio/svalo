@@ -196,6 +196,37 @@ export interface TestimonialsMessages {
   heading: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface FAQCategory {
+  title: string;
+  items: FAQItem[];
+}
+
+export interface HowToApplyStep {
+  title: string;
+  description: string;
+}
+
+export interface FAQMessages {
+  heading: string;
+  subtext: string;
+  categories: FAQCategory[];
+  howToApply?: {
+    heading: string;
+    steps: HowToApplyStep[];
+  };
+  contactCta?: {
+    heading: string;
+    subtext: string;
+    buttonText: string;
+    whatsappUrl: string;
+  };
+}
+
 export interface Messages {
   metadata: {
     title: string;
@@ -221,9 +252,10 @@ export interface Messages {
   contact: ContactMessages;
   services: ServicesMessages;
   choosePlan: ChoosePlanMessages;
-  about: AboutMessages;
-  whyPeopleComeBack: WhyPeopleComeBackMessages;
-  gallery: GalleryMessages;
-  testimonials: TestimonialsMessages;
+  about?: AboutMessages;
+  whyPeopleComeBack?: WhyPeopleComeBackMessages;
+  gallery?: GalleryMessages;
+  testimonials?: TestimonialsMessages;
+  faq?: FAQMessages;
   notFound?: NotFoundMessages;
 }

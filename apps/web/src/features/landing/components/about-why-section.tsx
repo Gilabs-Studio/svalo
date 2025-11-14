@@ -16,6 +16,10 @@ export function AboutWhySection({ locale }: AboutWhySectionProps) {
   const messages = getMessages(locale);
   const t = messages;
 
+  if (!t.about || !t.whyPeopleComeBack) {
+    return null;
+  }
+
   return (
     <section className="min-h-[90vh] flex items-center py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-4 w-full overflow-x-hidden">

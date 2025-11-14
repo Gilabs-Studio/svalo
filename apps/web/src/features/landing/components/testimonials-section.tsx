@@ -189,6 +189,10 @@ export function TestimonialsSection({ locale }: TestimonialsSectionProps) {
   const messages = getMessages(locale);
   const t = messages.testimonials;
 
+  if (!t) {
+    return null;
+  }
+
   return (
     <section className="min-h-[90vh] flex items-center py-24 bg-background">
       <div className="container mx-auto px-4">

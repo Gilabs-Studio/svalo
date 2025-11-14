@@ -18,6 +18,10 @@ export default async function AboutPage({
   const messages = getMessages(locale as Locale);
   const t = messages.about;
 
+  if (!t) {
+    notFound();
+  }
+
   const values = t.values ? [
     t.values.precision,
     t.values.excellence,
