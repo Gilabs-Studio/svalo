@@ -34,11 +34,11 @@ export function WhyChooseSavloSection({ locale }: WhyChooseSavloSectionProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {t.items.map((item, index) => (
               <div
-                key={`item-${index}`}
+                key={item}
                 className="flex items-start gap-4"
               >
                 <div className="overflow-hidden">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mt-1">
+                  <div className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mt-1">
                     <Check className="w-4 h-4 text-primary" />
                   </div>
                 </div>

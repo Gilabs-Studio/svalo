@@ -88,6 +88,82 @@
     "heading": "Dipercaya oleh mitra keuangan",
     "microcopy": "Kami bekerja dengan lembaga multi-finance dan mitra fintech yang diatur. (Tambahkan logo setelah peluncuran.)"
   },
+  "services": {
+    "heading": "Solusi Pembiayaan yang Disesuaikan untuk Anda",
+    "subtext": "Temukan berbagai solusi pembiayaan dari mitra terpercaya kami — dirancang untuk kebutuhan usaha, pribadi, dan operasional Anda.",
+    "products": [
+      {
+        "title": "Pembiayaan Berbasis BPKB",
+        "brand": "Savlo",
+        "description": "Gunakan BPKB kendaraan sebagai jaminan untuk mendapatkan dana cepat.",
+        "benefit": "Proses mudah dan cocok untuk kebutuhan mendesak.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Berbasis Properti",
+        "brand": "Savlo",
+        "description": "Pembiayaan menggunakan sertifikat properti (SHM/SHGB).",
+        "benefit": "Nilai pencairan hingga 65% dari nilai properti, maksimal IDR 5 Miliar.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Invoice AP",
+        "brand": "Savlo",
+        "description": "Danai invoice accounts payable hingga IDR 2 Miliar.",
+        "benefit": "Bantu kelancaran pembayaran supplier dan arus kas bisnis Anda.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Invoice AR",
+        "brand": "Savlo",
+        "description": "Optimalkan modal kerja dengan mendanai accounts receivable hingga IDR 5 Miliar.",
+        "benefit": "Akselerasi cash flow tanpa mengganggu operasional.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Solusi Banking Ekosistem",
+        "brand": "Savlo+",
+        "description": "Solusi khusus bagi bisnis yang kesulitan memenuhi standar kelayakan pembiayaan konvensional.",
+        "benefit": "Dirancang untuk memberi jalan keluar yang lebih fleksibel.",
+        "cta": "Pelajari Lebih Lanjut"
+      }
+    ]
+  },
+  "choosePlan": {
+    "heading": "Pilih Paket yang Tepat untuk Bisnis Anda",
+    "subtext": "Bandingkan layanan gateway gratis Savlo dengan program ekosistem premium Savlo+.",
+    "savlo": {
+      "name": "Savlo",
+      "overview": "Akses digital ke berbagai perusahaan pembiayaan dan fintech dalam satu platform.",
+      "description": "Gateway pembiayaan yang menghubungkan UMKM ke multi-finance dan fintech.",
+      "eligibility": [
+        "Usaha minimal 2 tahun berjalan",
+        "Kondisi keuangan positif, atau",
+        "Individu dengan jaminan"
+      ],
+      "partners": "Multi-finance dan fintech terkurasi.",
+      "valueProps": [
+        "Akses cepat ke berbagai opsi pembiayaan non-bank",
+        "Konsultasi awal gratis (online / offline)"
+      ]
+    },
+    "savloPlus": {
+      "name": "Savlo+",
+      "badge": "Program Premium",
+      "overview": "Program ekosistem dengan solusi yang lebih personal dan akses prioritas.",
+      "description": "Pendekatan premium untuk bisnis yang sering terkendala syarat pembiayaan standar.",
+      "eligibility": [
+        "Kriteria fleksibel melalui keanggotaan Savlo+ dan penilaian mitra"
+      ],
+      "partners": "Institusi finansial eksklusif yang tidak tersedia secara publik.",
+      "valueProps": [
+        "Solusi benar-benar personal untuk kebutuhan pembiayaan yang kompleks",
+        "Konsultasi pembiayaan tanpa batas",
+        "Akses prioritas ke peluang pendanaan tertentu"
+      ]
+    },
+    "trustedBy": "Dipercaya oleh Mitra Finansial Terkemuka"
+  },
   "footerCta": {
     "heading": "Siap untuk memulai?",
     "subtext": "Buat akun dan mulai aplikasi Anda dalam hitungan menit.",

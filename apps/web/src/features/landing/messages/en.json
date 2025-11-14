@@ -88,6 +88,82 @@
     "heading": "Trusted by financial partners",
     "microcopy": "We work with regulated multi-finance institutions and fintech partners. (Add logos after launch.)"
   },
+  "services": {
+    "heading": "Financing Solutions Tailored for You",
+    "subtext": "Discover various financing solutions from our trusted partners — designed for your business, personal, and operational needs.",
+    "products": [
+      {
+        "title": "BPKB-based Financing",
+        "brand": "Savlo",
+        "description": "Use your vehicle's BPKB as collateral to get quick funding.",
+        "benefit": "Easy process and suitable for urgent needs.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "Property-based Financing",
+        "brand": "Savlo",
+        "description": "Financing using property certificates (SHM/SHGB).",
+        "benefit": "Funding value up to 65% of property value, maximum IDR 5 Billion.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "AP Invoice Financing",
+        "brand": "Savlo",
+        "description": "Finance accounts payable invoices up to IDR 2 Billion.",
+        "benefit": "Help smooth supplier payments and your business cash flow.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "AR Invoice Financing",
+        "brand": "Savlo",
+        "description": "Optimize working capital by financing accounts receivable up to IDR 5 Billion.",
+        "benefit": "Accelerate cash flow without disrupting operations.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "Ecosystem Banking Solutions",
+        "brand": "Savlo+",
+        "description": "Special solutions for businesses that have difficulty meeting conventional financing eligibility standards.",
+        "benefit": "Designed to provide more flexible solutions.",
+        "cta": "Learn More"
+      }
+    ]
+  },
+  "choosePlan": {
+    "heading": "Choose the Right Plan for Your Business",
+    "subtext": "Compare Savlo's free gateway service with Savlo+'s premium ecosystem program.",
+    "savlo": {
+      "name": "Savlo",
+      "overview": "Digital access to various financing companies and fintech in one platform.",
+      "description": "Financing gateway that connects SMEs to multi-finance and fintech.",
+      "eligibility": [
+        "Business minimum 2 years in operation",
+        "Positive financial condition, or",
+        "Individual with collateral"
+      ],
+      "partners": "Curated multi-finance and fintech.",
+      "valueProps": [
+        "Quick access to various non-bank financing options",
+        "Free initial consultation (online / offline)"
+      ]
+    },
+    "savloPlus": {
+      "name": "Savlo+",
+      "badge": "Premium Program",
+      "overview": "Ecosystem program with more personal solutions and priority access.",
+      "description": "Premium approach for businesses that are often constrained by standard financing requirements.",
+      "eligibility": [
+        "Flexible criteria through Savlo+ membership and partner assessment"
+      ],
+      "partners": "Exclusive financial institutions not available publicly.",
+      "valueProps": [
+        "Truly personal solutions for complex financing needs",
+        "Unlimited financing consultation",
+        "Priority access to certain funding opportunities"
+      ]
+    },
+    "trustedBy": "Trusted by Leading Financial Partners"
+  },
   "footerCta": {
     "heading": "Ready to start?",
     "subtext": "Create an account and start your application in minutes.",

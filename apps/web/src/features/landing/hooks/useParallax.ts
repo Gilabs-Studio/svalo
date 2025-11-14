@@ -32,6 +32,11 @@ interface UseParallaxOptions {
    * @default 'none'
    */
   ease?: string;
+  /**
+   * Initial Y offset in pixels (useful when element is below viewport)
+   * @default 0
+   */
+  initialOffsetY?: number;
 }
 
 /**
@@ -58,6 +63,7 @@ export function useParallax(
     enableMouse = true,
     duration = 0.1,
     ease = 'none',
+    initialOffsetY = 0,
   } = options;
 
   useEffect(() => {
@@ -76,7 +82,7 @@ export function useParallax(
 
       gsap.to(ref.current, {
         x: mouseOffsetX,
-        y: scrollOffset + mouseOffsetY,
+        y: initialOffsetY + scrollOffset + mouseOffsetY,
         duration,
         ease,
       });
@@ -120,5 +126,5 @@ export function useParallax(
         window.removeEventListener('mousemove', handleMouseMove);
       }
     };
-  }, [ref, scrollSpeed, mouseIntensity, enableScroll, enableMouse, duration, ease]);
+  }, [ref, scrollSpeed, mouseIntensity, enableScroll, enableMouse, duration, ease, initialOffsetY]);
 }

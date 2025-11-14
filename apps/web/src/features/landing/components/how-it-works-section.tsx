@@ -4,7 +4,6 @@ import { type Locale } from '@/i18n';
 import { getMessages } from '../lib/get-messages';
 import { AnimatedHeading } from './animated-heading';
 import { AnimatedText } from './animated-text';
-import { cn } from '@/lib/utils';
 
 interface HowItWorksSectionProps {
   readonly locale: Locale;
@@ -34,7 +33,7 @@ export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {t.steps.map((step, index) => (
               <div
-                key={`step-${index}`}
+                key={step.title}
                 className="space-y-4 text-center"
               >
                 <div className="overflow-hidden">

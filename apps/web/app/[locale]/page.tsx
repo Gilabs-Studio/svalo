@@ -1,11 +1,11 @@
 import { type Locale } from '@/i18n';
 import { Hero } from '@/features/landing/components/hero';
 import { HowItWorksSection } from '@/features/landing/components/how-it-works-section';
-import { ProductsSection } from '@/features/landing/components/products-section';
+import { ServicesSection } from '@/features/landing/components/services-section';
+import { ChoosePlanSection } from '@/features/landing/components/choose-plan-section';
 import { WhyChooseSavloSection } from '@/features/landing/components/why-choose-savlo-section';
-import { PricingPreviewSection } from '@/features/landing/components/pricing-preview-section';
 import { TrustSection } from '@/features/landing/components/trust-section';
-import { FooterCtaSection } from '@/features/landing/components/footer-cta-section';
+import { ContactSection } from '@/features/landing/components/contact-section';
 import { locales } from '@/i18n';
 import { notFound } from 'next/navigation';
 
@@ -24,11 +24,10 @@ export default async function HomePage({
     <div>
       <Hero locale={locale} />
       <HowItWorksSection locale={locale} />
-      <ProductsSection locale={locale} />
+      <ServicesSection locale={locale} />
+      <ChoosePlanSection locale={locale} />
       <WhyChooseSavloSection locale={locale} />
-      <PricingPreviewSection locale={locale} />
       <TrustSection locale={locale} />
-      <FooterCtaSection locale={locale} />
     </div>
   );
 }
