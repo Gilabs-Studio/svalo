@@ -6,7 +6,7 @@ import { AnimatedHeading } from '@/features/landing/components/animated-heading'
 import { AnimatedText } from '@/features/landing/components/animated-text';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ChevronDown, ChevronUp, MessageCircle, HelpCircle, FileText, Building2, Receipt, Sparkles } from 'lucide-react';
+import { ChevronDown, MessageCircle } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import type { FAQCategory, FAQItem } from '../types';
@@ -14,18 +14,6 @@ import type { FAQCategory, FAQItem } from '../types';
 interface FAQContentProps {
   readonly locale: Locale;
 }
-
-const categoryIcons = {
-  'General Questions': HelpCircle,
-  'Pertanyaan Umum': HelpCircle,
-  'Savlo+': Sparkles,
-  'BPKB-based Financing': FileText,
-  'Pembiayaan Berbasis BPKB': FileText,
-  'Property-based Financing': Building2,
-  'Pembiayaan Berbasis Properti': Building2,
-  'Invoice Financing': Receipt,
-  'Pembiayaan Invoice': Receipt,
-};
 
 export function FAQContent({ locale }: FAQContentProps) {
   const messages = getMessages(locale);
@@ -42,10 +30,10 @@ export function FAQContent({ locale }: FAQContentProps) {
     }));
   };
 
-  // Handle scroll spy for active category
+  // Scroll spy untuk tracking kategori aktif
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + 150;
 
       for (const [categoryTitle, element] of Object.entries(categoryRefs.current)) {
         if (element) {
@@ -71,7 +59,7 @@ export function FAQContent({ locale }: FAQContentProps) {
   const scrollToCategory = (categoryTitle: string) => {
     const element = categoryRefs.current[categoryTitle];
     if (element) {
-      const offset = 120; // Account for fixed navbar
+      const offset = 100;
       const elementPosition = element.offsetTop - offset;
       window.scrollTo({
         top: elementPosition,
@@ -81,200 +69,187 @@ export function FAQContent({ locale }: FAQContentProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background relative">
-      {/* Fixed Sidebar Navigation */}
-      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-64 z-40 pt-24 pb-8 px-6 overflow-y-auto">
-        <div className="sticky top-24 space-y-2">
-          <div className="mb-6">
-            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-              Categories
-            </h3>
-          </div>
-          {t.categories.map((category: FAQCategory) => {
-            const Icon = categoryIcons[category.title as keyof typeof categoryIcons] || HelpCircle;
-            const isActive = activeCategory === category.title;
-            return (
-              <button
-                key={category.title}
-                onClick={() => scrollToCategory(category.title)}
-                className={cn(
-                  'w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 group',
-                  isActive
-                    ? 'bg-primary/10 text-primary font-semibold shadow-sm'
-                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-                )}
+    <div className="min-h-screen bg-background">
+      {/* Hero Section - Minimalist */}
+      <section className="flex items-center py-20 md:py-32">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <div className="overflow-hidden">
+              <AnimatedHeading
+                as="h1"
+                className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight"
               >
-                <Icon className={cn(
-                  'w-4 h-4 shrink-0 transition-colors',
-                  isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
-                )} />
-                <span className="text-sm font-medium">{category.title}</span>
-              </button>
-            );
-          })}
-          <div className="pt-8 mt-8 border-t border-border">
-            <Link
-              href={t.contactCta.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] transition-colors group"
-            >
-              <MessageCircle className="w-4 h-4 shrink-0" />
-              <span className="text-sm font-medium">Contact Support</span>
-            </Link>
-          </div>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <div className="lg:ml-64">
-        {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center py-24 bg-gradient-to-br from-muted/30 via-background to-muted/20">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
-              <div className="overflow-hidden">
-                <AnimatedHeading
-                  as="h1"
-                  className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight"
-                >
-                  {t.heading}
-                </AnimatedHeading>
-              </div>
-              <div className="overflow-hidden">
-                <AnimatedText
-                  delay={0.1}
-                  className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"
-                >
-                  {t.subtext}
-                </AnimatedText>
-              </div>
+                {t.heading}
+              </AnimatedHeading>
+            </div>
+            <div className="overflow-hidden">
+              <AnimatedText
+                delay={0.1}
+                className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-light"
+              >
+                {t.subtext}
+              </AnimatedText>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Bento Grid FAQ Content */}
-        <div className="container mx-auto px-4 lg:px-8 py-24">
-          <div className="max-w-7xl mx-auto">
-            {/* Bento Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-fr">
-              {t.categories.map((category: FAQCategory, categoryIndex: number) => {
-                const Icon = categoryIcons[category.title as keyof typeof categoryIcons] || HelpCircle;
-                const isLarge = categoryIndex === 0 || categoryIndex === 2;
-                const isTall = categoryIndex === 1 || categoryIndex === 4;
-
-                return (
-                  <div
-                    key={categoryIndex}
-                    ref={(el) => {
-                      categoryRefs.current[category.title] = el;
+      {/* Main Content with Sidebar */}
+      <div className="container mx-auto px-4 md:px-6 pb-32">
+        <div className="flex gap-12 lg:gap-16">
+          {/* Mini Sidebar - Categories Navigation */}
+          <aside className="hidden lg:block shrink-0 w-48">
+            <div className="sticky top-24 pt-4">
+              <nav className="space-y-1">
+                {t.categories.map((category: FAQCategory) => {
+                  const isActive = activeCategory === category.title;
+                  return (
+                    <button
+                      key={category.title}
+                      onClick={() => scrollToCategory(category.title)}
+                      className={cn(
+                        'w-full text-left px-3 py-2 text-sm font-normal transition-colors rounded-md',
+                        isActive
+                          ? 'text-foreground bg-muted/50'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
+                      )}
+                    >
+                      {category.title}
+                    </button>
+                  );
+                })}
+                {t.howToApply && (
+                  <button
+                    onClick={() => {
+                      const element = document.getElementById('how-to-apply');
+                      if (element) {
+                        const offset = 100;
+                        const elementPosition = element.offsetTop - offset;
+                        window.scrollTo({
+                          top: elementPosition,
+                          behavior: 'smooth',
+                        });
+                      }
                     }}
-                    id={`category-${categoryIndex}`}
-                    className={cn(
-                      'bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300',
-                      isLarge && 'md:col-span-2',
-                      isTall && 'md:row-span-2'
-                    )}
+                    className="w-full text-left px-3 py-2 text-sm font-normal text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors rounded-md mt-4 pt-4 border-t border-border/50"
                   >
-                    {/* Category Header */}
-                    <div className="mb-6 flex items-center gap-3">
-                      <div className="p-2.5 bg-primary/10 rounded-lg">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <AnimatedHeading
-                        as="h2"
-                        className="text-2xl md:text-3xl font-bold tracking-tight"
-                      >
-                        {category.title}
-                      </AnimatedHeading>
-                    </div>
+                    {t.howToApply.heading}
+                  </button>
+                )}
+              </nav>
+            </div>
+          </aside>
 
-                    {/* FAQ Items */}
-                    <div className="space-y-3">
-                      {category.items.map((item: FAQItem, itemIndex: number) => {
-                        const key = `${categoryIndex}-${itemIndex}`;
-                        const isOpen = openItems[key] || false;
-                        return (
-                          <div
-                            key={itemIndex}
-                            className="border border-border/50 rounded-xl overflow-hidden bg-muted/20 hover:bg-muted/40 transition-colors"
-                          >
-                            <button
-                              onClick={() => toggleItem(categoryIndex, itemIndex)}
-                              className="w-full px-4 py-3.5 flex items-start justify-between gap-4 text-left group"
-                            >
-                              <span className="font-semibold text-sm md:text-base pr-2 flex-1 group-hover:text-primary transition-colors">
-                                {item.question}
-                              </span>
-                              <div className="shrink-0 pt-1">
-                                {isOpen ? (
-                                  <ChevronUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                                ) : (
-                                  <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                                )}
-                              </div>
-                            </button>
-                            {isOpen && (
-                              <div className="px-4 pb-4">
-                                <AnimatedText
-                                  delay={0.05}
-                                  className="text-sm md:text-base text-muted-foreground leading-relaxed"
-                                >
-                                  {item.answer}
-                                </AnimatedText>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* How to Apply - Large Bento Card */}
-              <div className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-sm">
-                <div className="mb-8">
+          {/* FAQ Content - Clean Single Column */}
+          <div className="flex-1 max-w-4xl space-y-20">
+            {/* FAQ Categories */}
+            {t.categories.map((category: FAQCategory, categoryIndex: number) => (
+              <section
+                key={categoryIndex}
+                ref={(el) => {
+                  categoryRefs.current[category.title] = el;
+                }}
+                className="space-y-8"
+              >
+                <div className="overflow-hidden">
                   <AnimatedHeading
                     as="h2"
-                    className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+                    className="text-2xl md:text-3xl font-light tracking-tight text-foreground"
+                  >
+                    {category.title}
+                  </AnimatedHeading>
+                </div>
+                
+                <div className="space-y-1">
+                  {category.items.map((item: FAQItem, itemIndex: number) => {
+                    const key = `${categoryIndex}-${itemIndex}`;
+                    const isOpen = openItems[key] || false;
+                    return (
+                      <div
+                        key={itemIndex}
+                        className="border-b border-border/50 last:border-b-0"
+                      >
+                        <button
+                          onClick={() => toggleItem(categoryIndex, itemIndex)}
+                          className="w-full py-6 flex items-start justify-between gap-6 text-left group hover:opacity-70 transition-opacity"
+                        >
+                          <span className="text-base md:text-lg font-normal text-foreground pr-4 flex-1 leading-relaxed">
+                            {item.question}
+                          </span>
+                          <div className={cn(
+                            "shrink-0 pt-1 transition-transform duration-200",
+                            isOpen && "rotate-180"
+                          )}>
+                            <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                          </div>
+                        </button>
+                        {isOpen && (
+                          <div className="pb-6 pl-0">
+                            <AnimatedText
+                              delay={0.05}
+                              className="text-base text-muted-foreground leading-relaxed max-w-none"
+                            >
+                              {item.answer}
+                            </AnimatedText>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
+
+            {/* How to Apply Section - Simplified */}
+            {t.howToApply && (
+              <section
+                id="how-to-apply"
+                className="space-y-8 pt-16 border-t border-border/50"
+              >
+                <div className="overflow-hidden">
+                  <AnimatedHeading
+                    as="h2"
+                    className="text-2xl md:text-3xl font-light tracking-tight"
                   >
                     {t.howToApply.heading}
                   </AnimatedHeading>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="space-y-6">
                   {t.howToApply.steps.map((step, index: number) => (
                     <div
                       key={index}
                       className="overflow-hidden"
                     >
-                      <AnimatedText delay={index * 0.1}>
-                        <div className="bg-background/80 backdrop-blur-sm rounded-xl p-5 h-full space-y-3 border border-border/50 hover:border-primary/50 transition-colors">
-                          <div className="flex items-center gap-3 mb-2">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                              <span className="text-lg font-bold text-primary">
-                                {index + 1}
-                              </span>
-                            </div>
-                            <h3 className="text-base md:text-lg font-bold">
+                      <AnimatedText delay={index * 0.05}>
+                        <div className="flex gap-4">
+                          <div className="shrink-0 w-6 h-6 rounded-full border border-border flex items-center justify-center mt-1">
+                            <span className="text-xs font-normal text-foreground">
+                              {index + 1}
+                            </span>
+                          </div>
+                          <div className="flex-1 space-y-1">
+                            <h3 className="text-base font-normal text-foreground">
                               {step.title}
                             </h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              {step.description}
+                            </p>
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {step.description}
-                          </p>
                         </div>
                       </AnimatedText>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
+            )}
 
-              {/* Contact CTA - Full Width Bento Card */}
-              <div className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-[#25D366]/10 via-[#25D366]/5 to-[#25D366]/10 border-2 border-[#25D366]/20 rounded-2xl p-8 md:p-12 text-center space-y-6">
+            {/* Contact CTA Section - Minimalist */}
+            {t.contactCta && (
+              <section className="space-y-8 pt-16 border-t border-border/50 text-center">
                 <div className="overflow-hidden">
                   <AnimatedHeading
                     as="h2"
-                    className="text-3xl md:text-4xl font-bold tracking-tight"
+                    className="text-2xl md:text-3xl font-light tracking-tight"
                   >
                     {t.contactCta.heading}
                   </AnimatedHeading>
@@ -282,51 +257,25 @@ export function FAQContent({ locale }: FAQContentProps) {
                 <div className="overflow-hidden">
                   <AnimatedText
                     delay={0.1}
-                    className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                    className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto font-light"
                   >
                     {t.contactCta.subtext}
                   </AnimatedText>
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden pt-4">
                   <Link href={t.contactCta.whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <Button
                       size="lg"
-                      className="text-lg px-8 py-6 font-semibold bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-lg hover:shadow-xl transition-all"
+                      variant="outline"
+                      className="text-base px-8 py-6 font-normal border-2 hover:bg-foreground hover:text-background transition-all duration-200"
                     >
-                      <MessageCircle className="w-5 h-5 mr-2" />
+                      <MessageCircle className="w-4 h-4 mr-2" />
                       {t.contactCta.buttonText}
                     </Button>
                   </Link>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Floating Navigation */}
-      <div className="lg:hidden fixed bottom-6 right-6 z-50">
-        <div className="bg-card border border-border rounded-full shadow-lg p-2">
-          <div className="flex flex-col gap-2 max-h-[60vh] overflow-y-auto">
-            {t.categories.map((category: FAQCategory) => {
-              const Icon = categoryIcons[category.title as keyof typeof categoryIcons] || HelpCircle;
-              const isActive = activeCategory === category.title;
-              return (
-                <button
-                  key={category.title}
-                  onClick={() => scrollToCategory(category.title)}
-                  className={cn(
-                    'p-3 rounded-full transition-all duration-200',
-                    isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted hover:bg-muted/80 text-foreground'
-                  )}
-                  title={category.title}
-                >
-                  <Icon className="w-5 h-5" />
-                </button>
-              );
-            })}
+              </section>
+            )}
           </div>
         </div>
       </div>
