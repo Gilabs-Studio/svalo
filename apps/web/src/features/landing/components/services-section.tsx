@@ -105,13 +105,13 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
 
   return (
     <article
-      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex flex-col h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="space-y-6">
+      <div className="flex flex-col h-full space-y-6">
         {/* Icon */}
-        <div className="h-24 w-24 flex items-center justify-center">
+        <div className="h-24 w-24 flex items-center justify-center shrink-0">
           {iconPath ? (
             <LottieIcon 
               src={iconPath} 
@@ -124,7 +124,7 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
         </div>
 
         {/* Content */}
-        <div className="space-y-3">
+        <div className="space-y-3 grow">
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-white/60 uppercase tracking-wider">
               {product.brand}
@@ -141,15 +141,17 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
           </p>
         </div>
 
-        {/* CTA */}
-        <Link href={`/${locale}/products`}>
-          <Button
-            variant="outline"
-            className="w-full border-white/20 text-white hover:bg-white/10 hover:border-white/40 bg-transparent"
-          >
-            {product.cta}
-          </Button>
-        </Link>
+        {/* CTA - Always at bottom */}
+        <div className="mt-auto pt-4">
+          <Link href={`/${locale}/products`} className="block">
+            <Button
+              variant="outline"
+              className="w-full border-white/20 text-white hover:bg-white/10 hover:border-white/40 bg-transparent"
+            >
+              {product.cta}
+            </Button>
+          </Link>
+        </div>
       </div>
     </article>
   );
@@ -232,7 +234,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
             <div className="overflow-hidden">
               <AnimatedHeading
                 as="h2"
-                className="text-5xl md:text-6xl lg:text-7xl font-black text-white"
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight px-4"
               >
                 {t.heading}
               </AnimatedHeading>
@@ -240,7 +242,7 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
             <div className="overflow-hidden">
               <AnimatedText
                 delay={0.1}
-                className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto"
+                className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto px-4"
               >
                 {t.subtext}
               </AnimatedText>
