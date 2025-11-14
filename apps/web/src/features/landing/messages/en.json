@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "title": "Savlo — Simple, Secure Financing for Small Businesses",
+    "description": "Savlo connects small businesses to trusted financing partners. Quick applications, clear terms, and dashboard tracking. Start with 14-day free access."
+  },
+  "nav": {
+    "home": "Home",
+    "howItWorks": "How it works",
+    "products": "Products",
+    "pricing": "Pricing",
+    "resources": "Resources",
+    "contact": "Contact",
+    "signIn": "Sign in",
+    "getStarted": "Get started"
+  },
+  "hero": {
+    "headline": "Unlock Financing That Actually Fits Your Business",
+    "subtext": "Savlo connects your business to verified lenders and financing products — fast, clear, and secure.",
+    "description": "Apply online and track progress from your own dashboard.",
+    "cta": {
+      "startApplication": "Start Application",
+      "howItWorks": "How It Works"
+    }
+  },
+  "howItWorks": {
+    "heading": "How Savlo Works — 3 simple steps",
+    "steps": [
+      {
+        "title": "Tell us about your need.",
+        "description": "Pick BPKB, property, AP, or AR financing."
+      },
+      {
+        "title": "Upload your documents.",
+        "description": "Secure uploads, one place to manage files."
+      },
+      {
+        "title": "Track progress.",
+        "description": "Follow each application from submission to payout."
+      }
+    ],
+    "microcopy": "No hidden fees. No guesswork. Real updates in your dashboard."
+  },
+  "products": {
+    "heading": "Products built for real business needs",
+    "items": [
+      {
+        "title": "BPKB Financing",
+        "description": "Quick loans secured by vehicle ownership (BPKB). Fast turnaround for urgent cash needs.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "Property Financing",
+        "description": "Access up to 65% of your property value (max IDR 5B). Clear terms, straightforward steps.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "AP Invoice Financing",
+        "description": "Finance payables to keep suppliers paid — up to IDR 2B. Short application, quick payout.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "AR Invoice Financing",
+        "description": "Convert receivables into working capital — up to IDR 5B. Smooth approvals for qualified invoices.",
+        "cta": "Learn More"
+      },
+      {
+        "title": "Savlo+ (Ecosystem Program)",
+        "description": "For businesses that need a custom approach — priority access and personalized support.",
+        "cta": "Learn More"
+      }
+    ]
+  },
+  "whyChooseSavlo": {
+    "heading": "Why businesses choose Savlo",
+    "items": [
+      "Verified funding partners and clear fees.",
+      "Apply online, track everything in one place.",
+      "Local support that answers real questions.",
+      "Security and privacy first — your documents are protected."
+    ]
+  },
+  "pricing": {
+    "heading": "Choose a plan that fits you",
+    "subtext": "Start with Savlo gateway for free consultations. Upgrade to Savlo+ for tailored solutions.",
+    "cta": "View Pricing"
+  },
+  "trust": {
+    "heading": "Trusted by financial partners",
+    "microcopy": "We work with regulated multi-finance institutions and fintech partners. (Add logos after launch.)"
+  },
+  "footerCta": {
+    "heading": "Ready to start?",
+    "subtext": "Create an account and start your application in minutes.",
+    "cta": {
+      "startApplication": "Start Application",
+      "contactSales": "Contact Sales"
+    }
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "address": "Contact us for support and inquiries",
+    "hours": "Available Monday - Friday, 9 AM – 6 PM",
+    "phone": "Contact Support",
+    "copyright": "© 2025 Savlo. All rights reserved.",
+    "tagline": "Simple, secure financing for your business.",
+    "cta": {
+      "directions": "Contact Support"
+    },
+    "social": {
+      "instagram": "Instagram",
+      "threads": "Threads"
+    }
+  }
+}

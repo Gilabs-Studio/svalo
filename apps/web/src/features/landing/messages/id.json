@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "title": "Savlo — Pembiayaan Sederhana dan Aman untuk Bisnis Kecil",
+    "description": "Savlo menghubungkan bisnis kecil ke mitra pembiayaan terpercaya. Aplikasi cepat, syarat jelas, dan pelacakan dashboard. Mulai dengan akses gratis 14 hari."
+  },
+  "nav": {
+    "home": "Beranda",
+    "howItWorks": "Cara kerja",
+    "products": "Produk",
+    "pricing": "Harga",
+    "resources": "Sumber daya",
+    "contact": "Kontak",
+    "signIn": "Masuk",
+    "getStarted": "Mulai"
+  },
+  "hero": {
+    "headline": "Buka Pembiayaan yang Benar-Benar Cocok untuk Bisnis Anda",
+    "subtext": "Savlo menghubungkan bisnis Anda ke pemberi pinjaman terverifikasi dan produk pembiayaan — cepat, jelas, dan aman.",
+    "description": "Ajukan secara online dan lacak progres dari dashboard Anda sendiri.",
+    "cta": {
+      "startApplication": "Mulai Aplikasi",
+      "howItWorks": "Cara Kerja"
+    }
+  },
+  "howItWorks": {
+    "heading": "Cara Savlo Bekerja — 3 langkah sederhana",
+    "steps": [
+      {
+        "title": "Ceritakan kebutuhan Anda.",
+        "description": "Pilih pembiayaan BPKB, properti, AP, atau AR."
+      },
+      {
+        "title": "Unggah dokumen Anda.",
+        "description": "Unggahan aman, satu tempat untuk mengelola file."
+      },
+      {
+        "title": "Lacak progres.",
+        "description": "Ikuti setiap aplikasi dari pengajuan hingga pencairan."
+      }
+    ],
+    "microcopy": "Tanpa biaya tersembunyi. Tanpa tebak-tebakan. Update nyata di dashboard Anda."
+  },
+  "products": {
+    "heading": "Produk yang dibuat untuk kebutuhan bisnis nyata",
+    "items": [
+      {
+        "title": "Pembiayaan BPKB",
+        "description": "Pinjaman cepat yang dijamin dengan kepemilikan kendaraan (BPKB). Putaran cepat untuk kebutuhan kas mendesak.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Properti",
+        "description": "Akses hingga 65% dari nilai properti Anda (maks IDR 5M). Syarat jelas, langkah sederhana.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Invoice AP",
+        "description": "Biayai hutang untuk menjaga pemasok tetap dibayar — hingga IDR 2M. Aplikasi singkat, pencairan cepat.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Pembiayaan Invoice AR",
+        "description": "Konversi piutang menjadi modal kerja — hingga IDR 5M. Persetujuan lancar untuk invoice yang memenuhi syarat.",
+        "cta": "Pelajari Lebih Lanjut"
+      },
+      {
+        "title": "Savlo+ (Program Ekosistem)",
+        "description": "Untuk bisnis yang membutuhkan pendekatan khusus — akses prioritas dan dukungan personalisasi.",
+        "cta": "Pelajari Lebih Lanjut"
+      }
+    ]
+  },
+  "whyChooseSavlo": {
+    "heading": "Mengapa bisnis memilih Savlo",
+    "items": [
+      "Mitra pendanaan terverifikasi dan biaya jelas.",
+      "Ajukan online, lacak semuanya di satu tempat.",
+      "Dukungan lokal yang menjawab pertanyaan nyata.",
+      "Keamanan dan privasi pertama — dokumen Anda dilindungi."
+    ]
+  },
+  "pricing": {
+    "heading": "Pilih paket yang cocok untuk Anda",
+    "subtext": "Mulai dengan Savlo gateway untuk konsultasi gratis. Tingkatkan ke Savlo+ untuk solusi yang disesuaikan.",
+    "cta": "Lihat Harga"
+  },
+  "trust": {
+    "heading": "Dipercaya oleh mitra keuangan",
+    "microcopy": "Kami bekerja dengan lembaga multi-finance dan mitra fintech yang diatur. (Tambahkan logo setelah peluncuran.)"
+  },
+  "footerCta": {
+    "heading": "Siap untuk memulai?",
+    "subtext": "Buat akun dan mulai aplikasi Anda dalam hitungan menit.",
+    "cta": {
+      "startApplication": "Mulai Aplikasi",
+      "contactSales": "Hubungi Penjualan"
+    }
+  },
+  "contact": {
+    "heading": "Hubungi kami",
+    "address": "Hubungi kami untuk dukungan dan pertanyaan",
+    "hours": "Tersedia Senin - Jumat, 9 pagi – 6 sore",
+    "phone": "Hubungi Dukungan",
+    "copyright": "© 2025 Savlo. Hak cipta dilindungi.",
+    "tagline": "Pembiayaan sederhana dan aman untuk bisnis Anda.",
+    "cta": {
+      "directions": "Hubungi Dukungan"
+    },
+    "social": {
+      "instagram": "Instagram",
+      "threads": "Threads"
+    }
+  }
+}
