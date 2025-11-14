@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { type Locale } from '@/i18n';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { getMessages } from '../lib/get-messages';
 import { cn } from '@/lib/utils';
 
@@ -85,51 +91,72 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm transition-transform duration-300 ease-in-out',
+        'fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300 ease-in-out',
         !isVisible && '-translate-y-full'
       )}
     >
       <div
         className={cn(
-          'absolute inset-0',
+          'absolute inset-0 border-b transition-all duration-300',
           isInHero && isLandingRoute
-            ? 'bg-gradient-to-b from-black via-black to-transparent'
-            : 'bg-black'
+            ? 'bg-white/0 border-white/0'
+            : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
         )}
-        style={
-          isInHero && isLandingRoute
-            ? {
-                background:
-                  'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)',
-              }
-            : undefined
-        }
       />
-      <div className="relative container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href={`/${locale}`} className="flex items-center space-x-2">
-          <span className="text-xl font-bold text-white">Savlo</span>
+      <div className="relative container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
+        <Link href={`/${locale}`} className="flex items-center space-x-2 z-10">
+          <span
+            className={cn(
+              'text-lg font-semibold tracking-tight transition-colors',
+              isInHero && isLandingRoute ? 'text-white' : 'text-gray-900'
+            )}
+          >
+            Savlo
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center gap-6 z-10">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'text-sm font-medium transition-colors',
-                isActive(item.href)
-                  ? 'text-white'
-                  : 'text-gray-400 hover:text-white'
+                'text-sm font-medium transition-colors relative',
+                isInHero && isLandingRoute
+                  ? isActive(item.href)
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-white'
+                  : isActive(item.href)
+                    ? 'text-gray-900'
+                    : 'text-gray-600 hover:text-gray-900'
               )}
             >
               {item.label}
+              {isActive(item.href) && (
+                <span
+                  className={cn(
+                    'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
+                    isInHero && isLandingRoute ? 'bg-white' : 'bg-gray-900'
+                  )}
+                />
+              )}
             </Link>
           ))}
-          <div className="h-4 w-px bg-gray-700 mx-2" />
+          <div
+            className={cn(
+              'h-4 w-px transition-colors',
+              isInHero && isLandingRoute ? 'bg-white/20' : 'bg-gray-300'
+            )}
+          />
           <Link
             href={`/${locale}/auth/login`}
-            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+            className={cn(
+              'text-sm font-medium transition-colors',
+              isInHero && isLandingRoute
+                ? 'text-white/70 hover:text-white'
+                : 'text-gray-600 hover:text-gray-900'
+            )}
           >
             {t.signIn}
           </Link>
@@ -141,117 +168,151 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               {t.getStarted}
             </Button>
           </Link>
-          <div className="relative inline-flex items-center gap-1">
-            <Link
-              href={getLocaleUrl('en')}
-              className={cn(
-                'relative flex items-center gap-1.5 px-2 py-1.5 transition-all duration-200',
-                locale === 'en'
-                  ? 'text-white'
-                  : 'text-gray-500 hover:text-gray-300'
-              )}
-            >
-              <FlagEN className="w-4 h-3 shrink-0" />
-              <span className="text-xs font-medium">EN</span>
-              {locale === 'en' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-all duration-200" />
-              )}
-            </Link>
-            <div className="h-4 w-px bg-gray-700" />
-            <Link
-              href={getLocaleUrl('id')}
-              className={cn(
-                'relative flex items-center gap-1.5 px-2 py-1.5 transition-all duration-200',
-                locale === 'id'
-                  ? 'text-white'
-                  : 'text-gray-500 hover:text-gray-300'
-              )}
-            >
-              <FlagID className="w-4 h-3 shrink-0" />
-              <span className="text-xs font-medium">ID</span>
-              {locale === 'id' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-all duration-200" />
-              )}
-            </Link>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={cn(
+                  'flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-all hover:bg-black/5',
+                  isInHero && isLandingRoute
+                    ? 'text-white hover:bg-white/10'
+                    : 'text-gray-700 hover:bg-gray-100'
+                )}
+              >
+                {locale === 'en' ? (
+                  <FlagEN className="w-4 h-3 shrink-0" />
+                ) : (
+                  <FlagID className="w-4 h-3 shrink-0" />
+                )}
+                <span className="text-xs font-medium uppercase">{locale}</span>
+                <ChevronDown className="w-3 h-3 opacity-50" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-32">
+              <DropdownMenuItem asChild>
+                <Link
+                  href={getLocaleUrl('en')}
+                  className={cn(
+                    'flex items-center gap-2 cursor-pointer',
+                    locale === 'en' && 'bg-gray-100'
+                  )}
+                >
+                  <FlagEN className="w-4 h-3 shrink-0" />
+                  <span className="text-sm">English</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  href={getLocaleUrl('id')}
+                  className={cn(
+                    'flex items-center gap-2 cursor-pointer',
+                    locale === 'id' && 'bg-gray-100'
+                  )}
+                >
+                  <FlagID className="w-4 h-3 shrink-0" />
+                  <span className="text-sm">Indonesia</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Mobile Navigation */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-white hover:bg-gray-800">
-              <Menu className="h-6 w-6" />
+          <SheetTrigger asChild className="md:hidden z-10">
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                'transition-colors',
+                isInHero && isLandingRoute
+                  ? 'text-white hover:bg-white/10'
+                  : 'text-gray-900 hover:bg-gray-100'
+              )}
+            >
+              <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-black border-gray-800">
+          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-white border-gray-200">
             <SheetHeader>
-              <SheetTitle className="text-white">Savlo</SheetTitle>
+              <SheetTitle className="text-gray-900">Savlo</SheetTitle>
             </SheetHeader>
-            <div className="mt-8 flex flex-col space-y-4">
+            <div className="mt-8 flex flex-col space-y-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'text-lg font-medium transition-colors',
+                    'text-base font-medium transition-colors px-3 py-2 rounded-md',
                     isActive(item.href)
-                      ? 'text-white'
-                      : 'text-gray-400 hover:text-white'
+                      ? 'text-gray-900 bg-gray-100'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   )}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-gray-800 space-y-4">
+              <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
                 <Link
                   href={`/${locale}/auth/login`}
                   onClick={() => setOpen(false)}
-                  className="text-lg font-medium text-gray-400 hover:text-white transition-colors block"
+                  className="text-base font-medium text-gray-600 hover:text-gray-900 transition-colors block px-3 py-2 rounded-md hover:bg-gray-50"
                 >
                   {t.signIn}
                 </Link>
                 <Link href={`/${locale}/auth/register`} onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-white text-black hover:bg-gray-100 font-medium">
+                  <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 font-medium">
                     {t.getStarted}
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-2 w-full">
-                <Link
-                  href={getLocaleUrl('en')}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    'relative flex items-center gap-2 px-4 py-2.5 flex-1 transition-all duration-200',
-                    locale === 'en'
-                      ? 'text-white'
-                      : 'text-gray-500 hover:text-gray-300'
-                  )}
-                >
-                  <FlagEN className="w-5 h-4 shrink-0" />
-                  <span className="text-sm font-medium">English</span>
-                  {locale === 'en' && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-all duration-200" />
-                  )}
-                </Link>
-                <div className="h-6 w-px bg-gray-700" />
-                <Link
-                  href={getLocaleUrl('id')}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    'relative flex items-center gap-2 px-4 py-2.5 flex-1 transition-all duration-200',
-                    locale === 'id'
-                      ? 'text-white'
-                      : 'text-gray-500 hover:text-gray-300'
-                  )}
-                >
-                  <FlagID className="w-5 h-4 shrink-0" />
-                  <span className="text-sm font-medium">Indonesia</span>
-                  {locale === 'id' && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white transition-all duration-200" />
-                  )}
-                </Link>
+              <div className="pt-4 mt-4 border-t border-gray-200">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center gap-2">
+                        {locale === 'en' ? (
+                          <FlagEN className="w-5 h-4 shrink-0" />
+                        ) : (
+                          <FlagID className="w-5 h-4 shrink-0" />
+                        )}
+                        <span className="text-sm font-medium text-gray-900">
+                          {locale === 'en' ? 'English' : 'Indonesia'}
+                        </span>
+                      </div>
+                      <ChevronDown className="w-4 h-4 text-gray-500" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-full">
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={getLocaleUrl('en')}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          'flex items-center gap-2 cursor-pointer',
+                          locale === 'en' && 'bg-gray-100'
+                        )}
+                      >
+                        <FlagEN className="w-5 h-4 shrink-0" />
+                        <span className="text-sm">English</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={getLocaleUrl('id')}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          'flex items-center gap-2 cursor-pointer',
+                          locale === 'id' && 'bg-gray-100'
+                        )}
+                      >
+                        <FlagID className="w-5 h-4 shrink-0" />
+                        <span className="text-sm">Indonesia</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </SheetContent>
