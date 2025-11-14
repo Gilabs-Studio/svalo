@@ -3,11 +3,27 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { type Locale, defaultLocale, locales } from '@/i18n';
 import { Button } from '@/components/ui/button';
+import { getMessages } from '@/features/landing/lib/get-messages';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 
-export default function NotFound() {
+interface ErrorProps {
+  readonly error: Error & { digest?: string };
+  readonly reset: () => void;
+}
+
+export default function Error({ error, reset }: ErrorProps) {
+  const params = useParams();
+  const localeParam = params?.locale as string | undefined;
+  const locale: Locale = 
+    localeParam && locales.includes(localeParam as Locale) 
+      ? (localeParam as Locale) 
+      : defaultLocale;
+  const messages = getMessages(locale);
+  
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subtextRef = useRef<HTMLParagraphElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -71,7 +87,7 @@ export default function NotFound() {
       );
     }
 
-    // Animate button
+    // Animate buttons
     if (buttonRef.current) {
       timeline.fromTo(
         buttonRef.current,
@@ -95,7 +111,7 @@ export default function NotFound() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/image/hero.webp"
-          alt="404 Background"
+          alt="Error Background"
           fill
           className="object-cover scale-110"
           priority
@@ -107,24 +123,43 @@ export default function NotFound() {
         <div className="space-y-8 max-w-5xl mx-auto">
           <h1 
             ref={headlineRef}
-            className="text-8xl md:text-9xl lg:text-[12rem] font-black leading-none will-change-transform"
+            className="text-6xl md:text-8xl lg:text-9xl font-black leading-none will-change-transform"
           >
-            404
+            Oops!
           </h1>
           <p 
             ref={subtextRef}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-200 will-change-transform"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-200 will-change-transform"
           >
-            Page Not Found
+            Something went wrong
           </p>
           <p 
             ref={descriptionRef}
             className="text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl mx-auto text-gray-300 font-medium will-change-transform"
           >
-            Looks like this page got lost. Let&apos;s get you back on track.
+            We encountered an unexpected error. Don&apos;t worry, our team has been notified.
           </p>
-          <div ref={buttonRef} className="flex justify-center gap-4 will-change-transform">
-            <Link href="/">
+          {error.digest && (
+            <p className="text-sm text-gray-400 font-mono mb-4">
+              Error ID: {error.digest}
+            </p>
+          )}
+          <div ref={buttonRef} className="flex justify-center gap-4 flex-wrap will-change-transform">
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={reset}
+              className={cn(
+                "text-lg md:text-xl px-8 py-6 text-white border-white bg-transparent",
+                "hover:bg-white/10 hover:border-white",
+                "shadow-lg hover:shadow-xl",
+                "transition-all duration-300",
+                "font-bold"
+              )}
+            >
+              Try Again
+            </Button>
+            <Link href={`/${locale}`}>
               <Button 
                 size="lg" 
                 variant="outline"
