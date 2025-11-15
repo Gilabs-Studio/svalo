@@ -1,6 +1,36 @@
 // Dashboard feature types
 // Only type declarations are allowed in .d.ts
 
+export type ApplicationStatus =
+  | 'DRAFT'
+  | 'SUBMITTED'
+  | 'UNDER_REVIEW'
+  | 'DOCUMENT_REQUEST'
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'DISBURSED'
+  | 'CLOSED';
+
+export type ProductType =
+  | 'BPKB_FINANCING'
+  | 'PROPERTY_FINANCING'
+  | 'AP_INVOICE_FINANCING'
+  | 'AR_INVOICE_FINANCING';
+
+export interface Application {
+  id: string;
+  applicationId: string | null; // Format: #[number], null for drafts
+  userId: string;
+  productType: ProductType;
+  status: ApplicationStatus;
+  submissionDate: Date | null;
+  currentStep: number;
+  amountRequested: number | null;
+  amountApproved: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface DashboardMessages {
   title: string;
   welcome: string;
@@ -24,6 +54,42 @@ export interface DashboardMessages {
   arInvoice: {
     title: string;
     description: string;
+  };
+  myApplications: {
+    title: string;
+    tabs: {
+      drafts: string;
+      underReview: string;
+      reviewed: string;
+    };
+    drafts: {
+      title: string;
+      description: string;
+      continue: string;
+      empty: string;
+    };
+    underReview: {
+      title: string;
+      description: string;
+      viewDetails: string;
+      empty: string;
+    };
+    reviewed: {
+      title: string;
+      description: string;
+      viewDetails: string;
+      empty: string;
+    };
+    status: {
+      draft: string;
+      submitted: string;
+      underReview: string;
+      documentRequest: string;
+      approved: string;
+      rejected: string;
+      disbursed: string;
+      closed: string;
+    };
   };
   forms: {
     steps: {

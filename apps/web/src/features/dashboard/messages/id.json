@@ -22,6 +22,42 @@
     "title": "Pembiayaan Invoice AR",
     "description": "Pembiayaan invoice Accounts Receivable"
   },
+  "myApplications": {
+    "title": "Aplikasi Saya",
+    "tabs": {
+      "drafts": "Draft",
+      "underReview": "Sedang Direview",
+      "reviewed": "Sudah Direview"
+    },
+    "drafts": {
+      "title": "Draft",
+      "description": "Aplikasi yang belum dikirim",
+      "continue": "Lanjutkan Aplikasi",
+      "empty": "Tidak ada aplikasi draft"
+    },
+    "underReview": {
+      "title": "Sedang Direview",
+      "description": "Aplikasi yang sedang direview",
+      "viewDetails": "Lihat Detail",
+      "empty": "Tidak ada aplikasi yang sedang direview"
+    },
+    "reviewed": {
+      "title": "Sudah Direview",
+      "description": "Aplikasi yang sudah direview",
+      "viewDetails": "Lihat Detail",
+      "empty": "Tidak ada aplikasi yang sudah direview"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Terkirim",
+      "underReview": "Sedang Direview",
+      "documentRequest": "Permintaan Dokumen",
+      "approved": "Disetujui",
+      "rejected": "Ditolak",
+      "disbursed": "Dicairkan",
+      "closed": "Ditutup"
+    }
+  },
   "forms": {
     "steps": {
       "registration": "Registrasi",

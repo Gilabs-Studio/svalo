@@ -22,6 +22,42 @@
     "title": "AR Invoice Financing",
     "description": "Accounts Receivable invoice financing"
   },
+  "myApplications": {
+    "title": "My Applications",
+    "tabs": {
+      "drafts": "Drafts",
+      "underReview": "Under Review",
+      "reviewed": "Reviewed"
+    },
+    "drafts": {
+      "title": "Drafts",
+      "description": "Applications that haven't been submitted yet",
+      "continue": "Continue Application",
+      "empty": "No draft applications"
+    },
+    "underReview": {
+      "title": "Under Review",
+      "description": "Applications that are being reviewed",
+      "viewDetails": "View Details",
+      "empty": "No applications under review"
+    },
+    "reviewed": {
+      "title": "Reviewed",
+      "description": "Applications that have been reviewed",
+      "viewDetails": "View Details",
+      "empty": "No reviewed applications"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "underReview": "Under Review",
+      "documentRequest": "Document Request",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed",
+      "closed": "Closed"
+    }
+  },
   "forms": {
     "steps": {
       "registration": "Registration",
