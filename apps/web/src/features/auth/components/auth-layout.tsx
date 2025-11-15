@@ -95,8 +95,8 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               ease: 'power2.in',
               onComplete: () => {
                 // Hide form content to prevent React from rendering new content
-                if (formContainer.current) {
-                  gsap.set(formContainer.current, { display: 'none' });
+                if (formContainer) {
+                  gsap.set(formContainer, { display: 'none' });
                 }
               },
             })
@@ -120,8 +120,9 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
                 setFormContent(newContent);
                 setDisplayMode(mode);
                 // Show form content again
-                if (formContainer.current) {
-                  gsap.set(formContainer.current, { display: 'block' });
+                const currentContainer = formContainerRef.current;
+                if (currentContainer) {
+                  gsap.set(currentContainer, { display: 'block' });
                 }
               });
             })
@@ -145,8 +146,8 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               ease: 'power2.in',
               onComplete: () => {
                 // Hide form content to prevent React from rendering new content
-                if (formContainer.current) {
-                  gsap.set(formContainer.current, { display: 'none' });
+                if (formContainer) {
+                  gsap.set(formContainer, { display: 'none' });
                 }
               },
             })
@@ -170,8 +171,9 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
                 setFormContent(newContent);
                 setDisplayMode(mode);
                 // Show form content again
-                if (formContainer.current) {
-                  gsap.set(formContainer.current, { display: 'block' });
+                const currentContainer = formContainerRef.current;
+                if (currentContainer) {
+                  gsap.set(currentContainer, { display: 'block' });
                 }
               });
             })
