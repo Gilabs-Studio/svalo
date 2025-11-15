@@ -11,8 +11,10 @@ interface ConditionalContactSectionProps {
 export function ConditionalContactSection({ locale }: ConditionalContactSectionProps) {
   const pathname = usePathname();
   const isAuthRoute = pathname.includes('/auth');
+  const isDashboardRoute = pathname.includes('/dashboard');
+  const isServiceDetailRoute = pathname.includes('/services/');
 
-  if (isAuthRoute) {
+  if (isAuthRoute || isDashboardRoute || isServiceDetailRoute) {
     return null;
   }
 
