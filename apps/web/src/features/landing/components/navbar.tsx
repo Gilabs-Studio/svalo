@@ -166,7 +166,8 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const messages = getMessages(locale);
   const t = messages.nav;
   const { isAuthenticated, logout } = useAuthStore();
-  const isTransparentNav = isInHero;
+  const isAuthRoute = pathname.includes('/auth');
+  const isTransparentNav = isInHero && !isAuthRoute;
 
   const navItems = [
     { href: `/${locale}`, label: t.home },
@@ -214,7 +215,9 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
           'absolute inset-0 border-b transition-all duration-300',
           isTransparentNav
             ? 'bg-white/0 border-white/0'
-            : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
+            : isAuthRoute
+              ? 'bg-white border-gray-200'
+              : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
         )}
       />
       <div className="relative container mx-auto flex h-12 items-center justify-between px-4 md:px-6">
