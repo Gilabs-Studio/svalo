@@ -165,9 +165,8 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const pathname = usePathname();
   const messages = getMessages(locale);
   const t = messages.nav;
-  const { user, isAuthenticated, logout } = useAuthStore();
-  const isLandingRoute = pathname === `/${locale}`;
-  const isTransparentNav = isInHero && isLandingRoute;
+  const { isAuthenticated, logout } = useAuthStore();
+  const isTransparentNav = isInHero;
 
   const navItems = [
     { href: `/${locale}`, label: t.home },
