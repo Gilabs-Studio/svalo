@@ -1,4 +1,3 @@
-// TODO: Install zustand package: npm install zustand
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
