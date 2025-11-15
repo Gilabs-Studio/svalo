@@ -25,6 +25,7 @@
   "myApplications": {
     "title": "My Applications",
     "tabs": {
+      "all": "All",
       "drafts": "Drafts",
       "underReview": "Under Review",
       "reviewed": "Reviewed"

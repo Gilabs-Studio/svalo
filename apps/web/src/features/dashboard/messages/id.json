@@ -25,6 +25,7 @@
   "myApplications": {
     "title": "Aplikasi Saya",
     "tabs": {
+      "all": "Semua",
       "drafts": "Draft",
       "underReview": "Sedang Direview",
       "reviewed": "Sudah Direview"

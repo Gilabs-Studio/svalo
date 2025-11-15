@@ -338,8 +338,16 @@ export function DashboardPage({ locale }: DashboardPageProps) {
               </AnimatedHeading>
             </div>
 
-            <Tabs defaultValue="drafts" className="w-full">
+            <Tabs defaultValue="all" className="w-full">
               <TabsList className="mb-6">
+                <TabsTrigger value="all">
+                  {t.myApplications.tabs.all}
+                  {dummyApplications.length > 0 && (
+                    <Badge variant="secondary" className="ml-2">
+                      {dummyApplications.length}
+                    </Badge>
+                  )}
+                </TabsTrigger>
                 <TabsTrigger value="drafts">
                   {t.myApplications.tabs.drafts}
                   {drafts.length > 0 && (
@@ -365,6 +373,146 @@ export function DashboardPage({ locale }: DashboardPageProps) {
                   )}
                 </TabsTrigger>
               </TabsList>
+
+              {/* All Tab */}
+              <TabsContent value="all" className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">{t.myApplications.title}</h3>
+                  <p className="text-sm text-muted-foreground">View all your applications</p>
+                </div>
+                
+                {/* Drafts Section */}
+                {drafts.length > 0 && (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">{t.myApplications.drafts.title}</h4>
+                      <p className="text-sm text-muted-foreground">{t.myApplications.drafts.description}</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {drafts.map((app) => (
+                        <Card key={app.id} className="border">
+                          <CardHeader>
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-lg">{getProductName(app.productType)}</CardTitle>
+                                <CardDescription className="mt-1">
+                                  {app.amountRequested ? formatCurrency(app.amountRequested) : 'Amount not set'}
+                                </CardDescription>
+                              </div>
+                              <Badge variant={getStatusBadgeVariant(app.status)}>
+                                {getStatusText(app.status)}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center justify-between">
+                              <div className="text-sm text-muted-foreground">
+                                Step {app.currentStep} of 4 • {formatDate(app.updatedAt)}
+                              </div>
+                              <Button variant="outline" size="sm" asChild>
+                                <Link href={`/${locale}/dashboard/${getProductRoute(app.productType)}`}>
+                                  {t.myApplications.drafts.continue}
+                                </Link>
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Under Review Section */}
+                {underReview.length > 0 && (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">{t.myApplications.underReview.title}</h4>
+                      <p className="text-sm text-muted-foreground">{t.myApplications.underReview.description}</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {underReview.map((app) => (
+                        <Card key={app.id} className="border">
+                          <CardHeader>
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-lg">{getProductName(app.productType)}</CardTitle>
+                                <CardDescription className="mt-1">
+                                  {app.applicationId} • {app.amountRequested ? formatCurrency(app.amountRequested) : 'N/A'}
+                                </CardDescription>
+                              </div>
+                              <Badge variant={getStatusBadgeVariant(app.status)}>
+                                {getStatusText(app.status)}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center justify-between">
+                              <div className="text-sm text-muted-foreground">
+                                {app.submissionDate ? `Submitted ${formatDate(app.submissionDate)}` : 'Not submitted'}
+                              </div>
+                              <Button variant="outline" size="sm">
+                                {t.myApplications.underReview.viewDetails}
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Reviewed Section */}
+                {reviewed.length > 0 && (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">{t.myApplications.reviewed.title}</h4>
+                      <p className="text-sm text-muted-foreground">{t.myApplications.reviewed.description}</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {reviewed.map((app) => (
+                        <Card key={app.id} className="border">
+                          <CardHeader>
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-lg">{getProductName(app.productType)}</CardTitle>
+                                <CardDescription className="mt-1">
+                                  {app.applicationId} • {app.amountRequested ? formatCurrency(app.amountRequested) : 'N/A'}
+                                  {app.amountApproved && app.status === 'APPROVED' && (
+                                    <span className="ml-2 text-green-600">
+                                      • Approved: {formatCurrency(app.amountApproved)}
+                                    </span>
+                                  )}
+                                </CardDescription>
+                              </div>
+                              <Badge variant={getStatusBadgeVariant(app.status)}>
+                                {getStatusText(app.status)}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center justify-between">
+                              <div className="text-sm text-muted-foreground">
+                                {app.submissionDate ? `Submitted ${formatDate(app.submissionDate)}` : 'Not submitted'}
+                              </div>
+                              <Button variant="outline" size="sm">
+                                {t.myApplications.reviewed.viewDetails}
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {dummyApplications.length === 0 && (
+                  <Card className="border-dashed">
+                    <CardContent className="py-8 text-center text-muted-foreground">
+                      No applications found
+                    </CardContent>
+                  </Card>
+                )}
+              </TabsContent>
 
               {/* Drafts Tab */}
               <TabsContent value="drafts" className="space-y-4">

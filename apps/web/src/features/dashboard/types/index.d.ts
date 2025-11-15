@@ -58,6 +58,7 @@ export interface DashboardMessages {
   myApplications: {
     title: string;
     tabs: {
+      all: string;
       drafts: string;
       underReview: string;
       reviewed: string;
