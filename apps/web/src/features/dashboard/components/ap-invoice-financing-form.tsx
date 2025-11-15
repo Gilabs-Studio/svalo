@@ -11,7 +11,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getMessages } from '../lib/get-messages';
 import { 
-  User, 
   Building2, 
   FileText, 
   CheckCircle2, 
@@ -67,36 +66,18 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
 
   const requiredDocuments = t.documents.required;
   const steps = [
-    { number: 1, title: stepsConfig.registration, icon: User },
-    { number: 2, title: stepsConfig.info, icon: Building2 },
-    { number: 3, title: stepsConfig.documents, icon: FileText },
-    { number: 4, title: stepsConfig.review, icon: CheckCircle2 },
+    { number: 1, title: stepsConfig.info, icon: Building2 },
+    { number: 2, title: stepsConfig.documents, icon: FileText },
+    { number: 3, title: stepsConfig.review, icon: CheckCircle2 },
   ];
 
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
-            <div className="text-center space-y-2">
-              <div className="flex justify-center mb-4">
-                <div className="p-4 bg-primary/10 rounded-full">
-                  <User className="w-8 h-8 text-primary" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold">{common.registration.title}</h3>
-              <p className="text-muted-foreground">
-                {common.registration.description}
-              </p>
-            </div>
-          </div>
-        );
-
-      case 2:
-        return (
           <div className="space-y-8">
             <div className="space-y-6">
-              <div className="flex items-center gap-3 border-b pb-3">
+              <div className="flex items-center gap-3 border-b border-border/30 pb-3">
                 <Building2 className="w-5 h-5 text-primary" />
                 <h3 className="text-xl font-bold">{t.companyInfo.title}</h3>
               </div>
@@ -117,7 +98,7 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-center gap-3 border-b pb-3">
+              <div className="flex items-center gap-3 border-b border-border/30 pb-3">
                 <CheckCircle2 className="w-5 h-5 text-primary" />
                 <h3 className="text-xl font-bold">{t.companyInfo.eligibility.title}</h3>
               </div>
@@ -133,10 +114,10 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
           </div>
         );
 
-      case 3:
+      case 2:
         return (
           <div className="space-y-6">
-            <div className="flex items-center gap-3 border-b pb-3">
+            <div className="flex items-center gap-3 border-b border-border/30 pb-3">
               <FileText className="w-5 h-5 text-primary" />
               <h3 className="text-xl font-bold">{common.documents.title}</h3>
             </div>
@@ -241,10 +222,10 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
           </div>
         );
 
-      case 4:
+      case 3:
         return (
           <div className="space-y-6">
-            <div className="flex items-center gap-3 border-b pb-3">
+            <div className="flex items-center gap-3 border-b border-border/30 pb-3">
               <CheckCircle2 className="w-5 h-5 text-primary" />
               <h3 className="text-xl font-bold">{common.review.title}</h3>
             </div>
@@ -275,7 +256,7 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="space-y-4">
-            <div className="overflow-hidden">
+            <div className="overflow-visible">
               <AnimatedHeading
                 as="h1"
                 className="text-4xl md:text-5xl font-black tracking-tight break-words"
@@ -283,7 +264,7 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
                 {t.title}
               </AnimatedHeading>
             </div>
-            <div className="overflow-hidden">
+            <div className="overflow-visible">
               <AnimatedText
                 delay={0.1}
                 className="text-muted-foreground"
@@ -293,54 +274,68 @@ export function APInvoiceFinancingForm({ locale }: APInvoiceFinancingFormProps) 
             </div>
           </div>
 
-          <div className="flex items-center justify-between border-b pb-4">
-            {steps.map((step) => {
+          <div className="flex items-center justify-center gap-2 border-b border-border/30 pb-6">
+            {steps.map((step, index) => {
               const Icon = step.icon;
+              const isActive = currentStep === step.number;
+              const isCompleted = currentStep > step.number;
               return (
-                <div
-                  key={step.number}
-                  className={`flex items-center gap-2 ${
-                    currentStep >= step.number ? 'text-primary' : 'text-muted-foreground'
-                  }`}
-                >
+                <div key={step.number} className="flex items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                      currentStep >= step.number
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted'
+                    className={`flex items-center gap-2 ${
+                      isActive || isCompleted ? 'text-primary' : 'text-muted-foreground'
                     }`}
                   >
-                    {currentStep > step.number ? (
-                      <CheckCircle2 className="w-4 h-4" />
-                    ) : (
-                      <Icon className="w-4 h-4" />
-                    )}
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                        isActive
+                          ? 'bg-primary text-primary-foreground scale-110'
+                          : isCompleted
+                          ? 'bg-primary/20 text-primary'
+                          : 'bg-muted'
+                      }`}
+                    >
+                      {isCompleted ? (
+                        <CheckCircle2 className="w-5 h-5" />
+                      ) : (
+                        <Icon className="w-5 h-5" />
+                      )}
+                    </div>
+                    <span className="hidden sm:inline text-sm font-medium ml-2">
+                      {step.title}
+                    </span>
                   </div>
-                  <span className="hidden md:inline text-sm font-medium">
-                    {step.title}
-                  </span>
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`h-px w-12 sm:w-16 mx-2 transition-colors ${
+                        isCompleted ? 'bg-primary' : 'bg-border'
+                      }`}
+                    />
+                  )}
                 </div>
               );
             })}
           </div>
 
-          <div className="bg-card border border-border rounded-lg p-8">
+          <div className="bg-card border border-border rounded-xl p-6 sm:p-8 shadow-sm">
             {renderStepContent()}
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-4">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
               disabled={currentStep === 1}
+              className="min-w-[100px]"
             >
               {common.navigation.previous}
             </Button>
             <Button
-              onClick={() => setCurrentStep(Math.min(4, currentStep + 1))}
-              disabled={currentStep === 4}
+              onClick={() => setCurrentStep(Math.min(3, currentStep + 1))}
+              disabled={currentStep === 3}
+              className="min-w-[100px]"
             >
-              {common.navigation.next}
+              {currentStep === 3 ? common.review.submit : common.navigation.next}
             </Button>
           </div>
         </div>

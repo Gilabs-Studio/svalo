@@ -10,15 +10,29 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { useParallax } from '../hooks/useParallax';
 import Image from 'next/image';
+import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
 interface ServiceDetailPageProps {
   readonly locale: Locale;
   readonly slug: string;
 }
 
+function getDashboardRoute(slug: string, locale: Locale): string {
+  const routeMap: Record<string, string> = {
+    'bpkb-based-financing': `/${locale}/dashboard/bpkb-financing`,
+    'property-based-financing': `/${locale}/dashboard/property-financing`,
+    'ap-invoice-financing': `/${locale}/dashboard/ap-invoice-financing`,
+    'ar-invoice-financing': `/${locale}/dashboard/ar-invoice-financing`,
+    'ecosystem-banking-solutions': `/${locale}/dashboard`,
+  };
+  return routeMap[slug] || `/${locale}/dashboard`;
+}
+
 export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   const details = getServiceDetails(locale, slug);
   const imageRef = useRef<HTMLDivElement>(null);
+  const { isAuthenticated } = useAuthStore();
+  const dashboardRoute = getDashboardRoute(slug, locale);
 
   useParallax(imageRef, {
     scrollSpeed: 0.15,
@@ -237,26 +251,40 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
             </div>
             <div className="overflow-hidden">
               <AnimatedText delay={0.1}>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link href={`/${locale}/auth/login`}>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="w-full sm:w-auto text-lg px-8 py-6 font-semibold"
-                    >
-                      {details.cta.login}
-                    </Button>
-                  </Link>
-                  <Link href={`/${locale}/auth/register`}>
-                    <Button
-                      size="lg"
-                      className="w-full sm:w-auto text-lg px-8 py-6 font-semibold"
-                    >
-                      {details.cta.createAccount}
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
-                </div>
+                {isAuthenticated ? (
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Link href={dashboardRoute}>
+                      <Button
+                        size="lg"
+                        className="w-full sm:w-auto text-lg px-8 py-6 font-semibold"
+                      >
+                        Apply Now
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Link href={`/${locale}/auth/login`}>
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="w-full sm:w-auto text-lg px-8 py-6 font-semibold"
+                      >
+                        {details.cta.login}
+                      </Button>
+                    </Link>
+                    <Link href={`/${locale}/auth/register`}>
+                      <Button
+                        size="lg"
+                        className="w-full sm:w-auto text-lg px-8 py-6 font-semibold"
+                      >
+                        {details.cta.createAccount}
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </AnimatedText>
             </div>
           </section>

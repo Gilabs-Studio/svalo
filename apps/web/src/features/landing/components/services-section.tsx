@@ -16,6 +16,11 @@ interface ServicesSectionProps {
   readonly locale: Locale;
 }
 
+function getServiceDetailRoute(title: string, locale: Locale): string {
+  const slug = getServiceSlug(title);
+  return `/${locale}/services/${slug}`;
+}
+
 const iconMap: Record<string, string> = {
   'BPKB-based Financing': '/icon/BPKB-based-Financing.json',
   'Pembiayaan Berbasis BPKB': '/icon/BPKB-based-Financing.json',
@@ -88,6 +93,7 @@ interface ProductCardProps {
 
 function ProductCard({ product, iconPath, locale }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const serviceDetailRoute = getServiceDetailRoute(product.title, locale);
 
   return (
     <article
@@ -129,7 +135,7 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
 
         {/* CTA - Always at bottom */}
         <div className="mt-auto pt-4">
-          <Link href={`/${locale}/services/${getServiceSlug(product.title)}`} className="block">
+          <Link href={serviceDetailRoute} className="block">
             <Button
               variant="outline"
               className="w-full border-white/20 text-white hover:bg-white/10 hover:border-white/40 bg-transparent"

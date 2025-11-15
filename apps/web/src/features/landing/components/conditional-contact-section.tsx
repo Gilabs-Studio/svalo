@@ -12,9 +12,8 @@ export function ConditionalContactSection({ locale }: ConditionalContactSectionP
   const pathname = usePathname();
   const isAuthRoute = pathname.includes('/auth');
   const isDashboardRoute = pathname.includes('/dashboard');
-  const isServiceDetailRoute = pathname.includes('/services/');
 
-  if (isAuthRoute || isDashboardRoute || isServiceDetailRoute) {
+  if (isAuthRoute || isDashboardRoute) {
     return null;
   }
 

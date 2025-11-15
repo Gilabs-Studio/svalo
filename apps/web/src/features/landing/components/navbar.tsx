@@ -25,6 +25,11 @@ import { getServiceSlug } from '../lib/service-slug';
 import Lottie, { type LottieRef } from 'lottie-react';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
+function getServiceDetailRoute(title: string, locale: Locale): string {
+  const slug = getServiceSlug(title);
+  return `/${locale}/services/${slug}`;
+}
+
 // Lottie animation data type
 type LottieAnimationData = Record<string, unknown>;
 
@@ -86,17 +91,17 @@ interface ServiceDropdownItemProps {
 }
 
 function ServiceDropdownItem({ service, locale, pathname }: ServiceDropdownItemProps) {
-  const slug = getServiceSlug(service.title);
   const iconPath = service.iconDark || service.icon;
   const [isHovered, setIsHovered] = useState(false);
+  const serviceDetailRoute = getServiceDetailRoute(service.title, locale);
 
   return (
     <DropdownMenuItem asChild>
       <Link
-        href={`/${locale}/services/${slug}`}
+        href={serviceDetailRoute}
         className={cn(
           'flex items-center gap-3 cursor-pointer py-2.5 group',
-          pathname === `/${locale}/services/${slug}` && 'bg-gray-100'
+          pathname === serviceDetailRoute && 'bg-gray-100'
         )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -162,8 +167,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const t = messages.nav;
   const { user, isAuthenticated, logout } = useAuthStore();
   const isLandingRoute = pathname === `/${locale}`;
-  const isServiceDetailRoute = pathname.startsWith(`/${locale}/services/`);
-  const isTransparentNav = isInHero && (isLandingRoute || isServiceDetailRoute);
+  const isTransparentNav = isInHero && isLandingRoute;
 
   const navItems = [
     { href: `/${locale}`, label: t.home },
@@ -189,9 +193,9 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
 
   const getProductsButtonClassName = () => {
     if (isTransparentNav) {
-      return isServiceDetailRoute ? 'text-white' : 'text-white/70 hover:text-white';
+      return 'text-white/70 hover:text-white';
     }
-    return isServiceDetailRoute ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900';
+    return 'text-gray-600 hover:text-gray-900';
   };
 
   const getLocaleUrl = (targetLocale: Locale) => {
@@ -260,14 +264,6 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               >
                 {t.products}
                 <ChevronDown className="w-3 h-3 opacity-70" />
-                {isServiceDetailRoute && (
-                  <span
-                    className={cn(
-                      'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
-                      isTransparentNav ? 'bg-white' : 'bg-gray-900'
-                    )}
-                  />
-                )}
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-72">
@@ -322,7 +318,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               </Link>
               <Button
                 size="sm"
-                variant="outline"
+                variant={isTransparentNav ? 'default' : 'outline'}
                 onClick={() => {
                   logout();
                   window.location.href = `/${locale}`;
@@ -330,7 +326,7 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                 className={cn(
                   'h-8 px-4 text-xs font-medium',
                   isTransparentNav
-                    ? 'border-white/30 text-white hover:bg-white/10'
+                    ? 'bg-white text-black hover:bg-gray-100'
                     : 'border-gray-300'
                 )}
               >
@@ -451,17 +447,17 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                 <div className="text-sm font-medium text-gray-900 mb-2">{t.products}</div>
                 <div className="flex flex-col space-y-1 ml-2">
                   {services.map((service) => {
-                    const slug = getServiceSlug(service.title);
                     const serviceWithIcon = service as { icon?: string; iconDark?: string };
                     const iconPath = serviceWithIcon.iconDark || serviceWithIcon.icon;
+                    const serviceDetailRoute = getServiceDetailRoute(service.title, locale);
                     return (
                       <Link
                         key={service.title}
-                        href={`/${locale}/services/${slug}`}
+                        href={serviceDetailRoute}
                         onClick={() => setOpen(false)}
                         className={cn(
                           'flex items-center gap-2 text-sm transition-colors px-2 py-2 rounded-md',
-                          pathname === `/${locale}/services/${slug}`
+                          pathname === serviceDetailRoute
                             ? 'text-gray-900 bg-gray-100 font-medium'
                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                         )}
