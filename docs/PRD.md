@@ -1,5 +1,7 @@
 # Product Requirements Document (PRD)
+
 ## Savlo - Your Financing Gateway
+
 ## Business Logic & Rules
 
 **Version:** 2.0  
@@ -11,17 +13,22 @@
 ## 1. Executive Summary
 
 ### 1.1 Purpose
+
 This PRD defines the business logic, rules, and processes for the Savlo financing gateway platform. It focuses on eligibility criteria, product specifications, application workflows, form structures, and business rules that govern the platform's operations.
 
 ### 1.2 Business Model
+
 Savlo operates as a **financing gateway** connecting borrowers to lenders:
+
 - **Free Tier (Savlo):** Gateway service connecting users to multi-finance institutions and fintech lenders
 - **Premium Tier (Savlo+):** Premium ecosystem program with personalized solutions and exclusive access to secret financial institutions
 
 ### 1.3 Core Value Proposition
+
 "Unlock Your Business Potential with Seamless Financing. Savlo is Your Financing Gateway, connecting you to the right funding solutions, quickly and securely."
 
 ### 1.4 Target Market
+
 - **Primary:** SMEs with minimum 2 years operation + positive financial performance
 - **Secondary:** Individuals with collaterals (BPKB, property certificates)
 - **Tertiary:** Businesses that struggle with standard financing eligibility (Savlo+ target)
@@ -35,6 +42,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **YES, Login & Dashboard Required**
 
 **Business Justification:**
+
 1. **Application Tracking:** Users need to track multiple applications across different services
 2. **Data Persistence:** Form data must be saved per user to allow multi-step form completion
 3. **Document Management:** Each user has unique document requirements per application
@@ -44,6 +52,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 ### 2.2 User Account Structure
 
 **User Entity:**
+
 - User ID (unique identifier)
 - Username/Email (login credential)
 - Password (hashed)
@@ -56,6 +65,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 - Session Token
 
 **Business Rules:**
+
 - One user can have multiple applications
 - User type determines available products
 - Savlo+ membership required for Ecosystem Banking Solutions
@@ -65,6 +75,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 ### 2.3 Dashboard Requirements
 
 **"My Applications" Dashboard:**
+
 - List all user's applications
 - Display: Application ID, Financing Type, Submission Date, Status
 - Filter by application type
@@ -83,6 +94,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Use Case:** Quick process for urgent needs
 
 **Eligibility Rules:**
+
 - Must be individual (not business)
 - Must own vehicle with valid BPKB
 - BPKB must be in applicant's name
@@ -92,10 +104,12 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Application Form Structure (Multi-Step):**
 
 **Step 1: Registration**
+
 - User must be logged in
 - If not logged in, redirect to login/register
 
 **Step 2: BPKB Info**
+
 - **Data Diri:**
   - Nama Lengkap (Full Name) - Required
   - No. KTP (ID Number) - Required, format validation
@@ -122,6 +136,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - Tenor Pelunasan (Repayment Tenor) - Required, dropdown: 12 | 24 | 36 | 48 | 60 months
 
 **Step 3: Documents**
+
 - Google Drive URL - Required
 - URL validation: must be valid Google Drive link
 - Link must have viewing permissions enabled
@@ -135,11 +150,13 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - ✅ Foto Kendaraan (Kiri)
 
 **Step 4: Review**
+
 - Display all entered information
 - Allow edit before submission
 - Submit button creates application
 
 **Business Rules:**
+
 - Form data saved per step (auto-save)
 - User can return to continue incomplete application
 - Application ID generated upon submission
@@ -156,6 +173,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Maximum Amount:** IDR 5 Billion
 
 **Eligibility Rules:**
+
 - Must be individual (not business)
 - Must own property with valid certificate (SHM or SHGB)
 - Property must be in Jabodetabek area
@@ -164,9 +182,11 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Application Form Structure (Multi-Step):**
 
 **Step 1: Registration**
+
 - User must be logged in
 
 **Step 2: Property Info**
+
 - **Data Diri:**
   - Nama Konsumen (Consumer Name) - Required
   - No. HP (Phone Number) - Required
@@ -184,6 +204,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - Tanggal Submission (Submission Date) - Auto-filled on submit
 
 **Step 3: Documents**
+
 - Google Drive URL - Required
 - Required Documents Checklist:
   - ✅ Foto KTP
@@ -193,10 +214,12 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - ✅ Bukti Rekening Listrik/Air
 
 **Step 4: Review**
+
 - Display all entered information
 - Allow edit before submission
 
 **Business Rules:**
+
 - Maximum financing = min(65% of property value, IDR 5B)
 - Property valuation required (post-submission)
 - Form data saved per step
@@ -211,6 +234,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Financing Range:** IDR 500M – IDR 2B
 
 **Eligibility Rules:**
+
 - **MANDATORY:**
   - Based in Jabodetabek
   - Corporate only (PT/CV)
@@ -221,10 +245,12 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Application Form Structure (Multi-Step):**
 
 **Step 1: Registration**
+
 - User must be logged in
 - User type must be BUSINESS
 
 **Step 2: Company Info**
+
 - **Company Information:**
   - Nama PT/CV (Company Name) - Required
   - Auto-validate: must be registered PT/CV
@@ -237,38 +263,41 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - Must have positive financial report ✅
 
 **Step 3: Documents**
+
 - Google Drive URL - Required
 - Required Documents Checklist:
-  
+
   **A. Perusahaan:**
   - ✅ Akta Pendirian & Perubahan
   - ✅ SK Menkumham, NPWP PT
   - ✅ KTP & NPWP Pengurus
   - ✅ NIB & izin pendukung
   - ✅ Company Profile
-  
+
   **B. Keuangan:**
   - ✅ Laporan Keuangan 2 Tahun + YTD
   - ✅ Mutasi Rekening 6 Bulan
-  
+
   **C. Dokumen PO & Invoice:**
   - ✅ PO Customer (3 sample)
   - ✅ Invoice Customer (3 sample)
   - ✅ History invoice paid (3 sample)
-  
+
   **D. Personal Guarantee:**
   - ✅ KTP + KTP Pasangan, KK
   - ✅ Akta Nikah
-  
+
   **E. Lain-lain:**
   - ✅ List Supplier & Customer
   - ✅ Kontak Person (Email, No HP, PIC)
 
 **Step 4: Review**
+
 - Display all entered information
 - Allow edit before submission
 
 **Business Rules:**
+
 - Only businesses can apply
 - Must verify company registration
 - Financial reports must be positive
@@ -285,6 +314,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Financing Range:** IDR 300M – IDR 5B
 
 **Eligibility Rules:**
+
 - **MANDATORY:**
   - Based in Jabodetabek, Surabaya, or Bali
   - Corporate only (PT/CV)
@@ -295,10 +325,12 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Application Form Structure (Multi-Step):**
 
 **Step 1: Registration**
+
 - User must be logged in
 - User type must be BUSINESS
 
 **Step 2: Company Info**
+
 - **Company Information:**
   - Nama PT/CV (Company Name) - Required
 
@@ -310,15 +342,18 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - Must have positive financial report ✅
 
 **Step 3: Documents**
+
 - Google Drive URL - Required
 - Required Documents Checklist:
   - Same as AP Invoice Financing (A, B, C, D, E sections)
 
 **Step 4: Review**
+
 - Display all entered information
 - Allow edit before submission
 
 **Business Rules:**
+
 - Only businesses can apply
 - Location must be Jabodetabek, Surabaya, or Bali
 - Minimum financing: IDR 300M
@@ -333,6 +368,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **Account Type Required:** Savlo+ (Premium)
 
 **Eligibility Rules:**
+
 - **MANDATORY:**
   - Savlo+ membership required
   - Business entity (PT/CV)
@@ -342,11 +378,13 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 **RECOMMENDED Application Form Structure (Multi-Step):**
 
 **Step 1: Registration**
+
 - User must be logged in
 - User must have Savlo+ account
 - If not Savlo+, show upgrade prompt
 
 **Step 2: Business Assessment**
+
 - **Company Information:**
   - Nama PT/CV (Company Name) - Required
   - Tahun Berdiri (Year Established) - Required
@@ -365,6 +403,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - Penjelasan kondisi keuangan (Financial condition explanation) - Required, text area
 
 **Step 3: Documents**
+
 - Google Drive URL - Required
 - Required Documents Checklist:
   - ✅ Akta Pendirian & Perubahan
@@ -376,16 +415,19 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
   - ✅ Dokumen pendukung lainnya (jika ada)
 
 **Step 4: Consultation Request**
+
 - Preferred consultation method - Required, dropdown: Online | Offline
 - Preferred consultation date/time - Optional
 - Additional notes - Optional, text area
 
 **Step 5: Review**
+
 - Display all entered information
 - Show note: "Application will be reviewed by Savlo+ team for personalized solution"
 - Submit button
 
 **Business Rules:**
+
 - Only Savlo+ members can apply
 - Application triggers consultation request
 - Personalized assessment by Savlo+ team
@@ -433,6 +475,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 ### 4.2 Application Status Lifecycle
 
 **Status Enum:**
+
 - `DRAFT` - Form started but not submitted
 - `SUBMITTED` - Application received, pending review
 - `UNDER_REVIEW` - Application being assessed by partner
@@ -443,6 +486,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 - `CLOSED` - Application process completed
 
 **Status Transition Rules:**
+
 - `DRAFT` → `SUBMITTED` (on form submission)
 - `SUBMITTED` → `UNDER_REVIEW` (partner picks up application)
 - `UNDER_REVIEW` → `DOCUMENT_REQUEST` (if docs missing)
@@ -455,6 +499,7 @@ Savlo operates as a **financing gateway** connecting borrowers to lenders:
 - `CLOSED` → Final (cannot change)
 
 **Business Rules:**
+
 - Status can only move forward (no backward changes)
 - Once "Rejected" or "Closed", status cannot change
 - "Disbursed" is final status for successful applications
@@ -473,8 +518,8 @@ interface User {
   password: string; // Hashed
   fullName: string;
   phoneNumber: string; // Unique
-  userType: 'INDIVIDUAL' | 'BUSINESS';
-  accountType: 'SAVLO' | 'SAVLO_PLUS';
+  userType: "INDIVIDUAL" | "BUSINESS";
+  accountType: "SAVLO" | "SAVLO_PLUS";
   registrationDate: Date;
   lastLogin: Date;
   isActive: boolean;
@@ -482,6 +527,7 @@ interface User {
 ```
 
 **Business Rules:**
+
 - Email must be unique
 - Phone number must be unique
 - Password must be hashed (never store plain text)
@@ -494,8 +540,21 @@ interface Application {
   id: string; // UUID
   applicationId: string; // Format: #[number], sequential, unique
   userId: string; // Foreign key to User
-  productType: 'BPKB_FINANCING' | 'PROPERTY_FINANCING' | 'AP_INVOICE_FINANCING' | 'AR_INVOICE_FINANCING' | 'ECOSYSTEM_BANKING';
-  status: 'DRAFT' | 'SUBMITTED' | 'UNDER_REVIEW' | 'DOCUMENT_REQUEST' | 'APPROVED' | 'REJECTED' | 'DISBURSED' | 'CLOSED';
+  productType:
+    | "BPKB_FINANCING"
+    | "PROPERTY_FINANCING"
+    | "AP_INVOICE_FINANCING"
+    | "AR_INVOICE_FINANCING"
+    | "ECOSYSTEM_BANKING";
+  status:
+    | "DRAFT"
+    | "SUBMITTED"
+    | "UNDER_REVIEW"
+    | "DOCUMENT_REQUEST"
+    | "APPROVED"
+    | "REJECTED"
+    | "DISBURSED"
+    | "CLOSED";
   submissionDate: Date | null;
   currentStep: number; // 1-4, for multi-step forms
   formData: Record<string, any>; // Product-specific form data
@@ -509,6 +568,7 @@ interface Application {
 ```
 
 **Business Rules:**
+
 - Application ID is sequential and unique (format: #1, #2, #3, ...)
 - One application = one product type
 - Application belongs to one user
@@ -523,8 +583,8 @@ interface Product {
   code: string; // BPKB_FINANCING, PROPERTY_FINANCING, etc.
   name: string;
   description: string;
-  targetUserType: 'INDIVIDUAL' | 'BUSINESS' | 'BOTH';
-  accountTypeRequired: 'SAVLO' | 'SAVLO_PLUS' | 'BOTH';
+  targetUserType: "INDIVIDUAL" | "BUSINESS" | "BOTH";
+  accountTypeRequired: "SAVLO" | "SAVLO_PLUS" | "BOTH";
   minAmount: number | null;
   maxAmount: number | null;
   eligibilityRequirements: string[];
@@ -539,8 +599,8 @@ interface Product {
 interface Partner {
   id: string;
   name: string;
-  type: 'MULTI_FINANCE' | 'FINTECH' | 'SECRET_INSTITUTION';
-  availableFor: 'SAVLO' | 'SAVLO_PLUS' | 'BOTH';
+  type: "MULTI_FINANCE" | "FINTECH" | "SECRET_INSTITUTION";
+  availableFor: "SAVLO" | "SAVLO_PLUS" | "BOTH";
   logoUrl: string | null;
   isActive: boolean;
 }
@@ -605,6 +665,7 @@ The application consists of the following business logic modules:
 **Current Implementation:** Google Drive Link
 
 **Business Rules:**
+
 - User provides Google Drive folder link
 - Link must have viewing permissions enabled ("Anyone with the link")
 - System validates link format
@@ -612,11 +673,13 @@ The application consists of the following business logic modules:
 - Each application has one document link
 
 **Required Documents per Product:**
+
 - See product specifications above
 
 ### 7.2 Document Validation
 
 **Validation Rules:**
+
 - Google Drive URL format validation
 - Link accessibility check (if possible)
 - Document checklist completion
@@ -665,6 +728,7 @@ The application consists of the following business logic modules:
 ### 8.2 Navigation Structure
 
 **Header Navigation:**
+
 - Home
 - My Applications (shown if logged in)
 - Help Center
@@ -676,6 +740,7 @@ The application consists of the following business logic modules:
   - Logout
 
 **Footer:**
+
 - © Savlo 2024-2025. All rights reserved.
 - Terms of Service
 - Privacy Policy
@@ -687,21 +752,25 @@ The application consists of the following business logic modules:
 ### 9.1 Language Configuration
 
 **Supported Languages:**
+
 - **Default Language:** English (en)
 - **Secondary Language:** Indonesian (id)
 
 **Language Codes:**
+
 - `en` - English
 - `id` - Indonesian (Bahasa Indonesia)
 
 ### 9.2 Language Selection & Persistence
 
 **Language Switcher:**
+
 - Language selector in header navigation
 - Dropdown or toggle button: `EN` | `ID`
 - Current language highlighted/active
 
 **Language Persistence:**
+
 - Store language preference in:
   1. **User Account** (if logged in) - saved to user profile
   2. **Local Storage** (if not logged in) - browser local storage
@@ -709,6 +778,7 @@ The application consists of the following business logic modules:
   4. **Cookie** (fallback) - if local storage not available
 
 **Default Behavior:**
+
 - First visit: Default to English (en)
 - If user has saved preference: Use saved preference
 - If browser language is Indonesian: Suggest Indonesian (optional)
@@ -716,6 +786,7 @@ The application consists of the following business logic modules:
 ### 9.3 URL Structure
 
 **Option 1: URL Prefix (Recommended)**
+
 ```
 /en/                    - Landing page (English)
 /id/                    - Landing page (Indonesian)
@@ -726,6 +797,7 @@ The application consists of the following business logic modules:
 ```
 
 **Option 2: Query Parameter**
+
 ```
 /?lang=en
 /?lang=id
@@ -772,11 +844,13 @@ The application consists of the following business logic modules:
 ### 9.5 Translation Keys Structure
 
 **Naming Convention:**
+
 ```
 namespace:key
 ```
 
 **Examples:**
+
 ```
 common:nav.home
 common:nav.myApplications
@@ -861,6 +935,7 @@ help:faq.bpkb
 ### 9.8 Translation File Structure
 
 **Recommended Structure:**
+
 ```
 /locales
   /en
@@ -880,6 +955,7 @@ help:faq.bpkb
 ```
 
 **Example Translation File (common.json):**
+
 ```json
 {
   "nav": {
@@ -906,6 +982,7 @@ help:faq.bpkb
 ```
 
 **Indonesian Version (common.json):**
+
 ```json
 {
   "nav": {
@@ -934,6 +1011,7 @@ help:faq.bpkb
 ### 9.9 Implementation Requirements
 
 **Technical Implementation:**
+
 - Use i18n library (e.g., next-intl, react-i18next, or next-i18next)
 - Language context/provider for app-wide language state
 - Language switcher component
@@ -942,6 +1020,7 @@ help:faq.bpkb
 - Language persistence mechanism
 
 **Component Structure:**
+
 ```typescript
 // Language switcher component
 <LanguageSwitcher />
@@ -954,6 +1033,7 @@ const t = useTranslation();
 ### 9.10 Testing Requirements
 
 **Bilingual Testing Checklist:**
+
 - [ ] All pages display correctly in both languages
 - [ ] Language switcher works on all pages
 - [ ] Language preference persists after page refresh
@@ -974,6 +1054,7 @@ const t = useTranslation();
 **Recommendation:** Implement comprehensive assessment form as outlined in Section 3.5
 
 **Rationale:**
+
 - Savlo+ is premium service, needs detailed assessment
 - Flexible eligibility requires more information
 - Consultation request integrated in form
@@ -998,6 +1079,7 @@ const t = useTranslation();
 ## 11. Out of Scope
 
 The following features are explicitly **NOT** included:
+
 - Payment processing
 - Real-time chat
 - Email notifications (backend)
@@ -1009,8 +1091,8 @@ The following features are explicitly **NOT** included:
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 2.1 | 2025-01-27 | Update | Added bilingual support (EN/ID) with i18n requirements |
-| 2.0 | 2025-01-27 | Initial | Complete rewrite with detailed form structures and business logic |
-| 1.0 | 2025-01-27 | Initial | Initial PRD |
+| Version | Date       | Author  | Changes                                                           |
+| ------- | ---------- | ------- | ----------------------------------------------------------------- |
+| 2.1     | 2025-01-27 | Update  | Added bilingual support (EN/ID) with i18n requirements            |
+| 2.0     | 2025-01-27 | Initial | Complete rewrite with detailed form structures and business logic |
+| 1.0     | 2025-01-27 | Initial | Initial PRD                                                       |

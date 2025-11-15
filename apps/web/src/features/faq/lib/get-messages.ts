@@ -1,7 +1,7 @@
-import { type Locale } from '@/i18n';
-import enMessages from '../messages/en.json';
-import idMessages from '../messages/id.json';
-import type { FAQMessages } from '../types';
+import { type Locale } from "@/i18n";
+import enMessages from "../messages/en.json";
+import idMessages from "../messages/id.json";
+import type { FAQMessages } from "../types";
 
 const messages: Record<Locale, FAQMessages> = {
   en: enMessages as FAQMessages,
@@ -13,4 +13,3 @@ export function getMessages(locale: Locale): FAQMessages {
 }
 
 export type { FAQMessages };
-

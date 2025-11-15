@@ -34,4 +34,3 @@ export interface FAQMessages {
     whatsappUrl: string;
   };
 }
-

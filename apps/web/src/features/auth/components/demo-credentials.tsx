@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { HelpCircle, X } from 'lucide-react';
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
+import { useState, useRef, useEffect } from "react";
+import { HelpCircle, X } from "lucide-react";
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
 
 interface DemoCredentialsProps {
   readonly locale: Locale;
@@ -29,11 +29,11 @@ export function DemoCredentials({ locale }: DemoCredentialsProps) {
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -69,14 +69,19 @@ export function DemoCredentials({ locale }: DemoCredentialsProps) {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between p-2 bg-muted/50 rounded">
                 <span className="text-muted-foreground">{t.individual}</span>
-                <span className="font-mono text-foreground">user@example.com</span>
+                <span className="font-mono text-foreground">
+                  user@example.com
+                </span>
               </div>
               <div className="flex items-center justify-between p-2 bg-muted/50 rounded">
                 <span className="text-muted-foreground">{t.business}</span>
-                <span className="font-mono text-foreground">business@example.com</span>
+                <span className="font-mono text-foreground">
+                  business@example.com
+                </span>
               </div>
               <div className="text-center pt-1 text-muted-foreground">
-                {t.password} <span className="font-semibold font-mono">password123</span>
+                {t.password}{" "}
+                <span className="font-semibold font-mono">password123</span>
               </div>
             </div>
           </div>
@@ -85,4 +90,3 @@ export function DemoCredentials({ locale }: DemoCredentialsProps) {
     </div>
   );
 }
-

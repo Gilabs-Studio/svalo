@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
 
 interface HowItWorksSectionProps {
   readonly locale: Locale;
@@ -32,10 +32,7 @@ export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {t.steps.map((step, index) => (
-              <div
-                key={step.title}
-                className="space-y-4 text-center"
-              >
+              <div key={step.title} className="space-y-4 text-center">
                 <div className="overflow-hidden">
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
@@ -81,5 +78,3 @@ export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
     </section>
   );
 }
-
-

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { cn } from '@/lib/utils';
-import { Marquee } from '@/registry/magicui/marquee';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { cn } from "@/lib/utils";
+import { Marquee } from "@/registry/magicui/marquee";
 
 interface TestimonialsSectionProps {
   readonly locale: Locale;
@@ -35,7 +35,7 @@ const reviews = [
   {
     name: "Feli",
     username: "@pelanggan4",
-    body: "benar\" premium, cutnya fresh sama konsisten potongan selalu bagus setiap datang kesini. Barbernya 22 nya bagus, gada yang ga bagus. Ga seperti yang merah...",
+    body: 'benar" premium, cutnya fresh sama konsisten potongan selalu bagus setiap datang kesini. Barbernya 22 nya bagus, gada yang ga bagus. Ga seperti yang merah...',
     img: "https://avatar.vercel.sh/pelanggan4",
     link: "https://maps.app.goo.gl/7m3qNECnT8mhYj287",
   },
@@ -116,17 +116,21 @@ const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
 
 const getInitials = (name: string): string => {
   const words = name.trim().split(/\s+/);
-  if (words.length === 0) return '';
-  if (words.length === 1) return words[0]?.[0]?.toUpperCase() || '';
+  if (words.length === 0) return "";
+  if (words.length === 1) return words[0]?.[0]?.toUpperCase() || "";
   const lastWord = words.at(-1);
-  return (words[0]?.[0]?.toUpperCase() || '') + (lastWord?.[0]?.toUpperCase() || '');
+  return (
+    (words[0]?.[0]?.toUpperCase() || "") + (lastWord?.[0]?.toUpperCase() || "")
+  );
 };
 
 const StarRating = () => {
   return (
     <div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }, (_, i) => (
-        <span key={`star-${i}`} className="text-yellow-500 text-xs">★</span>
+        <span key={`star-${i}`} className="text-yellow-500 text-xs">
+          ★
+        </span>
       ))}
     </div>
   );
@@ -142,15 +146,15 @@ const ReviewCard = ({
   link: string;
 }) => {
   const initials = getInitials(name);
-  
+
   const handleClick = () => {
     if (link) {
-      window.open(link, '_blank', 'noopener,noreferrer');
+      window.open(link, "_blank", "noopener,noreferrer");
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleClick();
     }
@@ -166,7 +170,7 @@ const ReviewCard = ({
         "relative h-full w-72 cursor-pointer overflow-hidden border p-6",
         "bg-card border-border",
         "hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
-        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
       )}
     >
       <div className="flex flex-row items-center gap-3 mb-4">
@@ -174,13 +178,13 @@ const ReviewCard = ({
           {initials}
         </div>
         <div className="flex flex-col flex-1">
-          <div className="text-sm font-bold text-foreground">
-            {name}
-          </div>
+          <div className="text-sm font-bold text-foreground">{name}</div>
           <StarRating />
         </div>
       </div>
-      <blockquote className="text-sm leading-relaxed text-foreground">{body}</blockquote>
+      <blockquote className="text-sm leading-relaxed text-foreground">
+        {body}
+      </blockquote>
     </div>
   );
 };
@@ -197,7 +201,7 @@ export function TestimonialsSection({ locale }: TestimonialsSectionProps) {
     <section className="min-h-[90vh] flex items-center py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto space-y-16">
-          <AnimatedHeading 
+          <AnimatedHeading
             as="h2"
             className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none text-center"
           >
@@ -206,12 +210,22 @@ export function TestimonialsSection({ locale }: TestimonialsSectionProps) {
           <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8">
             <Marquee pauseOnHover className="[--duration:20s]">
               {firstRow.map((review) => (
-                <ReviewCard key={review.link} name={review.name} body={review.body} link={review.link} />
+                <ReviewCard
+                  key={review.link}
+                  name={review.name}
+                  body={review.body}
+                  link={review.link}
+                />
               ))}
             </Marquee>
             <Marquee reverse pauseOnHover className="[--duration:20s]">
               {secondRow.map((review) => (
-                <ReviewCard key={review.link} name={review.name} body={review.body} link={review.link} />
+                <ReviewCard
+                  key={review.link}
+                  name={review.name}
+                  body={review.body}
+                  link={review.link}
+                />
               ))}
             </Marquee>
             <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
@@ -222,4 +236,3 @@ export function TestimonialsSection({ locale }: TestimonialsSectionProps) {
     </section>
   );
 }
-

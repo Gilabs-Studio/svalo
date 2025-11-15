@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect } from 'react';
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import { useParallax } from '../hooks/useParallax';
-import Lottie, { type LottieRef } from 'lottie-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getServiceSlug } from '../lib/service-slug';
+import { useRef, useState, useEffect } from "react";
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import { useParallax } from "../hooks/useParallax";
+import Lottie, { type LottieRef } from "lottie-react";
+import Image from "next/image";
+import Link from "next/link";
+import { getServiceSlug } from "../lib/service-slug";
 
 interface ServicesSectionProps {
   readonly locale: Locale;
@@ -22,16 +22,16 @@ function getServiceDetailRoute(title: string, locale: Locale): string {
 }
 
 const iconMap: Record<string, string> = {
-  'BPKB-based Financing': '/icon/BPKB-based-Financing.json',
-  'Pembiayaan Berbasis BPKB': '/icon/BPKB-based-Financing.json',
-  'Property-based Financing': '/icon/Property-based-Financing.json',
-  'Pembiayaan Berbasis Properti': '/icon/Property-based-Financing.json',
-  'AP Invoice Financing': '/icon/AP-Invoice-Financing.json',
-  'Pembiayaan Invoice AP': '/icon/AP-Invoice-Financing.json',
-  'AR Invoice Financing': '/icon/AR-Invoice-Financing.json',
-  'Pembiayaan Invoice AR': '/icon/AR-Invoice-Financing.json',
-  'Ecosystem Banking Solutions': '/icon/Ecosystem-Banking-Solutions.json',
-  'Solusi Banking Ekosistem': '/icon/Ecosystem-Banking-Solutions.json',
+  "BPKB-based Financing": "/icon/BPKB-based-Financing.json",
+  "Pembiayaan Berbasis BPKB": "/icon/BPKB-based-Financing.json",
+  "Property-based Financing": "/icon/Property-based-Financing.json",
+  "Pembiayaan Berbasis Properti": "/icon/Property-based-Financing.json",
+  "AP Invoice Financing": "/icon/AP-Invoice-Financing.json",
+  "Pembiayaan Invoice AP": "/icon/AP-Invoice-Financing.json",
+  "AR Invoice Financing": "/icon/AR-Invoice-Financing.json",
+  "Pembiayaan Invoice AR": "/icon/AR-Invoice-Financing.json",
+  "Ecosystem Banking Solutions": "/icon/Ecosystem-Banking-Solutions.json",
+  "Solusi Banking Ekosistem": "/icon/Ecosystem-Banking-Solutions.json",
 };
 
 // Lottie animation data type (simplified structure)
@@ -44,14 +44,15 @@ interface LottieIconProps {
 }
 
 function LottieIcon({ src, className, isPlaying = false }: LottieIconProps) {
-  const [animationData, setAnimationData] = useState<LottieAnimationData | null>(null);
+  const [animationData, setAnimationData] =
+    useState<LottieAnimationData | null>(null);
   const lottieRef = useRef(null) as LottieRef;
 
   useEffect(() => {
     fetch(src)
       .then((res) => res.json())
       .then((data) => setAnimationData(data))
-      .catch((err) => console.error('Failed to load Lottie animation:', err));
+      .catch((err) => console.error("Failed to load Lottie animation:", err));
   }, [src]);
 
   useEffect(() => {
@@ -105,9 +106,9 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
         {/* Icon */}
         <div className="h-24 w-24 flex items-center justify-center shrink-0">
           {iconPath ? (
-            <LottieIcon 
-              src={iconPath} 
-              className="w-full h-full" 
+            <LottieIcon
+              src={iconPath}
+              className="w-full h-full"
               isPlaying={isHovered}
             />
           ) : (
@@ -122,15 +123,9 @@ function ProductCard({ product, iconPath, locale }: ProductCardProps) {
               {product.brand}
             </span>
           </div>
-          <h3 className="text-2xl font-bold text-white">
-            {product.title}
-          </h3>
-          <p className="text-white/80 leading-relaxed">
-            {product.description}
-          </p>
-          <p className="text-sm text-white/70 font-medium">
-            {product.benefit}
-          </p>
+          <h3 className="text-2xl font-bold text-white">{product.title}</h3>
+          <p className="text-white/80 leading-relaxed">{product.description}</p>
+          <p className="text-sm text-white/70 font-medium">{product.benefit}</p>
         </div>
 
         {/* CTA - Always at bottom */}
@@ -167,13 +162,13 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
       // Get section's absolute position from top of document
       const sectionTop = sectionRect.top + window.scrollY;
       const viewportHeight = window.innerHeight;
-      
+
       // If section starts below viewport, calculate offset to move image up
       // The offset should compensate for the distance section is below viewport
       if (sectionTop > viewportHeight) {
         return -(sectionTop - viewportHeight) * 0.4;
       }
-      
+
       return 0;
     };
 
@@ -187,8 +182,8 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
       setInitialOffsetY(offset);
     };
 
-    window.addEventListener('resize', handleResize, { passive: true });
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useParallax(imageRef, {
@@ -200,13 +195,13 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
   });
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-24 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen py-24 overflow-hidden"
+    >
       {/* Background with parallax */}
       <div className="absolute inset-0 z-0">
-        <div 
-          ref={imageRef}
-          className="absolute inset-0 w-full h-full"
-        >
+        <div ref={imageRef} className="absolute inset-0 w-full h-full">
           <Image
             src="/image/service.webp"
             alt="Services background"
@@ -243,17 +238,25 @@ export function ServicesSection({ locale }: ServicesSectionProps) {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.products.map((product: { title: string; brand: string; description: string; benefit: string; cta: string }) => {
-              const iconPath = iconMap[product.title];
-              return (
-                <ProductCard
-                  key={product.title}
-                  product={product}
-                  iconPath={iconPath}
-                  locale={locale}
-                />
-              );
-            })}
+            {t.products.map(
+              (product: {
+                title: string;
+                brand: string;
+                description: string;
+                benefit: string;
+                cta: string;
+              }) => {
+                const iconPath = iconMap[product.title];
+                return (
+                  <ProductCard
+                    key={product.title}
+                    product={product}
+                    iconPath={iconPath}
+                    locale={locale}
+                  />
+                );
+              },
+            )}
           </div>
         </div>
       </div>

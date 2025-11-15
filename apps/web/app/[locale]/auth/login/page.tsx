@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Locale } from '@/i18n';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { type Locale } from "@/i18n";
 
 interface LoginPageProps {
   params: Promise<{ locale: Locale }>;

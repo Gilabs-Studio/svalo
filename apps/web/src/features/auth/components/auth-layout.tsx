@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import { type Locale } from '@/i18n';
-import { cn } from '@/lib/utils';
-import { useParallax } from '@/features/landing/hooks/useParallax';
-import gsap from 'gsap';
-import { AnimatedHeading } from '@/features/landing/components/animated-heading';
-import { AnimatedText } from '@/features/landing/components/animated-text';
-import { getMessages } from '../lib/get-messages';
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
+import { useParallax } from "@/features/landing/hooks/useParallax";
+import gsap from "gsap";
+import { AnimatedHeading } from "@/features/landing/components/animated-heading";
+import { AnimatedText } from "@/features/landing/components/animated-text";
+import { getMessages } from "../lib/get-messages";
 
 interface AuthLayoutProps {
   readonly locale: Locale;
@@ -16,22 +16,30 @@ interface AuthLayoutProps {
   readonly title: string;
   readonly subtitle: string;
   readonly icon: React.ReactNode;
-  readonly mode: 'login' | 'register';
-  readonly onModeChange: (mode: 'login' | 'register') => void;
+  readonly mode: "login" | "register";
+  readonly onModeChange: (mode: "login" | "register") => void;
 }
 
-export function AuthLayout({ locale, children, title, subtitle, icon, mode, onModeChange }: AuthLayoutProps) {
+export function AuthLayout({
+  locale,
+  children,
+  title,
+  subtitle,
+  icon,
+  mode,
+  onModeChange,
+}: AuthLayoutProps) {
   const imageRef = useRef<HTMLDivElement>(null);
   const loginContentRef = useRef<HTMLDivElement>(null);
   const registerContentRef = useRef<HTMLDivElement>(null);
   const formWrapperRef = useRef<HTMLDivElement>(null);
   const formContainerRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const prevModeRef = useRef<'login' | 'register'>(mode);
-  const [displayMode, setDisplayMode] = useState<'login' | 'register'>(mode);
+  const prevModeRef = useRef<"login" | "register">(mode);
+  const [displayMode, setDisplayMode] = useState<"login" | "register">(mode);
   const messages = getMessages(locale);
   const t = messages.layout;
-  
+
   // Store form content separately to prevent content change during fade out
   const [formContent, setFormContent] = useState({
     title,
@@ -42,11 +50,11 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
 
   // Freeze content during animation to prevent React from re-rendering
   const frozenContentRef = useRef(formContent);
-  
+
   // Use frozen content during animation, current content otherwise
   const displayContent = isAnimating ? frozenContentRef.current : formContent;
 
-  const isLogin = displayMode === 'login';
+  const isLogin = displayMode === "login";
 
   useParallax(imageRef, {
     scrollSpeed: 0.2,
@@ -66,12 +74,12 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
   // Handle mode change with smooth animation - form container slides
   useEffect(() => {
     const prevMode = prevModeRef.current;
-    
+
     if (prevMode !== mode && !isAnimating) {
       // Freeze current content before animation starts
       frozenContentRef.current = formContent;
       setIsAnimating(true);
-      
+
       const formWrapper = formWrapperRef.current;
       const formContainer = formContainerRef.current;
 
@@ -83,7 +91,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           },
         });
 
-        if (mode === 'login') {
+        if (mode === "login") {
           // To Login: Form container slides from left to right (x: -50vw to x: 0)
           // Step 1: Fade out form with old content
           timeline
@@ -92,11 +100,11 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               scale: 0.95,
               y: 10,
               duration: 0.3,
-              ease: 'power2.in',
+              ease: "power2.in",
               onComplete: () => {
                 // Hide form content to prevent React from rendering new content
                 if (formContainer) {
-                  gsap.set(formContainer, { display: 'none' });
+                  gsap.set(formContainer, { display: "none" });
                 }
               },
             })
@@ -106,9 +114,9 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               {
                 x: 0,
                 duration: 0.8,
-                ease: 'power2.inOut',
+                ease: "power2.inOut",
               },
-              '+=0.1' // Start after fade out completes
+              "+=0.1", // Start after fade out completes
             )
             // Step 3: Update content AFTER slide completes (form is in position)
             .call(() => {
@@ -122,18 +130,22 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
                 // Show form content again
                 const currentContainer = formContainerRef.current;
                 if (currentContainer) {
-                  gsap.set(currentContainer, { display: 'block' });
+                  gsap.set(currentContainer, { display: "block" });
                 }
               });
             })
             // Step 4: Fade in form with new content (after content is updated)
-            .to(formContainer, {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.4,
-              ease: 'power3.out',
-            }, '+=0.2'); // Delay to ensure React has re-rendered with new content
+            .to(
+              formContainer,
+              {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.4,
+                ease: "power3.out",
+              },
+              "+=0.2",
+            ); // Delay to ensure React has re-rendered with new content
         } else {
           // To Register: Form container slides from right to left (x: 0 to x: -50vw)
           // Step 1: Fade out form with old content
@@ -143,11 +155,11 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               scale: 0.95,
               y: 10,
               duration: 0.3,
-              ease: 'power2.in',
+              ease: "power2.in",
               onComplete: () => {
                 // Hide form content to prevent React from rendering new content
                 if (formContainer) {
-                  gsap.set(formContainer, { display: 'none' });
+                  gsap.set(formContainer, { display: "none" });
                 }
               },
             })
@@ -155,11 +167,11 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
             .to(
               formWrapper,
               {
-                x: '-50vw',
+                x: "-50vw",
                 duration: 0.8,
-                ease: 'power2.inOut',
+                ease: "power2.inOut",
               },
-              '+=0.1' // Start after fade out completes
+              "+=0.1", // Start after fade out completes
             )
             // Step 3: Update content AFTER slide completes (form is in position)
             .call(() => {
@@ -173,18 +185,22 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
                 // Show form content again
                 const currentContainer = formContainerRef.current;
                 if (currentContainer) {
-                  gsap.set(currentContainer, { display: 'block' });
+                  gsap.set(currentContainer, { display: "block" });
                 }
               });
             })
             // Step 4: Fade in form with new content (after content is updated)
-            .to(formContainer, {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.4,
-              ease: 'power3.out',
-            }, '+=0.2'); // Delay to ensure React has re-rendered with new content
+            .to(
+              formContainer,
+              {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.4,
+                ease: "power3.out",
+              },
+              "+=0.2",
+            ); // Delay to ensure React has re-rendered with new content
         }
       }
     }
@@ -196,9 +212,9 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
       // Set initial position for form wrapper
       // Login: right side (x: 0), Register: left side (x: -50vw)
       gsap.set(formWrapperRef.current, {
-        x: isLogin ? 0 : '-50vw',
+        x: isLogin ? 0 : "-50vw",
       });
-      
+
       // Animate form fade in with smooth morph
       gsap.fromTo(
         formContainerRef.current,
@@ -212,8 +228,8 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           scale: 1,
           y: 0,
           duration: 0.6,
-          ease: 'power3.out',
-        }
+          ease: "power3.out",
+        },
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -234,7 +250,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           priority
           quality={90}
           style={{
-            objectPosition: 'center',
+            objectPosition: "center",
           }}
         />
       </div>
@@ -262,7 +278,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               {t.welcomeBackDescription}
             </AnimatedText>
           </div>
-          
+
           {/* Features List */}
           <div className="space-y-4 pt-4">
             <div className="flex items-center gap-3 text-white/80">
@@ -304,7 +320,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               {t.startJourneyDescription}
             </AnimatedText>
           </div>
-          
+
           {/* Features List */}
           <div className="space-y-4 pt-4">
             <div className="flex items-center gap-3 text-white/80">
@@ -329,21 +345,21 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
         ref={formWrapperRef}
         className="w-full lg:w-1/2 fixed inset-y-0 right-0 z-20 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
         style={{
-          willChange: 'transform',
+          willChange: "transform",
         }}
       >
         {/* Solid background - 100% opaque */}
         <div className="absolute inset-0 bg-background" />
-        
+
         <div
           ref={formContainerRef}
           key={isAnimating ? prevModeRef.current : displayMode}
           className={cn(
-            'relative z-10 w-full max-w-md space-y-8',
-            isAnimating && 'pointer-events-none'
+            "relative z-10 w-full max-w-md space-y-8",
+            isAnimating && "pointer-events-none",
           )}
           style={{
-            willChange: 'transform, opacity',
+            willChange: "transform, opacity",
           }}
         >
           {/* Header */}
@@ -378,10 +394,12 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           <div className="text-center text-sm">
             {isLogin ? (
               <>
-                <span className="text-muted-foreground">{t.switchToRegister} </span>
+                <span className="text-muted-foreground">
+                  {t.switchToRegister}{" "}
+                </span>
                 <button
                   type="button"
-                  onClick={() => onModeChange('register')}
+                  onClick={() => onModeChange("register")}
                   disabled={isAnimating}
                   className="text-primary hover:underline font-medium inline-flex items-center gap-1 group transition-colors disabled:opacity-50"
                 >
@@ -403,10 +421,12 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               </>
             ) : (
               <>
-                <span className="text-muted-foreground">{t.switchToLogin} </span>
+                <span className="text-muted-foreground">
+                  {t.switchToLogin}{" "}
+                </span>
                 <button
                   type="button"
-                  onClick={() => onModeChange('login')}
+                  onClick={() => onModeChange("login")}
                   disabled={isAnimating}
                   className="text-primary hover:underline font-medium inline-flex items-center gap-1 group transition-colors disabled:opacity-50"
                 >
@@ -433,4 +453,3 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
     </div>
   );
 }
-

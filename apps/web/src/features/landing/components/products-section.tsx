@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface ProductsSectionProps {
   readonly locale: Locale;
@@ -56,7 +56,9 @@ export function ProductsSection({ locale }: ProductsSectionProps) {
                   </AnimatedText>
                 </div>
                 <div className="overflow-hidden">
-                  <Link href={`/${locale}/products#${product.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Link
+                    href={`/${locale}/products#${product.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  >
                     <Button
                       variant="ghost"
                       className="group-hover:text-primary transition-colors p-0 h-auto font-medium"
@@ -74,4 +76,3 @@ export function ProductsSection({ locale }: ProductsSectionProps) {
     </section>
   );
 }
-

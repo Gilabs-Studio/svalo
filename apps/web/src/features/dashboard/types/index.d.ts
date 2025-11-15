@@ -2,20 +2,20 @@
 // Only type declarations are allowed in .d.ts
 
 export type ApplicationStatus =
-  | 'DRAFT'
-  | 'SUBMITTED'
-  | 'UNDER_REVIEW'
-  | 'DOCUMENT_REQUEST'
-  | 'APPROVED'
-  | 'REJECTED'
-  | 'DISBURSED'
-  | 'CLOSED';
+  | "DRAFT"
+  | "SUBMITTED"
+  | "UNDER_REVIEW"
+  | "DOCUMENT_REQUEST"
+  | "APPROVED"
+  | "REJECTED"
+  | "DISBURSED"
+  | "CLOSED";
 
 export type ProductType =
-  | 'BPKB_FINANCING'
-  | 'PROPERTY_FINANCING'
-  | 'AP_INVOICE_FINANCING'
-  | 'AR_INVOICE_FINANCING';
+  | "BPKB_FINANCING"
+  | "PROPERTY_FINANCING"
+  | "AP_INVOICE_FINANCING"
+  | "AR_INVOICE_FINANCING";
 
 export interface Application {
   id: string;
@@ -268,4 +268,3 @@ export interface DashboardMessages {
     };
   };
 }
-

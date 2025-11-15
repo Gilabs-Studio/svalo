@@ -1,4 +1,5 @@
 # Application Management Module PRD
+
 ## Business Logic & Rules
 
 **Version:** 1.0  
@@ -22,8 +23,21 @@ interface Application {
   id: string; // UUID
   applicationId: string; // Format: #[number], sequential, unique
   userId: string; // Foreign key to User
-  productType: 'BPKB_FINANCING' | 'PROPERTY_FINANCING' | 'AP_INVOICE_FINANCING' | 'AR_INVOICE_FINANCING' | 'ECOSYSTEM_BANKING';
-  status: 'DRAFT' | 'SUBMITTED' | 'UNDER_REVIEW' | 'DOCUMENT_REQUEST' | 'APPROVED' | 'REJECTED' | 'DISBURSED' | 'CLOSED';
+  productType:
+    | "BPKB_FINANCING"
+    | "PROPERTY_FINANCING"
+    | "AP_INVOICE_FINANCING"
+    | "AR_INVOICE_FINANCING"
+    | "ECOSYSTEM_BANKING";
+  status:
+    | "DRAFT"
+    | "SUBMITTED"
+    | "UNDER_REVIEW"
+    | "DOCUMENT_REQUEST"
+    | "APPROVED"
+    | "REJECTED"
+    | "DISBURSED"
+    | "CLOSED";
   submissionDate: Date | null;
   currentStep: number; // 1-4 or 1-5, for multi-step forms
   formData: Record<string, any>; // Product-specific form data
@@ -41,12 +55,14 @@ interface Application {
 **Format:** `#[number]` (e.g., #36, #35, #34)
 
 **Business Rules:**
+
 - Sequential numbering (global, not per user)
 - Unique across all applications
 - Generated upon first submission (not on draft creation)
 - Format: `#` + sequential number
 
 **Implementation:**
+
 ```typescript
 function generateApplicationId(): string {
   const lastApplication = getLastApplication();
@@ -64,11 +80,13 @@ function generateApplicationId(): string {
 **All Products Follow Same Step Pattern:**
 
 **Step 1: Registration**
+
 - Auto-completed if user is logged in
 - If not logged in, redirect to login/register
 - After login, return to form
 
 **Step 2: Product-Specific Information**
+
 - BPKB: BPKB Info (Data Diri, Data Kendaraan, Informasi Pinjaman)
 - Property: Property Info (Data Diri, Informasi Properti & Pinjaman)
 - AP Invoice: Company Info
@@ -76,16 +94,19 @@ function generateApplicationId(): string {
 - Ecosystem Banking: Business Assessment
 
 **Step 3: Documents**
+
 - Google Drive URL input
 - Required documents checklist
 - Tips/instructions
 
 **Step 4: Review**
+
 - Display all entered information
 - Allow edit before submission
 - Submit button
 
 **Step 5: (Ecosystem Banking Only) Consultation Request**
+
 - Preferred consultation method
 - Preferred date/time
 - Additional notes
@@ -93,6 +114,7 @@ function generateApplicationId(): string {
 ### 3.2 Form State Management
 
 **State Structure:**
+
 ```typescript
 interface FormState {
   currentStep: number;
@@ -110,6 +132,7 @@ interface FormState {
 ```
 
 **Business Rules:**
+
 - Form data auto-saved after each step
 - User can navigate back to previous steps
 - User can leave and return to continue later
@@ -119,25 +142,28 @@ interface FormState {
 ### 3.3 Auto-Save Logic
 
 **Auto-Save Triggers:**
+
 1. On step completion (moving to next step)
 2. On field blur (after user finishes editing)
 3. On page unload (before user leaves)
 4. Periodically (every 30 seconds while editing)
 
 **Auto-Save Implementation:**
+
 ```typescript
 function autoSaveForm(applicationId: string, formData: FormData): void {
   // Save to database as DRAFT status
   updateApplication(applicationId, {
-    status: 'DRAFT',
+    status: "DRAFT",
     formData: formData,
     currentStep: currentStep,
-    updatedAt: new Date()
+    updatedAt: new Date(),
   });
 }
 ```
 
 **Business Rules:**
+
 - Draft applications saved with status `DRAFT`
 - User can resume from last completed step
 - Draft applications visible in "My Applications" with "Continue" button
@@ -183,6 +209,7 @@ function autoSaveForm(applicationId: string, formData: FormData): void {
 **Required Validations:**
 
 **All Products:**
+
 - User must be logged in
 - All required fields must be filled
 - Google Drive URL must be valid format
@@ -190,9 +217,11 @@ function autoSaveForm(applicationId: string, formData: FormData): void {
 - All required documents must be checked
 
 **Product-Specific Validations:**
+
 - See Form Validation Module for detailed rules
 
 **Business Rules:**
+
 - Cannot submit if any validation fails
 - Show specific error messages for each validation failure
 - Highlight fields with errors
@@ -204,6 +233,7 @@ function autoSaveForm(applicationId: string, formData: FormData): void {
 ### 5.1 Status Definitions
 
 **Status Enum:**
+
 - `DRAFT` - Form started but not submitted
 - `SUBMITTED` - Application received, pending review
 - `UNDER_REVIEW` - Application being assessed by partner
@@ -231,6 +261,7 @@ CLOSED → (Final - cannot change)
 ```
 
 **Business Rules:**
+
 - Status can only move forward (no backward changes)
 - Once "Rejected" or "Closed", status cannot change
 - "Disbursed" is final status for successful applications
@@ -240,6 +271,7 @@ CLOSED → (Final - cannot change)
 ### 5.3 Status Display Logic
 
 **Status Badge Colors:**
+
 - `DRAFT`: Gray - "Draft"
 - `SUBMITTED`: Blue - "Submitted"
 - `UNDER_REVIEW`: Yellow - "Under Review"
@@ -256,12 +288,14 @@ CLOSED → (Final - cannot change)
 ### 6.1 My Applications Dashboard
 
 **Display Logic:**
+
 - Show all user's applications
 - Sort by: Most recent first (default)
 - Filter by: Product type, Status
 - Search by: Application ID
 
 **Application Card Display:**
+
 - Application ID (format: #[number])
 - Product Type (e.g., "BPKB-based Financing")
 - Submission Date
@@ -272,6 +306,7 @@ CLOSED → (Final - cannot change)
 ### 6.2 Application Details View
 
 **Information Display:**
+
 - Application ID
 - Product Type
 - Status
@@ -284,6 +319,7 @@ CLOSED → (Final - cannot change)
 - Status History (if available)
 
 **Actions Available:**
+
 - View details (always)
 - Continue application (if DRAFT)
 - Download/View documents (if submitted)
@@ -298,15 +334,18 @@ CLOSED → (Final - cannot change)
 **Routing Rules:**
 
 **For Savlo (Free Tier) Products:**
+
 - BPKB Financing → Multi-finance institutions
 - Property Financing → Multi-finance institutions
 - AP Invoice Financing → Fintech lenders
 - AR Invoice Financing → Fintech lenders
 
 **For Savlo+ (Premium Tier) Products:**
+
 - Ecosystem Banking → Secret Financial Institutions
 
 **Business Rules:**
+
 - Partner assigned upon submission
 - Partner selection based on:
   - Product type
@@ -317,6 +356,7 @@ CLOSED → (Final - cannot change)
 ### 7.2 Partner Assignment
 
 **Assignment Process:**
+
 1. Determine product category
 2. Filter available partners for product
 3. Filter by account type (Savlo vs Savlo+)
@@ -331,12 +371,14 @@ CLOSED → (Final - cannot change)
 ### 8.1 Draft Management
 
 **Draft Storage:**
+
 - Drafts stored in database with status `DRAFT`
 - Drafts associated with user account
 - Drafts can be resumed anytime
 - Drafts expire after 30 days of inactivity (optional)
 
 **Draft Retrieval:**
+
 - User can see drafts in "My Applications"
 - Drafts marked with "Continue" button
 - Clicking "Continue" resumes from last completed step
@@ -344,6 +386,7 @@ CLOSED → (Final - cannot change)
 ### 8.2 Submitted Application Storage
 
 **Storage Rules:**
+
 - All form data stored as JSON
 - Document URL stored separately
 - Application ID generated and stored
@@ -360,6 +403,7 @@ CLOSED → (Final - cannot change)
 **Step 2: BPKB Info**
 
 **Data Diri (Personal Data):**
+
 - Nama Lengkap (Full Name) - Required, text
 - No. KTP (ID Number) - Required, format: 16 digits
 - No. HP (Phone Number) - Required, format: +62 XXX XXXX XXXX
@@ -369,6 +413,7 @@ CLOSED → (Final - cannot change)
 - Kecamatan (District) - Required, text
 
 **Data Kendaraan (Vehicle Data):**
+
 - Jenis Kendaraan (Vehicle Type) - Required, dropdown: Motor | Mobil
 - Merk Kendaraan (Brand) - Required, text
 - Tipe Kendaraan (Model) - Required, text
@@ -381,10 +426,12 @@ CLOSED → (Final - cannot change)
 - Asuransi Kendaraan (Insurance) - Required, dropdown: Ada | Tidak Ada
 
 **Informasi Pinjaman (Loan Information):**
+
 - Jumlah Pinjaman (Loan Amount) - Required, numeric, min: 10,000,000
 - Tenor Pelunasan (Repayment Tenor) - Required, dropdown: 12 | 24 | 36 | 48 | 60 months
 
 **Step 3: Documents**
+
 - Google Drive URL - Required, URL validation
 - Required Documents:
   - Foto KTP
@@ -400,6 +447,7 @@ CLOSED → (Final - cannot change)
 **Step 2: Property Info**
 
 **Data Diri (Personal Data):**
+
 - Nama Konsumen (Consumer Name) - Required, text
 - No. HP (Phone Number) - Required, format: +62 XXX XXXX XXXX
 - Alamat Properti (Property Address) - Required, text
@@ -408,6 +456,7 @@ CLOSED → (Final - cannot change)
 - Kota (City) - Required, text
 
 **Informasi Properti & Pinjaman:**
+
 - Jenis Sertifikat (Certificate Type) - Required, dropdown: SHM | SHGB
 - Dana Dibutuhkan (Funds Needed) - Required, numeric, max: 5,000,000,000
 - Kemampuan Angsuran / Bulan (Monthly Payment Capacity) - Required, numeric
@@ -416,6 +465,7 @@ CLOSED → (Final - cannot change)
 - Tanggal Submission (Submission Date) - Auto-filled on submit
 
 **Step 3: Documents**
+
 - Google Drive URL - Required, URL validation
 - Required Documents:
   - Foto KTP
@@ -427,10 +477,12 @@ CLOSED → (Final - cannot change)
 ### 9.3 AP Invoice Financing Form
 
 **Step 2: Company Info**
+
 - Nama PT/CV (Company Name) - Required, text
 - Eligibility Requirements Display (read-only)
 
 **Step 3: Documents**
+
 - Google Drive URL - Required, URL validation
 - Required Documents (5 sections):
   - A. Perusahaan (Company documents)
@@ -442,25 +494,30 @@ CLOSED → (Final - cannot change)
 ### 9.4 AR Invoice Financing Form
 
 **Step 2: Company Info**
+
 - Nama PT/CV (Company Name) - Required, text
 - Eligibility Requirements Display (read-only)
 
 **Step 3: Documents**
+
 - Google Drive URL - Required, URL validation
 - Required Documents (same as AP Invoice - 5 sections)
 
 ### 9.5 Ecosystem Banking Form
 
 **Step 2: Business Assessment**
+
 - Company Information fields
 - Business Challenge fields
 - Current Financial Status fields
 
 **Step 3: Documents**
+
 - Google Drive URL - Required, URL validation
 - Required Documents (comprehensive list)
 
 **Step 5: Consultation Request**
+
 - Preferred consultation method - Required, dropdown: Online | Offline
 - Preferred consultation date/time - Optional
 - Additional notes - Optional, text area
@@ -472,6 +529,7 @@ CLOSED → (Final - cannot change)
 ### 10.1 Form Validation Errors
 
 **Error Display:**
+
 - Show errors below each field
 - Highlight fields with errors
 - Prevent step progression if errors exist
@@ -480,6 +538,7 @@ CLOSED → (Final - cannot change)
 ### 10.2 Submission Errors
 
 **Error Scenarios:**
+
 - Network error → Retry submission
 - Validation error → Return to form with errors
 - Server error → Show error message, allow retry
@@ -489,6 +548,7 @@ CLOSED → (Final - cannot change)
 **Scenario:** User tries to access non-existent application
 
 **Response:**
+
 - Show error: "Application not found"
 - Redirect to "My Applications"
 
@@ -523,6 +583,7 @@ CLOSED → (Final - cannot change)
 ## 12. Testing Requirements
 
 **Test Cases:**
+
 - [ ] Draft creation and auto-save works
 - [ ] Form step navigation works correctly
 - [ ] Validation prevents invalid submissions
@@ -538,7 +599,6 @@ CLOSED → (Final - cannot change)
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-01-27 | Initial | Created Application Management Module PRD |
-
+| Version | Date       | Author  | Changes                                   |
+| ------- | ---------- | ------- | ----------------------------------------- |
+| 1.0     | 2025-01-27 | Initial | Created Application Management Module PRD |

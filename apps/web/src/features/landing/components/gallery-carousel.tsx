@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Carousel,
@@ -6,8 +6,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
-import Image from 'next/image';
+} from "@/components/ui/carousel";
+import Image from "next/image";
 
 export function GalleryCarousel() {
   const images = Array.from({ length: 6 }, (_, i) => i + 1);
@@ -33,4 +33,3 @@ export function GalleryCarousel() {
     </Carousel>
   );
 }
-

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface PricingPreviewSectionProps {
   readonly locale: Locale;
@@ -37,10 +37,7 @@ export function PricingPreviewSection({ locale }: PricingPreviewSectionProps) {
           </div>
           <div className="overflow-hidden">
             <Link href={`/${locale}/pricing`}>
-              <Button
-                size="lg"
-                className="text-lg px-8 py-6 font-semibold"
-              >
+              <Button size="lg" className="text-lg px-8 py-6 font-semibold">
                 {t.cta}
               </Button>
             </Link>
@@ -50,4 +47,3 @@ export function PricingPreviewSection({ locale }: PricingPreviewSectionProps) {
     </section>
   );
 }
-

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
-import Lenis from 'lenis';
-import { useEffect, useRef, useState } from 'react';
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
+import Lenis from "lenis";
+import { useEffect, useRef, useState } from "react";
 
 interface ParallaxGalleryProps {
   images: string[];
@@ -14,7 +14,7 @@ const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
 
   const { scrollYProgress } = useScroll({
     target: gallery,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const { height } = dimension;
@@ -33,20 +33,21 @@ const ParallaxGallery = ({ images }: ParallaxGalleryProps) => {
     const resize = () => {
       setDimension({ width: window.innerWidth, height: window.innerHeight });
     };
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     rafId = requestAnimationFrame(raf);
     resize();
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
 
   // Ensure we have at least 9 images by repeating if necessary
-  const imageList = images.length >= 9 
-    ? images.slice(0, 9)
-    : Array.from({ length: 9 }, (_, i) => images[i % images.length]);
+  const imageList =
+    images.length >= 9
+      ? images.slice(0, 9)
+      : Array.from({ length: 9 }, (_, i) => images[i % images.length]);
 
   return (
     <div className="w-full bg-background text-foreground">
@@ -88,4 +89,3 @@ const Column = ({ images, y }: ColumnProps) => {
 };
 
 export default ParallaxGallery;
-

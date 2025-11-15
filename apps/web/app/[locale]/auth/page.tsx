@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Locale } from '@/i18n';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select } from '@/components/ui/select';
-import { AuthLayout } from '@/features/auth/components/auth-layout';
-import { DemoCredentials } from '@/features/auth/components/demo-credentials';
-import { getMessages } from '@/features/auth/lib/get-messages';
-import { LogIn, UserPlus } from 'lucide-react';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { type Locale } from "@/i18n";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { AuthLayout } from "@/features/auth/components/auth-layout";
+import { DemoCredentials } from "@/features/auth/components/demo-credentials";
+import { getMessages } from "@/features/auth/lib/get-messages";
+import { LogIn, UserPlus } from "lucide-react";
+import Link from "next/link";
 
 interface AuthPageProps {
   params: Promise<{ locale: Locale }>;
 }
 
 export default function AuthPage({ params }: AuthPageProps) {
-  const [locale, setLocale] = useState<Locale>('en');
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [locale, setLocale] = useState<Locale>("en");
+  const [mode, setMode] = useState<"login" | "register">("login");
   const router = useRouter();
   const messages = getMessages(locale);
 
@@ -28,37 +28,37 @@ export default function AuthPage({ params }: AuthPageProps) {
       setLocale(p.locale);
       // Check URL params for mode
       const searchParams = new URLSearchParams(window.location.search);
-      const urlMode = searchParams.get('mode');
-      if (urlMode === 'register') {
-        setMode('register');
+      const urlMode = searchParams.get("mode");
+      if (urlMode === "register") {
+        setMode("register");
       }
     });
   }, [params]);
-  
+
   // Login state
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-  
+
   // Register state
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    fullName: '',
-    phoneNumber: '',
-    userType: '',
-    accountType: 'SAVLO',
+    email: "",
+    password: "",
+    confirmPassword: "",
+    fullName: "",
+    phoneNumber: "",
+    userType: "",
+    accountType: "SAVLO",
   });
-  const [registerError, setRegisterError] = useState('');
+  const [registerError, setRegisterError] = useState("");
   const [isRegisterLoading, setIsRegisterLoading] = useState(false);
-  
+
   const login = useAuthStore((state) => state.login);
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoginError('');
+    setLoginError("");
     setIsLoginLoading(true);
 
     const success = await login(email, password);
@@ -72,7 +72,7 @@ export default function AuthPage({ params }: AuthPageProps) {
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setRegisterError('');
+    setRegisterError("");
 
     if (formData.password !== formData.confirmPassword) {
       setRegisterError(messages.register.errors.passwordMismatch);
@@ -87,12 +87,12 @@ export default function AuthPage({ params }: AuthPageProps) {
     setIsRegisterLoading(true);
     // Simulate registration
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    setMode('login');
+    setMode("login");
     setIsRegisterLoading(false);
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setFormData({
       ...formData,
@@ -105,21 +105,19 @@ export default function AuthPage({ params }: AuthPageProps) {
       locale={locale}
       mode={mode}
       onModeChange={setMode}
-      title={mode === 'login' ? messages.login.title : messages.register.title}
+      title={mode === "login" ? messages.login.title : messages.register.title}
       subtitle={
-        mode === 'login'
-          ? messages.login.subtitle
-          : messages.register.subtitle
+        mode === "login" ? messages.login.subtitle : messages.register.subtitle
       }
       icon={
-        mode === 'login' ? (
+        mode === "login" ? (
           <LogIn className="w-8 h-8 text-primary" />
         ) : (
           <UserPlus className="w-8 h-8 text-primary" />
         )
       }
     >
-      {mode === 'login' ? (
+      {mode === "login" ? (
         <form onSubmit={handleLoginSubmit} className="space-y-5">
           {loginError && (
             <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
@@ -158,14 +156,14 @@ export default function AuthPage({ params }: AuthPageProps) {
                 id="remember"
                 className="w-4 h-4 rounded border-gray-300"
               />
-              <label htmlFor="remember" className="text-muted-foreground cursor-pointer">
+              <label
+                htmlFor="remember"
+                className="text-muted-foreground cursor-pointer"
+              >
                 {messages.login.rememberMe}
               </label>
             </div>
-            <Link
-              href="#"
-              className="text-primary hover:underline text-sm"
-            >
+            <Link href="#" className="text-primary hover:underline text-sm">
               {messages.login.forgotPassword}
             </Link>
           </div>
@@ -289,12 +287,15 @@ export default function AuthPage({ params }: AuthPageProps) {
               required
               className="mt-1 w-4 h-4 rounded border-gray-300"
             />
-            <label htmlFor="terms" className="text-muted-foreground cursor-pointer leading-relaxed">
-              {messages.register.terms}{' '}
+            <label
+              htmlFor="terms"
+              className="text-muted-foreground cursor-pointer leading-relaxed"
+            >
+              {messages.register.terms}{" "}
               <Link href="/terms" className="text-primary hover:underline">
                 {messages.register.termsLink}
-              </Link>{' '}
-              and{' '}
+              </Link>{" "}
+              and{" "}
               <Link href="/privacy" className="text-primary hover:underline">
                 {messages.register.privacyLink}
               </Link>
@@ -307,11 +308,12 @@ export default function AuthPage({ params }: AuthPageProps) {
             size="lg"
             disabled={isRegisterLoading}
           >
-            {isRegisterLoading ? messages.register.creatingAccount : messages.register.createAccount}
+            {isRegisterLoading
+              ? messages.register.creatingAccount
+              : messages.register.createAccount}
           </Button>
         </form>
       )}
     </AuthLayout>
   );
 }
-

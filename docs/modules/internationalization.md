@@ -1,4 +1,5 @@
 # Internationalization Module PRD
+
 ## Business Logic & Rules
 
 **Version:** 1.0  
@@ -18,12 +19,15 @@ The Internationalization Module handles language detection, selection, translati
 ### 2.1 Supported Languages
 
 **Primary Language:**
+
 - English (en) - Default language
 
 **Secondary Language:**
+
 - Indonesian (id) - Bahasa Indonesia
 
 **Language Codes:**
+
 - `en` - English
 - `id` - Indonesian
 
@@ -31,7 +35,7 @@ The Internationalization Module handles language detection, selection, translati
 
 ```typescript
 interface LanguageConfig {
-  code: 'en' | 'id';
+  code: "en" | "id";
   name: string;
   nativeName: string;
   flag?: string; // Optional flag emoji or icon
@@ -40,17 +44,17 @@ interface LanguageConfig {
 
 const languages: LanguageConfig[] = [
   {
-    code: 'en',
-    name: 'English',
-    nativeName: 'English',
-    isDefault: true
+    code: "en",
+    name: "English",
+    nativeName: "English",
+    isDefault: true,
   },
   {
-    code: 'id',
-    name: 'Indonesian',
-    nativeName: 'Bahasa Indonesia',
-    isDefault: false
-  }
+    code: "id",
+    name: "Indonesian",
+    nativeName: "Bahasa Indonesia",
+    isDefault: false,
+  },
 ];
 ```
 
@@ -61,6 +65,7 @@ const languages: LanguageConfig[] = [
 ### 3.1 Language Detection
 
 **Detection Priority:**
+
 1. User's saved preference (if logged in)
 2. URL parameter (`/en/` or `/id/`)
 3. Local storage (if not logged in)
@@ -68,55 +73,62 @@ const languages: LanguageConfig[] = [
 5. Default: English (en)
 
 **Detection Function:**
+
 ```typescript
-function detectLanguage(user: User | null, url: string, browserLang: string): 'en' | 'id' {
+function detectLanguage(
+  user: User | null,
+  url: string,
+  browserLang: string,
+): "en" | "id" {
   // 1. Check user preference (if logged in)
   if (user?.languagePreference) {
     return user.languagePreference;
   }
-  
+
   // 2. Check URL parameter
   const urlLang = extractLanguageFromUrl(url);
   if (urlLang) return urlLang;
-  
+
   // 3. Check local storage
-  const storedLang = localStorage.getItem('language');
-  if (storedLang && ['en', 'id'].includes(storedLang)) {
-    return storedLang as 'en' | 'id';
+  const storedLang = localStorage.getItem("language");
+  if (storedLang && ["en", "id"].includes(storedLang)) {
+    return storedLang as "en" | "id";
   }
-  
+
   // 4. Check browser language (optional)
-  if (browserLang.startsWith('id')) {
-    return 'id'; // Suggest Indonesian
+  if (browserLang.startsWith("id")) {
+    return "id"; // Suggest Indonesian
   }
-  
+
   // 5. Default to English
-  return 'en';
+  return "en";
 }
 ```
 
 ### 3.2 Language Selection
 
 **Language Switcher:**
+
 - Display in header navigation
 - Format: `EN | ID` or dropdown
 - Current language highlighted/active
 - Clicking switches language
 
 **Selection Function:**
+
 ```typescript
-function selectLanguage(lang: 'en' | 'id', user: User | null): void {
+function selectLanguage(lang: "en" | "id", user: User | null): void {
   // Update URL
   updateUrlLanguage(lang);
-  
+
   // Save to local storage
-  localStorage.setItem('language', lang);
-  
+  localStorage.setItem("language", lang);
+
   // Save to user profile (if logged in)
   if (user) {
     updateUserLanguagePreference(user.id, lang);
   }
-  
+
   // Reload page or update content
   reloadWithLanguage(lang);
 }
@@ -129,32 +141,38 @@ function selectLanguage(lang: 'en' | 'id', user: User | null): void {
 ### 4.1 Persistence Methods
 
 **1. User Account (Primary - if logged in)**
+
 - Stored in user profile: `languagePreference: 'en' | 'id'`
 - Persists across devices
 - Updated when user changes language
 
 **2. Local Storage (Secondary - if not logged in)**
+
 - Stored in browser: `localStorage.setItem('language', 'en' | 'id')`
 - Persists in same browser
 - Cleared when user logs in (use account preference)
 
 **3. URL Parameter (Tertiary)**
+
 - URL prefix: `/en/` or `/id/`
 - Shareable links with language
 - SEO-friendly
 
 **4. Cookie (Fallback)**
+
 - If local storage not available
 - Same behavior as local storage
 
 ### 4.2 Persistence Priority
 
 **When User Logged In:**
+
 1. User account preference (primary)
 2. URL parameter (for shareable links)
 3. Local storage (ignored, use account)
 
 **When User Not Logged In:**
+
 1. URL parameter
 2. Local storage
 3. Cookie (fallback)
@@ -168,6 +186,7 @@ function selectLanguage(lang: 'en' | 'id', user: User | null): void {
 ### 5.1 URL Prefix (Recommended)
 
 **Structure:**
+
 ```
 /en/                    - Landing page (English)
 /id/                    - Landing page (Indonesian)
@@ -180,6 +199,7 @@ function selectLanguage(lang: 'en' | 'id', user: User | null): void {
 ```
 
 **Implementation:**
+
 - Next.js App Router: `[locale]` dynamic segment
 - Route structure: `app/[locale]/page.tsx`
 - Language extracted from URL segment
@@ -187,18 +207,20 @@ function selectLanguage(lang: 'en' | 'id', user: User | null): void {
 ### 5.2 URL Update on Language Change
 
 **When User Changes Language:**
+
 1. Extract current path
 2. Replace language prefix
 3. Navigate to new URL
 4. Preserve query parameters
 
 **Function:**
+
 ```typescript
-function updateUrlLanguage(newLang: 'en' | 'id'): void {
+function updateUrlLanguage(newLang: "en" | "id"): void {
   const currentPath = window.location.pathname;
-  const pathWithoutLang = currentPath.replace(/^\/(en|id)/, '');
+  const pathWithoutLang = currentPath.replace(/^\/(en|id)/, "");
   const newPath = `/${newLang}${pathWithoutLang}`;
-  
+
   window.location.href = newPath;
   // Or use Next.js router.push()
 }
@@ -211,6 +233,7 @@ function updateUrlLanguage(newLang: 'en' | 'id'): void {
 ### 6.1 Translation File Structure
 
 **Directory Structure:**
+
 ```
 /locales
   /en
@@ -234,11 +257,13 @@ function updateUrlLanguage(newLang: 'en' | 'id'): void {
 ### 6.2 Translation Key Structure
 
 **Naming Convention:**
+
 ```
 namespace:key.subkey
 ```
 
 **Examples:**
+
 ```
 common:nav.home
 common:nav.myApplications
@@ -264,6 +289,7 @@ help:faq.general
 ### 6.3 Translation File Examples
 
 **common.json (English):**
+
 ```json
 {
   "nav": {
@@ -290,6 +316,7 @@ help:faq.general
 ```
 
 **common.json (Indonesian):**
+
 ```json
 {
   "nav": {
@@ -322,6 +349,7 @@ help:faq.general
 ### 7.1 What Gets Translated
 
 **Translated Content:**
+
 - Navigation menu
 - Page titles and headings
 - Button labels
@@ -337,6 +365,7 @@ help:faq.general
 ### 7.2 What Doesn't Get Translated
 
 **Not Translated (Language-Independent):**
+
 - Application IDs (format: #[number])
 - Currency (IDR - Indonesian Rupiah)
 - Dates (format: DD/MM/YYYY - Indonesian format)
@@ -347,6 +376,7 @@ help:faq.general
 ### 7.3 Indonesian-Specific Terms
 
 **Terms That Stay in Indonesian:**
+
 - KTP (Indonesian ID card) - with English explanation
 - Kelurahan, Kecamatan (administrative divisions) - with English explanation
 - SHM/SHGB (property certificates) - with English explanation
@@ -354,6 +384,7 @@ help:faq.general
 - NPWP (tax ID) - with English explanation
 
 **Display Format:**
+
 - English: "No. KTP (Indonesian ID Number)"
 - Indonesian: "No. KTP"
 
@@ -364,12 +395,13 @@ help:faq.general
 ### 8.1 Translation Hook/Function
 
 **React Hook (next-intl example):**
+
 ```typescript
 import { useTranslations } from 'next-intl';
 
 function MyComponent() {
   const t = useTranslations('common');
-  
+
   return (
     <button>{t('button.submit')}</button>
   );
@@ -377,17 +409,18 @@ function MyComponent() {
 ```
 
 **Translation Function:**
+
 ```typescript
-function translate(key: string, lang: 'en' | 'id'): string {
-  const [namespace, ...keyParts] = key.split(':');
+function translate(key: string, lang: "en" | "id"): string {
+  const [namespace, ...keyParts] = key.split(":");
   const translationFile = require(`/locales/${lang}/${namespace}.json`);
-  
+
   let value = translationFile;
   for (const part of keyParts) {
     value = value[part];
     if (!value) return key; // Fallback to key if not found
   }
-  
+
   return value;
 }
 ```
@@ -395,6 +428,7 @@ function translate(key: string, lang: 'en' | 'id'): string {
 ### 8.2 Translation in Components
 
 **Example Usage:**
+
 ```typescript
 // In component
 const t = useTranslation();
@@ -414,22 +448,26 @@ const t = useTranslation();
 ### 9.1 Language-Specific Rules
 
 **Form Data:**
+
 - User can input in any language
 - Form labels always in selected language
 - Validation messages in selected language
 - Document names can be in any language
 
 **Application Data:**
+
 - Application data stored in original language (user input)
 - Application display: Labels in selected language, data in original
 - Application ID: Language-independent
 
 **User Preferences:**
+
 - Language preference saved per user
 - If user changes language, preference updated
 - Language preference persists across sessions
 
 **Content Consistency:**
+
 - All pages must support both languages
 - No mixed languages on same page
 - Consistent terminology across translations
@@ -437,16 +475,19 @@ const t = useTranslation();
 ### 9.2 Currency & Date Formatting
 
 **Currency:**
+
 - Always display IDR (Indonesian Rupiah)
 - Format: `IDR 5,000,000,000` or `IDR 5B`
 - Language-independent
 
 **Dates:**
+
 - Format: DD/MM/YYYY (Indonesian format)
 - Or use locale-aware formatting
 - Language-independent format
 
 **Phone Numbers:**
+
 - Indonesian format: +62 XXX XXXX XXXX
 - Validation rules apply regardless of language
 
@@ -457,11 +498,13 @@ const t = useTranslation();
 ### 10.1 Technical Implementation
 
 **Recommended Libraries:**
+
 - `next-intl` - Next.js internationalization
 - `react-i18next` - React internationalization
 - `next-i18next` - Next.js with react-i18next
 
 **Setup:**
+
 ```typescript
 // i18n configuration
 import { NextIntlClientProvider } from 'next-intl';
@@ -480,21 +523,21 @@ export default function RootLayout({ children, params: { locale } }) {
 ```typescript
 function LanguageSwitcher({ currentLang }: { currentLang: 'en' | 'id' }) {
   const router = useRouter();
-  
+
   const switchLanguage = (lang: 'en' | 'id') => {
     const path = router.asPath.replace(/^\/(en|id)/, '');
     router.push(`/${lang}${path}`);
   };
-  
+
   return (
     <div>
-      <button 
+      <button
         onClick={() => switchLanguage('en')}
         className={currentLang === 'en' ? 'active' : ''}
       >
         EN
       </button>
-      <button 
+      <button
         onClick={() => switchLanguage('id')}
         className={currentLang === 'id' ? 'active' : ''}
       >
@@ -510,6 +553,7 @@ function LanguageSwitcher({ currentLang }: { currentLang: 'en' | 'id' }) {
 ## 11. Testing Requirements
 
 **Test Cases:**
+
 - [ ] Language detection works correctly
 - [ ] Language switcher works on all pages
 - [ ] Language preference persists after page refresh
@@ -527,7 +571,6 @@ function LanguageSwitcher({ currentLang }: { currentLang: 'en' | 'id' }) {
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-01-27 | Initial | Created Internationalization Module PRD |
-
+| Version | Date       | Author  | Changes                                 |
+| ------- | ---------- | ------- | --------------------------------------- |
+| 1.0     | 2025-01-27 | Initial | Created Internationalization Module PRD |

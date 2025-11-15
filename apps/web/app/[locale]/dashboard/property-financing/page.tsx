@@ -1,55 +1,61 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Locale } from '@/i18n';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
-import { AnimatedHeading } from '@/features/landing/components/animated-heading';
-import { AnimatedText } from '@/features/landing/components/animated-text';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { 
-  User, 
-  Home, 
-  FileText, 
-  CheckCircle2, 
-  Upload, 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { type Locale } from "@/i18n";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { AnimatedHeading } from "@/features/landing/components/animated-heading";
+import { AnimatedText } from "@/features/landing/components/animated-text";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  User,
+  Home,
+  FileText,
+  CheckCircle2,
+  Upload,
   Link as LinkIcon,
   X,
-  CreditCard
-} from 'lucide-react';
+  CreditCard,
+} from "lucide-react";
 
 interface PropertyFinancingPageProps {
   params: Promise<{ locale: Locale }>;
 }
 
-export default function PropertyFinancingPage({ params }: PropertyFinancingPageProps) {
-  const [locale, setLocale] = useState<Locale>('en');
+export default function PropertyFinancingPage({
+  params,
+}: PropertyFinancingPageProps) {
+  const [locale, setLocale] = useState<Locale>("en");
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(1);
-  const [documentMethod, setDocumentMethod] = useState<'gdrive' | 'manual'>('gdrive');
-  const [manualDocuments, setManualDocuments] = useState<Record<string, File | null>>({});
+  const [documentMethod, setDocumentMethod] = useState<"gdrive" | "manual">(
+    "gdrive",
+  );
+  const [manualDocuments, setManualDocuments] = useState<
+    Record<string, File | null>
+  >({});
   const [formData, setFormData] = useState({
     // Data Diri
-    namaKonsumen: '',
-    noHp: '',
-    alamatProperti: '',
-    alamatLengkap: '',
-    kecamatan: '',
-    kota: '',
+    namaKonsumen: "",
+    noHp: "",
+    alamatProperti: "",
+    alamatLengkap: "",
+    kecamatan: "",
+    kota: "",
     // Informasi Properti & Pinjaman
-    jenisSertifikat: '',
-    danaDibutuhkan: '',
-    kemampuanAngsuran: '',
-    siapDisurvey: '',
-    tanggalPengajuan: new Date().toLocaleDateString('id-ID'),
-    tanggalSubmission: '',
+    jenisSertifikat: "",
+    danaDibutuhkan: "",
+    kemampuanAngsuran: "",
+    siapDisurvey: "",
+    tanggalPengajuan: new Date().toLocaleDateString("id-ID"),
+    tanggalSubmission: "",
     // Documents
-    googleDriveUrl: '',
+    googleDriveUrl: "",
   });
 
   useEffect(() => {
@@ -67,7 +73,9 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
   }
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData({
       ...formData,
@@ -83,17 +91,17 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
   };
 
   const requiredDocuments = [
-    { id: 'fotoKtp', name: 'Foto KTP' },
-    { id: 'sertifikatProperti', name: 'Sertifikat Properti (SHM/SHGB)' },
-    { id: 'imb', name: 'IMB (Izin Mendirikan Bangunan)' },
-    { id: 'pbb', name: 'PBB (Pajak Bumi dan Bangunan) Terbaru' },
-    { id: 'buktiRekening', name: 'Bukti Rekening Listrik/Air' },
+    { id: "fotoKtp", name: "Foto KTP" },
+    { id: "sertifikatProperti", name: "Sertifikat Properti (SHM/SHGB)" },
+    { id: "imb", name: "IMB (Izin Mendirikan Bangunan)" },
+    { id: "pbb", name: "PBB (Pajak Bumi dan Bangunan) Terbaru" },
+    { id: "buktiRekening", name: "Bukti Rekening Listrik/Air" },
   ];
 
   const steps = [
-    { number: 1, title: 'Property Info', icon: Home },
-    { number: 2, title: 'Documents', icon: FileText },
-    { number: 3, title: 'Review', icon: CheckCircle2 },
+    { number: 1, title: "Property Info", icon: Home },
+    { number: 2, title: "Documents", icon: FileText },
+    { number: 3, title: "Review", icon: CheckCircle2 },
   ];
 
   const renderStepContent = () => {
@@ -287,14 +295,14 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
               <FileText className="w-5 h-5 text-primary" />
               <h3 className="text-xl font-bold">Documents</h3>
             </div>
-            
+
             {/* Document Method Selection */}
             <div className="space-y-4">
               <div className="flex gap-4">
                 <Button
                   type="button"
-                  variant={documentMethod === 'gdrive' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('gdrive')}
+                  variant={documentMethod === "gdrive" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("gdrive")}
                   className="flex-1"
                 >
                   <LinkIcon className="w-4 h-4 mr-2" />
@@ -302,8 +310,8 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
                 </Button>
                 <Button
                   type="button"
-                  variant={documentMethod === 'manual' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('manual')}
+                  variant={documentMethod === "manual" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("manual")}
                   className="flex-1"
                 >
                   <Upload className="w-4 h-4 mr-2" />
@@ -311,7 +319,7 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
                 </Button>
               </div>
 
-              {documentMethod === 'gdrive' ? (
+              {documentMethod === "gdrive" ? (
                 <div className="space-y-2">
                   <Label htmlFor="googleDriveUrl">Google Drive URL</Label>
                   <Input
@@ -324,7 +332,8 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
                     required
                   />
                   <p className="text-xs text-muted-foreground">
-                    Pastikan link memiliki izin viewing (Siapa saja yang memiliki link)
+                    Pastikan link memiliki izin viewing (Siapa saja yang
+                    memiliki link)
                   </p>
                 </div>
               ) : (
@@ -428,10 +437,7 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
               </AnimatedHeading>
             </div>
             <div className="overflow-visible">
-              <AnimatedText
-                delay={0.1}
-                className="text-muted-foreground"
-              >
+              <AnimatedText delay={0.1} className="text-muted-foreground">
                 Follow the steps below to complete your application.
               </AnimatedText>
             </div>
@@ -447,16 +453,18 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
                 <div key={step.number} className="flex items-center">
                   <div
                     className={`flex items-center gap-2 ${
-                      isActive || isCompleted ? 'text-primary' : 'text-muted-foreground'
+                      isActive || isCompleted
+                        ? "text-primary"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                         isActive
-                          ? 'bg-primary text-primary-foreground scale-110'
+                          ? "bg-primary text-primary-foreground scale-110"
                           : isCompleted
-                          ? 'bg-primary/20 text-primary'
-                          : 'bg-muted'
+                            ? "bg-primary/20 text-primary"
+                            : "bg-muted"
                       }`}
                     >
                       {isCompleted ? (
@@ -472,7 +480,7 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
                   {index < steps.length - 1 && (
                     <div
                       className={`h-px w-12 sm:w-16 mx-2 transition-colors ${
-                        isCompleted ? 'bg-primary' : 'bg-border'
+                        isCompleted ? "bg-primary" : "bg-border"
                       }`}
                     />
                   )}
@@ -501,7 +509,7 @@ export default function PropertyFinancingPage({ params }: PropertyFinancingPageP
               disabled={currentStep === 3}
               className="min-w-[100px]"
             >
-              {currentStep === 3 ? 'Submit Application' : 'Next'}
+              {currentStep === 3 ? "Submit Application" : "Next"}
             </Button>
           </div>
         </div>

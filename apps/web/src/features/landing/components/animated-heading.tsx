@@ -1,35 +1,37 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { cn } from '@/lib/utils';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/lib/utils";
 
-if (typeof globalThis.window !== 'undefined') {
+if (typeof globalThis.window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 interface AnimatedHeadingProps {
   children: React.ReactNode;
   className?: string;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   delay?: number;
   duration?: number;
 }
 
 export function AnimatedHeading({
   children,
-  className = '',
-  as: Component = 'h2',
+  className = "",
+  as: Component = "h2",
   delay = 0,
   duration = 1.2,
 }: AnimatedHeadingProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null);
+  const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!headingRef.current) return;
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const element = headingRef.current;
     let isMounted = true;
@@ -52,17 +54,21 @@ export function AnimatedHeading({
     }
 
     // Reset element to original content
-    const text = typeof children === 'string' ? children : element.textContent || '';
-    const words = text.split(' ').filter(Boolean);
+    const text =
+      typeof children === "string" ? children : element.textContent || "";
+    const words = text.split(" ").filter(Boolean);
 
     if (words.length === 0) return;
 
     // Split into spans
     element.innerHTML = words
-      .map((word, i) => `<span class="inline-block">${word}${i < words.length - 1 ? '&nbsp;' : ''}</span>`)
-      .join('');
+      .map(
+        (word, i) =>
+          `<span class="inline-block">${word}${i < words.length - 1 ? "&nbsp;" : ""}</span>`,
+      )
+      .join("");
 
-    const wordSpans = element.querySelectorAll('span');
+    const wordSpans = element.querySelectorAll("span");
 
     // Wait for next frame to ensure DOM is ready
     requestAnimationFrame(() => {
@@ -104,14 +110,14 @@ export function AnimatedHeading({
             duration,
             delay,
             stagger: 0.05,
-            ease: 'power3.out',
+            ease: "power3.out",
             scrollTrigger: {
               trigger: element,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 85%",
+              toggleActions: "play none none none",
               once: true,
             },
-          }
+          },
         );
 
         animationRef.current = timeline;
@@ -130,7 +136,10 @@ export function AnimatedHeading({
       // Kill any remaining ScrollTriggers for this element
       try {
         ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars?.trigger === element || trigger.trigger === element) {
+          if (
+            trigger.vars?.trigger === element ||
+            trigger.trigger === element
+          ) {
             trigger.kill();
           }
         });
@@ -141,9 +150,11 @@ export function AnimatedHeading({
   }, [children, delay, duration]);
 
   return (
-    <Component ref={headingRef} className={cn('will-change-transform', className)}>
+    <Component
+      ref={headingRef}
+      className={cn("will-change-transform", className)}
+    >
       {children}
     </Component>
   );
 }
-

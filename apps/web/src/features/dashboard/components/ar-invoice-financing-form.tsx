@@ -1,43 +1,49 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Locale } from '@/i18n';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
-import { AnimatedHeading } from '@/features/landing/components/animated-heading';
-import { AnimatedText } from '@/features/landing/components/animated-text';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { getMessages } from '../lib/get-messages';
-import { 
-  Building2, 
-  FileText, 
-  CheckCircle2, 
-  Upload, 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { type Locale } from "@/i18n";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { AnimatedHeading } from "@/features/landing/components/animated-heading";
+import { AnimatedText } from "@/features/landing/components/animated-text";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { getMessages } from "../lib/get-messages";
+import {
+  Building2,
+  FileText,
+  CheckCircle2,
+  Upload,
   Link as LinkIcon,
   X,
-  Check
-} from 'lucide-react';
+  Check,
+} from "lucide-react";
 
 interface ARInvoiceFinancingFormProps {
   readonly locale: Locale;
 }
 
-export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) {
+export function ARInvoiceFinancingForm({
+  locale,
+}: ARInvoiceFinancingFormProps) {
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
   const messages = getMessages(locale);
   const t = messages.forms.arInvoice;
   const common = messages.forms.common;
   const stepsConfig = messages.forms.steps;
-  
+
   const [currentStep, setCurrentStep] = useState(1);
-  const [documentMethod, setDocumentMethod] = useState<'gdrive' | 'manual'>('gdrive');
-  const [manualDocuments, setManualDocuments] = useState<Record<string, File | null>>({});
+  const [documentMethod, setDocumentMethod] = useState<"gdrive" | "manual">(
+    "gdrive",
+  );
+  const [manualDocuments, setManualDocuments] = useState<
+    Record<string, File | null>
+  >({});
   const [formData, setFormData] = useState({
-    namaPtCv: '',
-    googleDriveUrl: '',
+    namaPtCv: "",
+    googleDriveUrl: "",
   });
 
   useEffect(() => {
@@ -100,7 +106,9 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
             <div className="space-y-6">
               <div className="flex items-center gap-3 border-b border-border/30 pb-3">
                 <CheckCircle2 className="w-5 h-5 text-primary" />
-                <h3 className="text-xl font-bold">{t.companyInfo.eligibility.title}</h3>
+                <h3 className="text-xl font-bold">
+                  {t.companyInfo.eligibility.title}
+                </h3>
               </div>
               <ul className="space-y-3">
                 {t.companyInfo.eligibility.items.map((req, index) => (
@@ -121,13 +129,13 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
               <FileText className="w-5 h-5 text-primary" />
               <h3 className="text-xl font-bold">{common.documents.title}</h3>
             </div>
-            
+
             <div className="space-y-4">
               <div className="flex gap-4">
                 <Button
                   type="button"
-                  variant={documentMethod === 'gdrive' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('gdrive')}
+                  variant={documentMethod === "gdrive" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("gdrive")}
                   className="flex-1"
                 >
                   <LinkIcon className="w-4 h-4 mr-2" />
@@ -135,8 +143,8 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                 </Button>
                 <Button
                   type="button"
-                  variant={documentMethod === 'manual' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('manual')}
+                  variant={documentMethod === "manual" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("manual")}
                   className="flex-1"
                 >
                   <Upload className="w-4 h-4 mr-2" />
@@ -144,9 +152,11 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                 </Button>
               </div>
 
-              {documentMethod === 'gdrive' ? (
+              {documentMethod === "gdrive" ? (
                 <div className="space-y-2">
-                  <Label htmlFor="googleDriveUrl">{common.documents.gdrive.label}</Label>
+                  <Label htmlFor="googleDriveUrl">
+                    {common.documents.gdrive.label}
+                  </Label>
                   <Input
                     id="googleDriveUrl"
                     name="googleDriveUrl"
@@ -165,24 +175,33 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                   <p className="text-sm text-muted-foreground">
                     {common.documents.manual.description}
                   </p>
-                  
-                  {['A', 'B', 'C', 'D', 'E'].map((section) => {
-                    const sectionDocs = requiredDocuments.filter((doc) => doc.section === section);
+
+                  {["A", "B", "C", "D", "E"].map((section) => {
+                    const sectionDocs = requiredDocuments.filter(
+                      (doc) => doc.section === section,
+                    );
                     if (sectionDocs.length === 0) return null;
-                    
+
                     return (
                       <div key={section} className="space-y-3">
                         <h4 className="font-semibold text-sm">
-                          {section === 'A' && common.documents.manual.sections.a}
-                          {section === 'B' && common.documents.manual.sections.b}
-                          {section === 'C' && common.documents.manual.sections.c}
-                          {section === 'D' && common.documents.manual.sections.d}
-                          {section === 'E' && common.documents.manual.sections.e}
+                          {section === "A" &&
+                            common.documents.manual.sections.a}
+                          {section === "B" &&
+                            common.documents.manual.sections.b}
+                          {section === "C" &&
+                            common.documents.manual.sections.c}
+                          {section === "D" &&
+                            common.documents.manual.sections.d}
+                          {section === "E" &&
+                            common.documents.manual.sections.e}
                         </h4>
                         <div className="space-y-3 ml-4">
                           {sectionDocs.map((doc) => (
                             <div key={doc.id} className="space-y-2">
-                              <Label htmlFor={doc.id} className="text-sm">{doc.name}</Label>
+                              <Label htmlFor={doc.id} className="text-sm">
+                                {doc.name}
+                              </Label>
                               <div className="flex items-center gap-2">
                                 <Input
                                   id={doc.id}
@@ -202,7 +221,9 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                                     </span>
                                     <button
                                       type="button"
-                                      onClick={() => handleFileChange(doc.id, null)}
+                                      onClick={() =>
+                                        handleFileChange(doc.id, null)
+                                      }
                                       className="text-destructive hover:text-destructive/80"
                                     >
                                       <X className="w-3 h-3" />
@@ -236,7 +257,9 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                   {t.review.companyInfo}
                 </h4>
                 <div className="text-sm text-muted-foreground">
-                  <p>{t.companyInfo.namaPtCv}: {formData.namaPtCv}</p>
+                  <p>
+                    {t.companyInfo.namaPtCv}: {formData.namaPtCv}
+                  </p>
                 </div>
               </div>
             </div>
@@ -265,10 +288,7 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
               </AnimatedHeading>
             </div>
             <div className="overflow-visible">
-              <AnimatedText
-                delay={0.1}
-                className="text-muted-foreground"
-              >
+              <AnimatedText delay={0.1} className="text-muted-foreground">
                 {t.subtitle}
               </AnimatedText>
             </div>
@@ -283,16 +303,18 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                 <div key={step.number} className="flex items-center">
                   <div
                     className={`flex items-center gap-2 ${
-                      isActive || isCompleted ? 'text-primary' : 'text-muted-foreground'
+                      isActive || isCompleted
+                        ? "text-primary"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                         isActive
-                          ? 'bg-primary text-primary-foreground scale-110'
+                          ? "bg-primary text-primary-foreground scale-110"
                           : isCompleted
-                          ? 'bg-primary/20 text-primary'
-                          : 'bg-muted'
+                            ? "bg-primary/20 text-primary"
+                            : "bg-muted"
                       }`}
                     >
                       {isCompleted ? (
@@ -308,7 +330,7 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
                   {index < steps.length - 1 && (
                     <div
                       className={`h-px w-12 sm:w-16 mx-2 transition-colors ${
-                        isCompleted ? 'bg-primary' : 'bg-border'
+                        isCompleted ? "bg-primary" : "bg-border"
                       }`}
                     />
                   )}
@@ -335,7 +357,9 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
               disabled={currentStep === 3}
               className="min-w-[100px]"
             >
-              {currentStep === 3 ? common.review.submit : common.navigation.next}
+              {currentStep === 3
+                ? common.review.submit
+                : common.navigation.next}
             </Button>
           </div>
         </div>
@@ -343,5 +367,3 @@ export function ARInvoiceFinancingForm({ locale }: ARInvoiceFinancingFormProps) 
     </div>
   );
 }
-
-

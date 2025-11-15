@@ -1,4 +1,5 @@
 # Form Validation Module PRD
+
 ## Business Logic & Rules
 
 **Version:** 1.0  
@@ -20,6 +21,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: BPKB Info - Data Diri
 
 **Nama Lengkap (Full Name)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -31,6 +33,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Invalid Pattern: "Nama lengkap hanya boleh mengandung huruf dan spasi"
 
 **No. KTP (ID Number)**
+
 - Type: Text input (numeric)
 - Required: Yes
 - Length: Exactly 16 digits
@@ -42,6 +45,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Invalid: "Nomor KTP tidak valid"
 
 **No. HP (Phone Number)**
+
 - Type: Text input
 - Required: Yes
 - Pattern: Indonesian phone number format
@@ -56,6 +60,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Invalid Format: "Format nomor HP tidak valid. Gunakan format: 08XX atau +62XX"
 
 **Usia Konsumen (Age)**
+
 - Type: Number input
 - Required: Yes
 - Min Value: 21
@@ -67,6 +72,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Max Value: "Usia maksimal 70 tahun"
 
 **Alamat Survey (Survey Address)**
+
 - Type: Textarea
 - Required: Yes
 - Min Length: 10 characters
@@ -76,6 +82,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Length: "Alamat survey minimal 10 karakter"
 
 **Kelurahan (Sub-district)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -84,6 +91,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Kelurahan wajib diisi"
 
 **Kecamatan (District)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -94,6 +102,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: BPKB Info - Data Kendaraan
 
 **Jenis Kendaraan (Vehicle Type)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Motor", "Mobil"]
@@ -101,6 +110,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Jenis kendaraan wajib dipilih"
 
 **Merk Kendaraan (Brand)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 2 characters
@@ -109,6 +119,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Merk kendaraan wajib diisi"
 
 **Tipe Kendaraan (Model)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 2 characters
@@ -117,6 +128,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Tipe kendaraan wajib diisi"
 
 **Tahun Kendaraan (Year)**
+
 - Type: Number input
 - Required: Yes
 - Min Value: 2000
@@ -128,6 +140,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Max Value: "Tahun kendaraan tidak boleh melebihi tahun saat ini"
 
 **No. Plat Kendaraan (License Plate)**
+
 - Type: Text input
 - Required: Yes
 - Pattern: Indonesian license plate format
@@ -141,6 +154,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Invalid Format: "Format nomor plat tidak valid"
 
 **Atas Nama Kendaraan (Registered Owner)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -149,6 +163,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Atas nama kendaraan wajib diisi"
 
 **Status Kendaraan (Vehicle Status)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Pribadi", "Perusahaan"]
@@ -156,6 +171,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Status kendaraan wajib dipilih"
 
 **Status BPKB (BPKB Status)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Asli", "Copy"]
@@ -163,6 +179,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Status BPKB wajib dipilih"
 
 **Status Pajak (Tax Status)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Lunas", "Belum Lunas"]
@@ -171,6 +188,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Status pajak wajib dipilih"
 
 **Asuransi Kendaraan (Insurance)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Ada", "Tidak Ada"]
@@ -181,6 +199,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: BPKB Info - Informasi Pinjaman
 
 **Jumlah Pinjaman (Loan Amount)**
+
 - Type: Number input (currency)
 - Required: Yes
 - Min Value: 10,000,000 (IDR 10 million)
@@ -191,6 +210,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Value: "Jumlah pinjaman minimal IDR 10.000.000"
 
 **Tenor Pelunasan (Repayment Tenor)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["12", "24", "36", "48", "60"] (months)
@@ -200,6 +220,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 3: Documents
 
 **Google Drive URL**
+
 - Type: URL input
 - Required: Yes
 - Pattern: Valid Google Drive URL
@@ -217,6 +238,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - No Permission: "Pastikan link memiliki izin viewing (Siapa saja yang memiliki link)"
 
 **Required Documents Checklist**
+
 - Type: Checkbox list
 - Required: All must be checked
 - Documents:
@@ -237,12 +259,15 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: Property Info - Data Diri
 
 **Nama Konsumen (Consumer Name)**
+
 - Same validation as BPKB "Nama Lengkap"
 
 **No. HP (Phone Number)**
+
 - Same validation as BPKB
 
 **Alamat Properti (Property Address)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 10 characters
@@ -251,6 +276,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Alamat properti wajib diisi"
 
 **Alamat Lengkap (Full Address)**
+
 - Type: Textarea
 - Required: Yes
 - Min Length: 10 characters
@@ -259,9 +285,11 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Alamat lengkap wajib diisi"
 
 **Kecamatan (District)**
+
 - Same validation as BPKB
 
 **Kota (City)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -272,6 +300,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: Property Info - Informasi Properti & Pinjaman
 
 **Jenis Sertifikat (Certificate Type)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["SHM", "SHGB"]
@@ -279,6 +308,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Jenis sertifikat wajib dipilih"
 
 **Dana Dibutuhkan (Funds Needed)**
+
 - Type: Number input (currency)
 - Required: Yes
 - Min Value: 100,000,000 (IDR 100 million)
@@ -290,6 +320,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Max Value: "Dana dibutuhkan maksimal IDR 5.000.000.000"
 
 **Kemampuan Angsuran / Bulan (Monthly Payment Capacity)**
+
 - Type: Number input (currency)
 - Required: Yes
 - Min Value: 1,000,000 (IDR 1 million)
@@ -300,6 +331,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Value: "Kemampuan angsuran minimal IDR 1.000.000"
 
 **Siap Di-survey? (Ready for Survey)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Ya", "Tidak"]
@@ -307,11 +339,13 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Kesiapan survey wajib dipilih"
 
 **Tanggal Pengajuan (Application Date)**
+
 - Type: Date input (read-only)
 - Auto-filled: Current date
 - Format: DD/MM/YYYY
 
 **Tanggal Submission (Submission Date)**
+
 - Type: Date input (read-only)
 - Auto-filled: On submission
 - Format: DD/MM/YYYY
@@ -319,9 +353,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 3: Documents
 
 **Google Drive URL**
+
 - Same validation as BPKB
 
 **Required Documents Checklist**
+
 - Type: Checkbox list
 - Required: All must be checked
 - Documents:
@@ -340,6 +376,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: Company Info
 
 **Nama PT/CV (Company Name)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -352,6 +389,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Length: "Nama PT/CV minimal 3 karakter"
 
 **Eligibility Requirements Display**
+
 - Type: Read-only display
 - Shows eligibility checklist (all must be met):
   - ✅ Based in Jabodetabek
@@ -363,9 +401,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 3: Documents
 
 **Google Drive URL**
+
 - Same validation as BPKB
 
 **Required Documents Checklist**
+
 - Type: Checkbox list
 - Required: All sections must have documents
 - Sections:
@@ -398,9 +438,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 2: Company Info
 
 **Nama PT/CV (Company Name)**
+
 - Same validation as AP Invoice
 
 **Eligibility Requirements Display**
+
 - Type: Read-only display
 - Shows eligibility checklist (all must be met):
   - ✅ Based in Jabodetabek, Surabaya, or Bali
@@ -412,9 +454,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 3: Documents
 
 **Google Drive URL**
+
 - Same validation as BPKB
 
 **Required Documents Checklist**
+
 - Same as AP Invoice Financing (5 sections)
 
 ---
@@ -426,9 +470,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 **Company Information:**
 
 **Nama PT/CV (Company Name)**
+
 - Same validation as AP/AR Invoice
 
 **Tahun Berdiri (Year Established)**
+
 - Type: Number input
 - Required: Yes
 - Min Value: 1900
@@ -438,6 +484,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Invalid: "Tahun berdiri tidak valid"
 
 **Lokasi (Location)**
+
 - Type: Text input
 - Required: Yes
 - Min Length: 3 characters
@@ -446,6 +493,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Lokasi wajib diisi"
 
 **Industri (Industry)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: [List of industries]
@@ -453,6 +501,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Industri wajib dipilih"
 
 **Jumlah Karyawan (Number of Employees)**
+
 - Type: Number input
 - Required: Yes
 - Min Value: 1
@@ -463,6 +512,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 **Business Challenge:**
 
 **Alasan tidak memenuhi syarat standar (Reason)**
+
 - Type: Textarea
 - Required: Yes
 - Min Length: 20 characters
@@ -472,6 +522,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Length: "Alasan minimal 20 karakter"
 
 **Jenis pembiayaan yang dibutuhkan (Financing Type Needed)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: [List of financing types]
@@ -479,6 +530,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Jenis pembiayaan wajib dipilih"
 
 **Jumlah dana yang dibutuhkan (Amount Needed)**
+
 - Type: Number input (currency)
 - Required: Yes
 - Min Value: 100,000,000 (IDR 100 million)
@@ -488,6 +540,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Min Value: "Jumlah dana minimal IDR 100.000.000"
 
 **Tujuan penggunaan dana (Purpose of Funds)**
+
 - Type: Textarea
 - Required: Yes
 - Min Length: 20 characters
@@ -499,6 +552,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 **Current Financial Status:**
 
 **Status laporan keuangan (Financial Report Status)**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Positif", "Negatif", "Tidak Ada"]
@@ -506,6 +560,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Status laporan keuangan wajib dipilih"
 
 **Penjelasan kondisi keuangan (Financial Condition Explanation)**
+
 - Type: Textarea
 - Required: Yes
 - Min Length: 20 characters
@@ -517,9 +572,11 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 3: Documents
 
 **Google Drive URL**
+
 - Same validation as BPKB
 
 **Required Documents Checklist**
+
 - Type: Checkbox list
 - Required: All must be checked
 - Documents:
@@ -534,6 +591,7 @@ The Form Validation Module handles all field-level and form-level validation rul
 #### Step 5: Consultation Request
 
 **Preferred consultation method**
+
 - Type: Dropdown/Select
 - Required: Yes
 - Options: ["Online", "Offline"]
@@ -541,6 +599,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Required: "Metode konsultasi wajib dipilih"
 
 **Preferred consultation date/time**
+
 - Type: DateTime input
 - Required: No (optional)
 - Validation: Must be future date
@@ -548,6 +607,7 @@ The Form Validation Module handles all field-level and form-level validation rul
   - Past Date: "Tanggal konsultasi harus di masa depan"
 
 **Additional notes**
+
 - Type: Textarea
 - Required: No (optional)
 - Max Length: 500 characters
@@ -559,22 +619,26 @@ The Form Validation Module handles all field-level and form-level validation rul
 ### 3.1 Common Validations
 
 **All Products:**
+
 - User must be logged in
 - All required fields must be filled
 - Google Drive URL must be valid
 - All required documents must be checked
 
 **All Text Fields:**
+
 - No special characters (unless specified)
 - No HTML tags
 - Trim whitespace
 
 **All Number Fields:**
+
 - Must be numeric
 - No negative values (unless specified)
 - Proper decimal handling (if applicable)
 
 **All Date Fields:**
+
 - Valid date format
 - No future dates (unless specified)
 - No dates too far in past (unless specified)
@@ -582,29 +646,34 @@ The Form Validation Module handles all field-level and form-level validation rul
 ### 3.2 Google Drive URL Validation
 
 **Universal Rules:**
+
 - Must be valid URL format
 - Must be from Google Drive domain
 - Must be folder or file link
 - Should have viewing permissions
 
 **Validation Function:**
+
 ```typescript
 function validateGoogleDriveUrl(url: string): ValidationResult {
   // Check URL format
   if (!isValidUrl(url)) {
     return { valid: false, error: "URL tidak valid" };
   }
-  
+
   // Check Google Drive domain
-  if (!url.includes('drive.google.com')) {
+  if (!url.includes("drive.google.com")) {
     return { valid: false, error: "URL harus dari Google Drive" };
   }
-  
+
   // Check if it's folder or file link
-  if (!url.includes('/folders/') && !url.includes('/file/d/')) {
-    return { valid: false, error: "URL harus link folder atau file Google Drive" };
+  if (!url.includes("/folders/") && !url.includes("/file/d/")) {
+    return {
+      valid: false,
+      error: "URL harus link folder atau file Google Drive",
+    };
   }
-  
+
   return { valid: true };
 }
 ```
@@ -616,12 +685,14 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 4.1 Error Display
 
 **Field-Level Errors:**
+
 - Show error message below field
 - Highlight field with error (red border)
 - Show error icon
 - Error message in selected language (EN/ID)
 
 **Form-Level Errors:**
+
 - Show error summary at top of form
 - List all fields with errors
 - Allow quick navigation to error fields
@@ -629,12 +700,14 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 4.2 Error Messages
 
 **Message Structure:**
+
 - Clear and specific
 - In user's selected language
 - Actionable (tell user what to fix)
 - Consistent terminology
 
 **Message Examples:**
+
 - Required: "[Field name] wajib diisi" / "[Field name] is required"
 - Invalid Format: "Format [field name] tidak valid" / "[Field name] format is invalid"
 - Min/Max: "[Field name] minimal/maksimal [value]" / "[Field name] minimum/maximum [value]"
@@ -646,6 +719,7 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 5.1 Real-Time Validation
 
 **Triggered On:**
+
 - Field blur (when user leaves field)
 - Field change (for format validation)
 - Step navigation (before moving to next step)
@@ -653,11 +727,13 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 5.2 Submission Validation
 
 **Triggered On:**
+
 - Form submission attempt
 - Review step completion
 - Final submit button click
 
 **Validation Process:**
+
 1. Validate all fields
 2. Check all required documents
 3. Validate Google Drive URL
@@ -671,6 +747,7 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 6.1 Conditional Validation
 
 **Examples:**
+
 - If "Status Pajak" is "Belum Lunas", show warning but allow
 - If "Asuransi" is "Tidak Ada", show recommendation but allow
 - If "Siap Di-survey?" is "Tidak", show message but allow
@@ -678,6 +755,7 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ### 6.2 Cross-Field Validation
 
 **Examples:**
+
 - Loan amount should be reasonable compared to collateral value
 - Monthly payment capacity should be reasonable compared to loan amount
 - Age should match ID number (if possible to validate)
@@ -687,6 +765,7 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 ## 7. Testing Requirements
 
 **Test Cases:**
+
 - [ ] All required field validations work
 - [ ] Format validations work correctly
 - [ ] Min/max value validations work
@@ -702,7 +781,6 @@ function validateGoogleDriveUrl(url: string): ValidationResult {
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-01-27 | Initial | Created Form Validation Module PRD |
-
+| Version | Date       | Author  | Changes                            |
+| ------- | ---------- | ------- | ---------------------------------- |
+| 1.0     | 2025-01-27 | Initial | Created Form Validation Module PRD |

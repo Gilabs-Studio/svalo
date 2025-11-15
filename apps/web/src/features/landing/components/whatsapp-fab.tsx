@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-const WHATSAPP_URL = 'https://api.whatsapp.com/send/?phone=628118820990&text=Saya+mau+tanya+mengenai+savlo+financing&type=phone_number&app_absent=0';
+const WHATSAPP_URL =
+  "https://api.whatsapp.com/send/?phone=628118820990&text=Saya+mau+tanya+mengenai+savlo+financing&type=phone_number&app_absent=0";
 
 export function WhatsAppFab() {
   return (
@@ -24,4 +25,3 @@ export function WhatsAppFab() {
     </Link>
   );
 }
-

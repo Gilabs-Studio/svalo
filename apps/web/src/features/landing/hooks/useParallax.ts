@@ -1,5 +1,5 @@
-import { useEffect, type RefObject } from 'react';
-import gsap from 'gsap';
+import { useEffect, type RefObject } from "react";
+import gsap from "gsap";
 
 interface UseParallaxOptions {
   /**
@@ -42,10 +42,10 @@ interface UseParallaxOptions {
 /**
  * Custom hook for parallax effect on elements
  * Combines scroll and mouse movement parallax effects
- * 
+ *
  * @param ref - React ref to the element that will have parallax effect
  * @param options - Configuration options for parallax behavior
- * 
+ *
  * @example
  * ```tsx
  * const imageRef = useRef<HTMLDivElement>(null);
@@ -54,7 +54,7 @@ interface UseParallaxOptions {
  */
 export function useParallax(
   ref: RefObject<HTMLElement | null>,
-  options: UseParallaxOptions = {}
+  options: UseParallaxOptions = {},
 ): void {
   const {
     scrollSpeed = 0.5,
@@ -62,7 +62,7 @@ export function useParallax(
     enableScroll = true,
     enableMouse = true,
     duration = 0.1,
-    ease = 'none',
+    ease = "none",
     initialOffsetY = 0,
   } = options;
 
@@ -111,20 +111,29 @@ export function useParallax(
     updateParallax();
 
     if (enableScroll) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener("scroll", handleScroll, { passive: true });
     }
 
     if (enableMouse) {
-      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
 
     return () => {
       if (enableScroll) {
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
       }
       if (enableMouse) {
-        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener("mousemove", handleMouseMove);
       }
     };
-  }, [ref, scrollSpeed, mouseIntensity, enableScroll, enableMouse, duration, ease, initialOffsetY]);
+  }, [
+    ref,
+    scrollSpeed,
+    mouseIntensity,
+    enableScroll,
+    enableMouse,
+    duration,
+    ease,
+    initialOffsetY,
+  ]);
 }

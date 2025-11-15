@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from '@/features/landing/components/animated-heading';
-import { AnimatedText } from '@/features/landing/components/animated-text';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ChevronDown, MessageCircle } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { cn } from '@/lib/utils';
-import type { FAQCategory, FAQItem } from '../types';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "@/features/landing/components/animated-heading";
+import { AnimatedText } from "@/features/landing/components/animated-text";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ChevronDown, MessageCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
+import type { FAQCategory, FAQItem } from "../types";
 
 interface FAQContentProps {
   readonly locale: Locale;
@@ -19,7 +19,7 @@ export function FAQContent({ locale }: FAQContentProps) {
   const messages = getMessages(locale);
   const t = messages;
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
-  const [activeCategory, setActiveCategory] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<string>("");
   const categoryRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const toggleItem = (categoryIndex: number, itemIndex: number) => {
@@ -35,7 +35,9 @@ export function FAQContent({ locale }: FAQContentProps) {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 150;
 
-      for (const [categoryTitle, element] of Object.entries(categoryRefs.current)) {
+      for (const [categoryTitle, element] of Object.entries(
+        categoryRefs.current,
+      )) {
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (
@@ -49,10 +51,10 @@ export function FAQContent({ locale }: FAQContentProps) {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initial check
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [t.categories]);
 
   // Scroll to category
@@ -63,7 +65,7 @@ export function FAQContent({ locale }: FAQContentProps) {
       const elementPosition = element.offsetTop - offset;
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -108,10 +110,10 @@ export function FAQContent({ locale }: FAQContentProps) {
                       key={category.title}
                       onClick={() => scrollToCategory(category.title)}
                       className={cn(
-                        'w-full text-left px-3 py-2 text-sm font-normal transition-colors rounded-md',
+                        "w-full text-left px-3 py-2 text-sm font-normal transition-colors rounded-md",
                         isActive
-                          ? 'text-foreground bg-muted/50'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
+                          ? "text-foreground bg-muted/50"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
                       )}
                     >
                       {category.title}
@@ -121,13 +123,13 @@ export function FAQContent({ locale }: FAQContentProps) {
                 {t.howToApply && (
                   <button
                     onClick={() => {
-                      const element = document.getElementById('how-to-apply');
+                      const element = document.getElementById("how-to-apply");
                       if (element) {
                         const offset = 100;
                         const elementPosition = element.offsetTop - offset;
                         window.scrollTo({
                           top: elementPosition,
-                          behavior: 'smooth',
+                          behavior: "smooth",
                         });
                       }
                     }}
@@ -143,62 +145,66 @@ export function FAQContent({ locale }: FAQContentProps) {
           {/* FAQ Content - Clean Single Column */}
           <div className="flex-1 max-w-4xl space-y-20">
             {/* FAQ Categories */}
-            {t.categories.map((category: FAQCategory, categoryIndex: number) => (
-              <section
-                key={categoryIndex}
-                ref={(el) => {
-                  categoryRefs.current[category.title] = el;
-                }}
-                className="space-y-8"
-              >
-                <div className="overflow-hidden">
-                  <AnimatedHeading
-                    as="h2"
-                    className="text-2xl md:text-3xl font-light tracking-tight text-foreground"
-                  >
-                    {category.title}
-                  </AnimatedHeading>
-                </div>
-                
-                <div className="space-y-1">
-                  {category.items.map((item: FAQItem, itemIndex: number) => {
-                    const key = `${categoryIndex}-${itemIndex}`;
-                    const isOpen = openItems[key] || false;
-                    return (
-                      <div
-                        key={itemIndex}
-                        className="border-b border-border/50 last:border-b-0"
-                      >
-                        <button
-                          onClick={() => toggleItem(categoryIndex, itemIndex)}
-                          className="w-full py-6 flex items-start justify-between gap-6 text-left group hover:opacity-70 transition-opacity"
+            {t.categories.map(
+              (category: FAQCategory, categoryIndex: number) => (
+                <section
+                  key={categoryIndex}
+                  ref={(el) => {
+                    categoryRefs.current[category.title] = el;
+                  }}
+                  className="space-y-8"
+                >
+                  <div className="overflow-hidden">
+                    <AnimatedHeading
+                      as="h2"
+                      className="text-2xl md:text-3xl font-light tracking-tight text-foreground"
+                    >
+                      {category.title}
+                    </AnimatedHeading>
+                  </div>
+
+                  <div className="space-y-1">
+                    {category.items.map((item: FAQItem, itemIndex: number) => {
+                      const key = `${categoryIndex}-${itemIndex}`;
+                      const isOpen = openItems[key] || false;
+                      return (
+                        <div
+                          key={itemIndex}
+                          className="border-b border-border/50 last:border-b-0"
                         >
-                          <span className="text-base md:text-lg font-normal text-foreground pr-4 flex-1 leading-relaxed">
-                            {item.question}
-                          </span>
-                          <div className={cn(
-                            "shrink-0 pt-1 transition-transform duration-200",
-                            isOpen && "rotate-180"
-                          )}>
-                            <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                          </div>
-                        </button>
-                        {isOpen && (
-                          <div className="pb-6 pl-0">
-                            <AnimatedText
-                              delay={0.05}
-                              className="text-base text-muted-foreground leading-relaxed max-w-none"
+                          <button
+                            onClick={() => toggleItem(categoryIndex, itemIndex)}
+                            className="w-full py-6 flex items-start justify-between gap-6 text-left group hover:opacity-70 transition-opacity"
+                          >
+                            <span className="text-base md:text-lg font-normal text-foreground pr-4 flex-1 leading-relaxed">
+                              {item.question}
+                            </span>
+                            <div
+                              className={cn(
+                                "shrink-0 pt-1 transition-transform duration-200",
+                                isOpen && "rotate-180",
+                              )}
                             >
-                              {item.answer}
-                            </AnimatedText>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
+                              <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                            </div>
+                          </button>
+                          {isOpen && (
+                            <div className="pb-6 pl-0">
+                              <AnimatedText
+                                delay={0.05}
+                                className="text-base text-muted-foreground leading-relaxed max-w-none"
+                              >
+                                {item.answer}
+                              </AnimatedText>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              ),
+            )}
 
             {/* How to Apply Section - Simplified */}
             {t.howToApply && (
@@ -216,10 +222,7 @@ export function FAQContent({ locale }: FAQContentProps) {
                 </div>
                 <div className="space-y-6">
                   {t.howToApply.steps.map((step, index: number) => (
-                    <div
-                      key={index}
-                      className="overflow-hidden"
-                    >
+                    <div key={index} className="overflow-hidden">
                       <AnimatedText delay={index * 0.05}>
                         <div className="flex gap-4">
                           <div className="shrink-0 w-6 h-6 rounded-full border border-border flex items-center justify-center mt-1">
@@ -263,7 +266,11 @@ export function FAQContent({ locale }: FAQContentProps) {
                   </AnimatedText>
                 </div>
                 <div className="overflow-hidden pt-4">
-                  <Link href={t.contactCta.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={t.contactCta.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button
                       size="lg"
                       variant="outline"

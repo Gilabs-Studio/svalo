@@ -2,9 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
   // Explicit Turbopack config to acknowledge Turbopack usage in Next.js 16
   // and silence the warning when a webpack override is present.
@@ -24,4 +22,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-

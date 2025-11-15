@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { cn } from '@/lib/utils';
-import React, { type ComponentPropsWithoutRef } from 'react';
+import { cn } from "@/lib/utils";
+import React, { type ComponentPropsWithoutRef } from "react";
 
-interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
+interface MarqueeProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
   reverse?: boolean;
   pauseOnHover?: boolean;
@@ -26,26 +26,26 @@ export function Marquee({
   const fadeComponents = childrenArray.filter(
     (child) =>
       React.isValidElement(child) &&
-      (child.type as { displayName?: string })?.displayName === 'MarqueeFade'
+      (child.type as { displayName?: string })?.displayName === "MarqueeFade",
   );
   const contentChildren = childrenArray.filter(
     (child) =>
       !(
         React.isValidElement(child) &&
-        (child.type as { displayName?: string })?.displayName === 'MarqueeFade'
-      )
+        (child.type as { displayName?: string })?.displayName === "MarqueeFade"
+      ),
   );
 
   return (
     <div
       {...props}
       className={cn(
-        'group relative flex overflow-hidden [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
+        "group relative flex overflow-hidden [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
         {
-          'flex-row': !vertical,
-          'flex-col': vertical,
+          "flex-row": !vertical,
+          "flex-col": vertical,
         },
-        className
+        className,
       )}
     >
       {fadeComponents}
@@ -54,11 +54,11 @@ export function Marquee({
         .map((_, i) => (
           <div
             key={i}
-            className={cn('flex shrink-0 justify-around [gap:var(--gap)]', {
-              'animate-marquee flex-row': !vertical,
-              'animate-marquee-vertical flex-col': vertical,
-              'group-hover:[animation-play-state:paused]': pauseOnHover,
-              '[animation-direction:reverse]': reverse,
+            className={cn("flex shrink-0 justify-around [gap:var(--gap)]", {
+              "animate-marquee flex-row": !vertical,
+              "animate-marquee-vertical flex-col": vertical,
+              "group-hover:[animation-play-state:paused]": pauseOnHover,
+              "[animation-direction:reverse]": reverse,
             })}
           >
             {contentChildren}
@@ -68,7 +68,7 @@ export function Marquee({
   );
 }
 
-interface MarqueeContentProps extends ComponentPropsWithoutRef<'div'> {
+interface MarqueeContentProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
 }
 
@@ -78,13 +78,13 @@ export function MarqueeContent({
   ...props
 }: Readonly<MarqueeContentProps>) {
   return (
-    <div className={cn('flex shrink-0 [gap:var(--gap)]', className)} {...props}>
+    <div className={cn("flex shrink-0 [gap:var(--gap)]", className)} {...props}>
       {children}
     </div>
   );
 }
 
-interface MarqueeItemProps extends ComponentPropsWithoutRef<'div'> {
+interface MarqueeItemProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
 }
 
@@ -94,19 +94,19 @@ export function MarqueeItem({
   ...props
 }: Readonly<MarqueeItemProps>) {
   return (
-    <div className={cn('shrink-0', className)} {...props}>
+    <div className={cn("shrink-0", className)} {...props}>
       {children}
     </div>
   );
 }
 
-interface MarqueeFadeProps extends ComponentPropsWithoutRef<'div'> {
-  side?: 'left' | 'right';
+interface MarqueeFadeProps extends ComponentPropsWithoutRef<"div"> {
+  side?: "left" | "right";
   className?: string;
 }
 
 export function MarqueeFade({
-  side = 'left',
+  side = "left",
   className,
   ...props
 }: Readonly<MarqueeFadeProps>) {
@@ -114,16 +114,15 @@ export function MarqueeFade({
     <div
       {...props}
       className={cn(
-        'pointer-events-none absolute inset-y-0 z-10 w-1/4 bg-gradient-to-r from-background',
+        "pointer-events-none absolute inset-y-0 z-10 w-1/4 bg-gradient-to-r from-background",
         {
-          'left-0': side === 'left',
-          'right-0 bg-gradient-to-l': side === 'right',
+          "left-0": side === "left",
+          "right-0 bg-gradient-to-l": side === "right",
         },
-        className
+        className,
       )}
     />
   );
 }
 
-MarqueeFade.displayName = 'MarqueeFade';
-
+MarqueeFade.displayName = "MarqueeFade";

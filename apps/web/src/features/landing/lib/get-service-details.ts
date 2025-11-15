@@ -1,6 +1,6 @@
-import { type Locale } from '@/i18n';
-import enServiceDetails from '../messages/service-details-en.json';
-import idServiceDetails from '../messages/service-details-id.json';
+import { type Locale } from "@/i18n";
+import enServiceDetails from "../messages/service-details-en.json";
+import idServiceDetails from "../messages/service-details-id.json";
 
 type ServiceDetails = {
   headline: string;
@@ -22,9 +22,11 @@ const serviceDetails: Record<Locale, Record<string, ServiceDetails>> = {
   id: idServiceDetails as Record<string, ServiceDetails>,
 };
 
-export function getServiceDetails(locale: Locale, slug: string): ServiceDetails | null {
+export function getServiceDetails(
+  locale: Locale,
+  slug: string,
+): ServiceDetails | null {
   return serviceDetails[locale]?.[slug] || null;
 }
 
 export type { ServiceDetails };
-

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 interface UseNavbarScrollReturn {
   readonly isInHero: boolean;
   readonly isVisible: boolean;
-  readonly scrollDirection: 'up' | 'down';
+  readonly scrollDirection: "up" | "down";
 }
 
 export function useNavbarScroll(): UseNavbarScrollReturn {
   const [isInHero, setIsInHero] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const lastScrollY = useRef(0);
   const heroRef = useRef<HTMLElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -23,7 +23,7 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
     setIsInHero(true);
     setIsVisible(true);
     lastScrollY.current = 0;
-    
+
     // Disconnect previous observer if exists
     if (observerRef.current) {
       observerRef.current.disconnect();
@@ -32,7 +32,7 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
 
     // Find hero section element with multiple retry strategies
     const findHeroSection = (): HTMLElement | null => {
-      return document.getElementById('hero-section');
+      return document.getElementById("hero-section");
     };
 
     // Intersection Observer for hero section
@@ -44,19 +44,19 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
       },
       {
         threshold: 0.1, // Trigger when 10% of hero is visible
-        rootMargin: '-64px 0px 0px 0px', // Account for navbar height
-      }
+        rootMargin: "-64px 0px 0px 0px", // Account for navbar height
+      },
     );
-    
+
     observerRef.current = observer;
 
     // Try to find hero element with multiple retry attempts
     let retryCount = 0;
     const maxRetries = 20; // Try for ~2 seconds (20 * 100ms)
-    
+
     const tryFindAndObserve = () => {
       const heroElement = findHeroSection();
-      
+
       if (heroElement) {
         heroRef.current = heroElement;
         observer.observe(heroElement);
@@ -66,7 +66,7 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
         setIsInHero(isVisible);
         return true;
       }
-      
+
       retryCount++;
       if (retryCount < maxRetries) {
         // Use requestAnimationFrame for better timing
@@ -74,7 +74,7 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
           setTimeout(tryFindAndObserve, 50);
         });
       }
-      
+
       return false;
     };
 
@@ -87,13 +87,13 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
 
       // Determine scroll direction
       if (currentScrollY > lastScrollY.current) {
-        setScrollDirection('down');
+        setScrollDirection("down");
         // Hide navbar on scroll down (except at top)
         if (currentScrollY > 100) {
           setIsVisible(false);
         }
       } else {
-        setScrollDirection('up');
+        setScrollDirection("up");
         // Show navbar on scroll up
         setIsVisible(true);
       }
@@ -118,14 +118,16 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
       }
     };
 
-    globalThis.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    globalThis.addEventListener("scroll", throttledHandleScroll, {
+      passive: true,
+    });
 
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
         observerRef.current = null;
       }
-      globalThis.removeEventListener('scroll', throttledHandleScroll);
+      globalThis.removeEventListener("scroll", throttledHandleScroll);
     };
   }, [pathname]); // Re-run when pathname changes
 
@@ -135,4 +137,3 @@ export function useNavbarScroll(): UseNavbarScrollReturn {
     scrollDirection,
   };
 }
-

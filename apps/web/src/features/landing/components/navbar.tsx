@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, ChevronDown } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { type Locale } from '@/i18n';
-import { Button } from '@/components/ui/button';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { type Locale } from "@/i18n";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
+} from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { getMessages } from '../lib/get-messages';
-import { cn } from '@/lib/utils';
-import { getServiceSlug } from '../lib/service-slug';
-import Lottie, { type LottieRef } from 'lottie-react';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
+} from "@/components/ui/dropdown-menu";
+import { getMessages } from "../lib/get-messages";
+import { cn } from "@/lib/utils";
+import { getServiceSlug } from "../lib/service-slug";
+import Lottie, { type LottieRef } from "lottie-react";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 function getServiceDetailRoute(title: string, locale: Locale): string {
   const slug = getServiceSlug(title);
@@ -40,7 +40,8 @@ interface LottieIconProps {
 }
 
 function LottieIcon({ src, className, onHover = false }: LottieIconProps) {
-  const [animationData, setAnimationData] = useState<LottieAnimationData | null>(null);
+  const [animationData, setAnimationData] =
+    useState<LottieAnimationData | null>(null);
   const lottieRef = useRef(null) as LottieRef;
 
   useEffect(() => {
@@ -64,7 +65,7 @@ function LottieIcon({ src, className, onHover = false }: LottieIconProps) {
   }, [onHover, animationData]);
 
   if (!animationData) {
-    return <div className={cn('w-5 h-5', className)} />;
+    return <div className={cn("w-5 h-5", className)} />;
   }
 
   return (
@@ -73,7 +74,7 @@ function LottieIcon({ src, className, onHover = false }: LottieIconProps) {
       animationData={animationData}
       loop
       autoplay={false}
-      className={cn('w-5 h-5', className)}
+      className={cn("w-5 h-5", className)}
     />
   );
 }
@@ -90,7 +91,11 @@ interface ServiceDropdownItemProps {
   readonly pathname: string;
 }
 
-function ServiceDropdownItem({ service, locale, pathname }: ServiceDropdownItemProps) {
+function ServiceDropdownItem({
+  service,
+  locale,
+  pathname,
+}: ServiceDropdownItemProps) {
   const iconPath = service.iconDark || service.icon;
   const [isHovered, setIsHovered] = useState(false);
   const serviceDetailRoute = getServiceDetailRoute(service.title, locale);
@@ -100,8 +105,8 @@ function ServiceDropdownItem({ service, locale, pathname }: ServiceDropdownItemP
       <Link
         href={serviceDetailRoute}
         className={cn(
-          'flex items-center gap-3 cursor-pointer py-2.5 group',
-          pathname === serviceDetailRoute && 'bg-gray-100'
+          "flex items-center gap-3 cursor-pointer py-2.5 group",
+          pathname === serviceDetailRoute && "bg-gray-100",
         )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -160,18 +165,20 @@ interface NavbarProps {
   readonly isVisible?: boolean;
 }
 
-export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarProps) {
+export function Navbar({
+  locale,
+  isInHero = false,
+  isVisible = true,
+}: NavbarProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const messages = getMessages(locale);
   const t = messages.nav;
   const { isAuthenticated, logout } = useAuthStore();
-  const isAuthRoute = pathname.includes('/auth');
+  const isAuthRoute = pathname.includes("/auth");
   const isTransparentNav = isInHero && !isAuthRoute;
 
-  const navItems = [
-    { href: `/${locale}`, label: t.home },
-  ];
+  const navItems = [{ href: `/${locale}`, label: t.home }];
 
   // Get services for Products dropdown
   const services = messages.services?.products || [];
@@ -186,46 +193,46 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
   const getNavItemClassName = (href: string) => {
     const active = isActive(href);
     if (isTransparentNav) {
-      return active ? 'text-white' : 'text-white/70 hover:text-white';
+      return active ? "text-white" : "text-white/70 hover:text-white";
     }
-    return active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900';
+    return active ? "text-gray-900" : "text-gray-600 hover:text-gray-900";
   };
 
   const getProductsButtonClassName = () => {
     if (isTransparentNav) {
-      return 'text-white/70 hover:text-white';
+      return "text-white/70 hover:text-white";
     }
-    return 'text-gray-600 hover:text-gray-900';
+    return "text-gray-600 hover:text-gray-900";
   };
 
   const getLocaleUrl = (targetLocale: Locale) => {
-    const pathWithoutLocale = pathname.replace(`/${locale}`, '');
-    return `/${targetLocale}${pathWithoutLocale || ''}`;
+    const pathWithoutLocale = pathname.replace(`/${locale}`, "");
+    return `/${targetLocale}${pathWithoutLocale || ""}`;
   };
 
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300 ease-in-out',
-        !isVisible && '-translate-y-full'
+        "fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300 ease-in-out",
+        !isVisible && "-translate-y-full",
       )}
     >
       <div
         className={cn(
-          'absolute inset-0 border-b transition-all duration-300',
+          "absolute inset-0 border-b transition-all duration-300",
           isTransparentNav
-            ? 'bg-white/0 border-white/0'
+            ? "bg-white/0 border-white/0"
             : isAuthRoute
-              ? 'bg-white border-gray-200'
-              : 'bg-white/95 border-gray-200/50 backdrop-blur-md'
+              ? "bg-white border-gray-200"
+              : "bg-white/95 border-gray-200/50 backdrop-blur-md",
         )}
       />
       <div className="relative container mx-auto flex h-12 items-center justify-between px-4 md:px-6">
         <Link href={`/${locale}`} className="flex items-center space-x-2 z-10">
           <span
             className={cn(
-              'text-lg font-semibold tracking-tight transition-colors',
-              isTransparentNav ? 'text-white' : 'text-gray-900'
+              "text-lg font-semibold tracking-tight transition-colors",
+              isTransparentNav ? "text-white" : "text-gray-900",
             )}
           >
             Savlo
@@ -239,29 +246,29 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               key={item.href}
               href={item.href}
               className={cn(
-                'text-sm font-medium transition-colors relative',
-                getNavItemClassName(item.href)
+                "text-sm font-medium transition-colors relative",
+                getNavItemClassName(item.href),
               )}
             >
               {item.label}
               {isActive(item.href) && (
                 <span
                   className={cn(
-                    'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
-                    isTransparentNav ? 'bg-white' : 'bg-gray-900'
+                    "absolute -bottom-1 left-0 right-0 h-0.5 transition-all",
+                    isTransparentNav ? "bg-white" : "bg-gray-900",
                   )}
                 />
               )}
             </Link>
           ))}
-          
+
           {/* Products Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
                 className={cn(
-                  'text-sm font-medium transition-colors relative flex items-center gap-1',
-                  getProductsButtonClassName()
+                  "text-sm font-medium transition-colors relative flex items-center gap-1",
+                  getProductsButtonClassName(),
                 )}
               >
                 {t.products}
@@ -279,30 +286,30 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          
+
           {/* FAQ Link */}
           <Link
             href={`/${locale}/faq`}
             className={cn(
-              'text-sm font-medium transition-colors relative',
-              getNavItemClassName(`/${locale}/faq`)
+              "text-sm font-medium transition-colors relative",
+              getNavItemClassName(`/${locale}/faq`),
             )}
           >
             FAQ
             {isActive(`/${locale}/faq`) && (
               <span
                 className={cn(
-                  'absolute -bottom-1 left-0 right-0 h-0.5 transition-all',
-                  isTransparentNav ? 'bg-white' : 'bg-gray-900'
+                  "absolute -bottom-1 left-0 right-0 h-0.5 transition-all",
+                  isTransparentNav ? "bg-white" : "bg-gray-900",
                 )}
               />
             )}
           </Link>
-          
+
           <div
             className={cn(
-              'h-4 w-px transition-colors',
-              isTransparentNav ? 'bg-white/20' : 'bg-gray-300'
+              "h-4 w-px transition-colors",
+              isTransparentNav ? "bg-white/20" : "bg-gray-300",
             )}
           />
           {isAuthenticated ? (
@@ -310,26 +317,26 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               <Link
                 href={`/${locale}/dashboard`}
                 className={cn(
-                  'text-sm font-medium transition-colors',
+                  "text-sm font-medium transition-colors",
                   isTransparentNav
-                    ? 'text-white/70 hover:text-white'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? "text-white/70 hover:text-white"
+                    : "text-gray-600 hover:text-gray-900",
                 )}
               >
                 Dashboard
               </Link>
               <Button
                 size="sm"
-                variant={isTransparentNav ? 'default' : 'outline'}
+                variant={isTransparentNav ? "default" : "outline"}
                 onClick={() => {
                   logout();
                   window.location.href = `/${locale}`;
                 }}
                 className={cn(
-                  'h-8 px-4 text-xs font-medium',
+                  "h-8 px-4 text-xs font-medium",
                   isTransparentNav
-                    ? 'bg-white text-black hover:bg-gray-100'
-                    : 'border-gray-300'
+                    ? "bg-white text-black hover:bg-gray-100"
+                    : "border-gray-300",
                 )}
               >
                 Logout
@@ -340,10 +347,10 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               <Link
                 href={`/${locale}/auth`}
                 className={cn(
-                  'text-sm font-medium transition-colors',
+                  "text-sm font-medium transition-colors",
                   isTransparentNav
-                    ? 'text-white/70 hover:text-white'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? "text-white/70 hover:text-white"
+                    : "text-gray-600 hover:text-gray-900",
                 )}
               >
                 {t.signIn}
@@ -362,13 +369,13 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
             <DropdownMenuTrigger asChild>
               <button
                 className={cn(
-                  'flex items-center gap-1 px-2 py-1 rounded-md transition-all hover:bg-black/5',
+                  "flex items-center gap-1 px-2 py-1 rounded-md transition-all hover:bg-black/5",
                   isTransparentNav
-                    ? 'text-white hover:bg-white/10'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? "text-white hover:bg-white/10"
+                    : "text-gray-700 hover:bg-gray-100",
                 )}
               >
-                {locale === 'en' ? (
+                {locale === "en" ? (
                   <FlagEN className="w-3.5 h-2.5 shrink-0" />
                 ) : (
                   <FlagID className="w-3.5 h-2.5 shrink-0" />
@@ -380,10 +387,10 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
             <DropdownMenuContent align="end" className="w-32">
               <DropdownMenuItem asChild>
                 <Link
-                  href={getLocaleUrl('en')}
+                  href={getLocaleUrl("en")}
                   className={cn(
-                    'flex items-center gap-2 cursor-pointer',
-                    locale === 'en' && 'bg-gray-100'
+                    "flex items-center gap-2 cursor-pointer",
+                    locale === "en" && "bg-gray-100",
                   )}
                 >
                   <FlagEN className="w-4 h-3 shrink-0" />
@@ -392,10 +399,10 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
-                  href={getLocaleUrl('id')}
+                  href={getLocaleUrl("id")}
                   className={cn(
-                    'flex items-center gap-2 cursor-pointer',
-                    locale === 'id' && 'bg-gray-100'
+                    "flex items-center gap-2 cursor-pointer",
+                    locale === "id" && "bg-gray-100",
                   )}
                 >
                   <FlagID className="w-4 h-3 shrink-0" />
@@ -413,17 +420,20 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
               variant="ghost"
               size="icon"
               className={cn(
-                'transition-colors',
+                "transition-colors",
                 isTransparentNav
-                  ? 'text-white hover:bg-white/10'
-                  : 'text-gray-900 hover:bg-gray-100'
+                  ? "text-white hover:bg-white/10"
+                  : "text-gray-900 hover:bg-gray-100",
               )}
             >
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-white border-gray-200">
+          <SheetContent
+            side="right"
+            className="w-[300px] sm:w-[400px] bg-white border-gray-200"
+          >
             <SheetHeader>
               <SheetTitle className="text-gray-900">Savlo</SheetTitle>
             </SheetHeader>
@@ -434,58 +444,69 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'text-base font-medium transition-colors px-3 py-2 rounded-md',
+                    "text-base font-medium transition-colors px-3 py-2 rounded-md",
                     isActive(item.href)
-                      ? 'text-gray-900 bg-gray-100'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      ? "text-gray-900 bg-gray-100"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
                   )}
                 >
                   {item.label}
                 </Link>
               ))}
-              
+
               {/* Products Dropdown for Mobile */}
               <div className="px-3 py-2">
-                <div className="text-sm font-medium text-gray-900 mb-2">{t.products}</div>
+                <div className="text-sm font-medium text-gray-900 mb-2">
+                  {t.products}
+                </div>
                 <div className="flex flex-col space-y-1 ml-2">
                   {services.map((service) => {
-                    const serviceWithIcon = service as { icon?: string; iconDark?: string };
-                    const iconPath = serviceWithIcon.iconDark || serviceWithIcon.icon;
-                    const serviceDetailRoute = getServiceDetailRoute(service.title, locale);
+                    const serviceWithIcon = service as {
+                      icon?: string;
+                      iconDark?: string;
+                    };
+                    const iconPath =
+                      serviceWithIcon.iconDark || serviceWithIcon.icon;
+                    const serviceDetailRoute = getServiceDetailRoute(
+                      service.title,
+                      locale,
+                    );
                     return (
                       <Link
                         key={service.title}
                         href={serviceDetailRoute}
                         onClick={() => setOpen(false)}
                         className={cn(
-                          'flex items-center gap-2 text-sm transition-colors px-2 py-2 rounded-md',
+                          "flex items-center gap-2 text-sm transition-colors px-2 py-2 rounded-md",
                           pathname === serviceDetailRoute
-                            ? 'text-gray-900 bg-gray-100 font-medium'
-                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                            ? "text-gray-900 bg-gray-100 font-medium"
+                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
                         )}
                       >
-                        {iconPath && <LottieIcon src={iconPath} onHover={false} />}
+                        {iconPath && (
+                          <LottieIcon src={iconPath} onHover={false} />
+                        )}
                         <span className="flex-1">{service.title}</span>
                       </Link>
                     );
                   })}
                 </div>
               </div>
-              
+
               {/* FAQ Link for Mobile */}
               <Link
                 href={`/${locale}/faq`}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'text-base font-medium transition-colors px-3 py-2 rounded-md',
+                  "text-base font-medium transition-colors px-3 py-2 rounded-md",
                   isActive(`/${locale}/faq`)
-                    ? 'text-gray-900 bg-gray-100'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ? "text-gray-900 bg-gray-100"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
                 )}
               >
                 FAQ
               </Link>
-              
+
               <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
                 {isAuthenticated ? (
                   <>
@@ -516,7 +537,10 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                     >
                       {t.signIn}
                     </Link>
-                    <Link href={`/${locale}/auth`} onClick={() => setOpen(false)}>
+                    <Link
+                      href={`/${locale}/auth`}
+                      onClick={() => setOpen(false)}
+                    >
                       <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 font-medium">
                         {t.getStarted}
                       </Button>
@@ -529,13 +553,13 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                   <DropdownMenuTrigger asChild>
                     <button className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
                       <div className="flex items-center gap-2">
-                        {locale === 'en' ? (
+                        {locale === "en" ? (
                           <FlagEN className="w-5 h-4 shrink-0" />
                         ) : (
                           <FlagID className="w-5 h-4 shrink-0" />
                         )}
                         <span className="text-sm font-medium text-gray-900">
-                          {locale === 'en' ? 'English' : 'Indonesia'}
+                          {locale === "en" ? "English" : "Indonesia"}
                         </span>
                       </div>
                       <ChevronDown className="w-4 h-4 text-gray-500" />
@@ -544,11 +568,11 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                   <DropdownMenuContent align="end" className="w-full">
                     <DropdownMenuItem asChild>
                       <Link
-                        href={getLocaleUrl('en')}
+                        href={getLocaleUrl("en")}
                         onClick={() => setOpen(false)}
                         className={cn(
-                          'flex items-center gap-2 cursor-pointer',
-                          locale === 'en' && 'bg-gray-100'
+                          "flex items-center gap-2 cursor-pointer",
+                          locale === "en" && "bg-gray-100",
                         )}
                       >
                         <FlagEN className="w-5 h-4 shrink-0" />
@@ -557,11 +581,11 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link
-                        href={getLocaleUrl('id')}
+                        href={getLocaleUrl("id")}
                         onClick={() => setOpen(false)}
                         className={cn(
-                          'flex items-center gap-2 cursor-pointer',
-                          locale === 'id' && 'bg-gray-100'
+                          "flex items-center gap-2 cursor-pointer",
+                          locale === "id" && "bg-gray-100",
                         )}
                       >
                         <FlagID className="w-5 h-4 shrink-0" />
@@ -578,4 +602,3 @@ export function Navbar({ locale, isInHero = false, isVisible = true }: NavbarPro
     </nav>
   );
 }
-

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getServiceDetails } from '../lib/get-service-details';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import { Check, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { useRef } from 'react';
-import { useParallax } from '../hooks/useParallax';
-import Image from 'next/image';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
+import { type Locale } from "@/i18n";
+import { getServiceDetails } from "../lib/get-service-details";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import { Check, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useRef } from "react";
+import { useParallax } from "../hooks/useParallax";
+import Image from "next/image";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 
 interface ServiceDetailPageProps {
   readonly locale: Locale;
@@ -19,11 +19,11 @@ interface ServiceDetailPageProps {
 
 function getDashboardRoute(slug: string, locale: Locale): string {
   const routeMap: Record<string, string> = {
-    'bpkb-based-financing': `/${locale}/dashboard/bpkb-financing`,
-    'property-based-financing': `/${locale}/dashboard/property-financing`,
-    'ap-invoice-financing': `/${locale}/dashboard/ap-invoice-financing`,
-    'ar-invoice-financing': `/${locale}/dashboard/ar-invoice-financing`,
-    'ecosystem-banking-solutions': `/${locale}/dashboard`,
+    "bpkb-based-financing": `/${locale}/dashboard/bpkb-financing`,
+    "property-based-financing": `/${locale}/dashboard/property-financing`,
+    "ap-invoice-financing": `/${locale}/dashboard/ap-invoice-financing`,
+    "ar-invoice-financing": `/${locale}/dashboard/ar-invoice-financing`,
+    "ecosystem-banking-solutions": `/${locale}/dashboard`,
   };
   return routeMap[slug] || `/${locale}/dashboard`;
 }
@@ -48,12 +48,12 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section id="hero-section" className="relative min-h-[60vh] flex items-center py-24 overflow-hidden">
+      <section
+        id="hero-section"
+        className="relative min-h-[60vh] flex items-center py-24 overflow-hidden"
+      >
         <div className="absolute inset-0 z-0">
-          <div 
-            ref={imageRef}
-            className="absolute inset-0 w-full h-full"
-          >
+          <div ref={imageRef} className="absolute inset-0 w-full h-full">
             <Image
               src="/image/service.webp"
               alt="Service background"
@@ -65,7 +65,7 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
         </div>
-        
+
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <div className="overflow-hidden">
@@ -133,23 +133,37 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
             <div className="overflow-hidden">
               <AnimatedText delay={0.1}>
                 <div className="bg-muted/50 rounded-2xl p-8 space-y-4">
-                  {Object.entries(details.fundingDetails).map(([key, value], index) => (
-                    <div key={key} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pb-4 border-b border-border/50 last:border-0 last:pb-0">
-                      <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider min-w-[140px]">
-                        {key === 'collateral' ? 'Collateral' :
-                         key === 'amount' ? 'Amount' :
-                         key === 'maxLimit' ? 'Max Limit' :
-                         key === 'limit' ? 'Limit' :
-                         key === 'tenor' ? 'Tenor' :
-                         key === 'interest' ? 'Interest Rate' :
-                         key === 'invoiceType' ? 'Invoice Type' :
-                         key === 'products' ? 'Products' :
-                         key === 'process' ? 'Process' :
-                         key}
-                      </span>
-                      <span className="text-lg font-medium">{value}</span>
-                    </div>
-                  ))}
+                  {Object.entries(details.fundingDetails).map(
+                    ([key, value], index) => (
+                      <div
+                        key={key}
+                        className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pb-4 border-b border-border/50 last:border-0 last:pb-0"
+                      >
+                        <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider min-w-[140px]">
+                          {key === "collateral"
+                            ? "Collateral"
+                            : key === "amount"
+                              ? "Amount"
+                              : key === "maxLimit"
+                                ? "Max Limit"
+                                : key === "limit"
+                                  ? "Limit"
+                                  : key === "tenor"
+                                    ? "Tenor"
+                                    : key === "interest"
+                                      ? "Interest Rate"
+                                      : key === "invoiceType"
+                                        ? "Invoice Type"
+                                        : key === "products"
+                                          ? "Products"
+                                          : key === "process"
+                                            ? "Process"
+                                            : key}
+                        </span>
+                        <span className="text-lg font-medium">{value}</span>
+                      </div>
+                    ),
+                  )}
                 </div>
               </AnimatedText>
             </div>
@@ -293,4 +307,3 @@ export function ServiceDetailPage({ locale, slug }: ServiceDetailPageProps) {
     </div>
   );
 }
-

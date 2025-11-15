@@ -55,5 +55,3 @@ export interface AuthMessages {
     password: string;
   };
 }
-
-

@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { locales, type Locale } from '@/i18n';
-import { NavbarWrapper } from '@/features/landing/components/navbar-wrapper';
-import { getMessages } from '@/features/landing/lib/get-messages';
-import { ConditionalContactSection } from '@/features/landing/components/conditional-contact-section';
-import { WhatsAppFab } from '@/features/landing/components/whatsapp-fab';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { locales, type Locale } from "@/i18n";
+import { NavbarWrapper } from "@/features/landing/components/navbar-wrapper";
+import { getMessages } from "@/features/landing/lib/get-messages";
+import { ConditionalContactSection } from "@/features/landing/components/conditional-contact-section";
+import { WhatsAppFab } from "@/features/landing/components/whatsapp-fab";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -34,7 +34,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
+
   if (!locales.includes(locale as Locale)) {
     notFound();
   }
@@ -49,4 +49,3 @@ export default async function LocaleLayout({
     </>
   );
 }
-

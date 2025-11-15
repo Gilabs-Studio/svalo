@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 interface ContactFormProps {
   locale: Locale;
@@ -13,22 +13,22 @@ interface ContactFormProps {
 
 export function ContactForm({ locale }: ContactFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
   const messages = getMessages(locale);
   const t = messages.contact;
   const form = t.form ?? {
-    name: 'Name',
-    email: 'Email',
-    phone: 'Phone',
-    message: 'Message',
-    submit: 'Send Message',
-    success: 'Message sent!',
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    message: "Message",
+    submit: "Send Message",
+    success: "Message sent!",
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,7 +39,7 @@ export function ContactForm({ locale }: ContactFormProps) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -105,4 +105,3 @@ export function ContactForm({ locale }: ContactFormProps) {
     </form>
   );
 }
-

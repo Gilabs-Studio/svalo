@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import gsap from "gsap";
 
 interface ErrorProps {
   readonly error: Error & { digest?: string };
@@ -35,8 +35,8 @@ export default function Error({ error, reset }: ErrorProps) {
           y: 0,
           rotationX: 0,
           duration: 0.7,
-          ease: 'power3.out',
-        }
+          ease: "power3.out",
+        },
       );
     }
 
@@ -52,9 +52,9 @@ export default function Error({ error, reset }: ErrorProps) {
           opacity: 1,
           y: 0,
           duration: 0.3,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.4'
+        "-=0.4",
       );
     }
 
@@ -70,9 +70,9 @@ export default function Error({ error, reset }: ErrorProps) {
           opacity: 1,
           y: 0,
           duration: 0.2,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.2'
+        "-=0.2",
       );
     }
 
@@ -88,9 +88,9 @@ export default function Error({ error, reset }: ErrorProps) {
           opacity: 1,
           scale: 1,
           duration: 0.4,
-          ease: 'back.out(1.2)',
+          ease: "back.out(1.2)",
         },
-        '-=0.1'
+        "-=0.1",
       );
     }
   }, []);
@@ -110,32 +110,36 @@ export default function Error({ error, reset }: ErrorProps) {
       </div>
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
         <div className="space-y-8 max-w-5xl mx-auto">
-          <h1 
+          <h1
             ref={headlineRef}
             className="text-6xl md:text-8xl lg:text-9xl font-black leading-none will-change-transform"
           >
             Oops!
           </h1>
-          <p 
+          <p
             ref={subtextRef}
             className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-200 will-change-transform"
           >
             Something went wrong
           </p>
-          <p 
+          <p
             ref={descriptionRef}
             className="text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl mx-auto text-gray-300 font-medium will-change-transform"
           >
-            We encountered an unexpected error. Don&apos;t worry, our team has been notified.
+            We encountered an unexpected error. Don&apos;t worry, our team has
+            been notified.
           </p>
           {error.digest && (
             <p className="text-sm text-gray-400 font-mono mb-4">
               Error ID: {error.digest}
             </p>
           )}
-          <div ref={buttonRef} className="flex justify-center gap-4 flex-wrap will-change-transform">
-            <Button 
-              size="lg" 
+          <div
+            ref={buttonRef}
+            className="flex justify-center gap-4 flex-wrap will-change-transform"
+          >
+            <Button
+              size="lg"
               variant="outline"
               onClick={reset}
               className={cn(
@@ -143,21 +147,21 @@ export default function Error({ error, reset }: ErrorProps) {
                 "hover:bg-white/10 hover:border-white",
                 "shadow-lg hover:shadow-xl",
                 "transition-all duration-300",
-                "font-bold"
+                "font-bold",
               )}
             >
               Try Again
             </Button>
             <Link href="/">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 className={cn(
                   "text-lg md:text-xl px-8 py-6 text-white border-white bg-transparent",
                   "hover:bg-white/10 hover:border-white",
                   "shadow-lg hover:shadow-xl",
                   "transition-all duration-300",
-                  "font-bold"
+                  "font-bold",
                 )}
               >
                 Go Home
@@ -169,4 +173,3 @@ export default function Error({ error, reset }: ErrorProps) {
     </section>
   );
 }
-

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface ChoosePlanSectionProps {
   readonly locale: Locale;
@@ -64,12 +64,14 @@ export function ChoosePlanSection({ locale }: ChoosePlanSectionProps) {
                       Eligibility
                     </h4>
                     <ul className="space-y-2">
-                      {t.savlo.eligibility.map((item: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-gray-900 shrink-0 mt-0.5" />
-                          <span className="text-gray-700">{item}</span>
-                        </li>
-                      ))}
+                      {t.savlo.eligibility.map(
+                        (item: string, index: number) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-gray-900 shrink-0 mt-0.5" />
+                            <span className="text-gray-700">{item}</span>
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
 
@@ -130,12 +132,14 @@ export function ChoosePlanSection({ locale }: ChoosePlanSectionProps) {
                       Eligibility
                     </h4>
                     <ul className="space-y-2">
-                      {t.savloPlus.eligibility.map((item: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-white shrink-0 mt-0.5" />
-                          <span className="text-white/90">{item}</span>
-                        </li>
-                      ))}
+                      {t.savloPlus.eligibility.map(
+                        (item: string, index: number) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-white shrink-0 mt-0.5" />
+                            <span className="text-white/90">{item}</span>
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
 
@@ -151,12 +155,14 @@ export function ChoosePlanSection({ locale }: ChoosePlanSectionProps) {
                       Value Propositions
                     </h4>
                     <ul className="space-y-2">
-                      {t.savloPlus.valueProps.map((item: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-white shrink-0 mt-0.5" />
-                          <span className="text-white/90">{item}</span>
-                        </li>
-                      ))}
+                      {t.savloPlus.valueProps.map(
+                        (item: string, index: number) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-white shrink-0 mt-0.5" />
+                            <span className="text-white/90">{item}</span>
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -169,10 +175,8 @@ export function ChoosePlanSection({ locale }: ChoosePlanSectionProps) {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
-

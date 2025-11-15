@@ -1,7 +1,7 @@
-import { type Locale } from '@/i18n';
-import { ServicesPageContent } from '@/features/landing/components/services-page-content';
-import { locales } from '@/i18n';
-import { notFound } from 'next/navigation';
+import { type Locale } from "@/i18n";
+import { ServicesPageContent } from "@/features/landing/components/services-page-content";
+import { locales } from "@/i18n";
+import { notFound } from "next/navigation";
 
 export default async function ServicesPage({
   params,
@@ -16,4 +16,3 @@ export default async function ServicesPage({
 
   return <ServicesPageContent locale={locale} />;
 }
-

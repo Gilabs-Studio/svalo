@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import gsap from "gsap";
 
 export default function NotFound() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -30,8 +30,8 @@ export default function NotFound() {
           y: 0,
           rotationX: 0,
           duration: 0.7,
-          ease: 'power3.out',
-        }
+          ease: "power3.out",
+        },
       );
     }
 
@@ -47,9 +47,9 @@ export default function NotFound() {
           opacity: 1,
           y: 0,
           duration: 0.3,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.4'
+        "-=0.4",
       );
     }
 
@@ -65,9 +65,9 @@ export default function NotFound() {
           opacity: 1,
           y: 0,
           duration: 0.2,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.2'
+        "-=0.2",
       );
     }
 
@@ -83,9 +83,9 @@ export default function NotFound() {
           opacity: 1,
           scale: 1,
           duration: 0.4,
-          ease: 'back.out(1.2)',
+          ease: "back.out(1.2)",
         },
-        '-=0.1'
+        "-=0.1",
       );
     }
   }, []);
@@ -105,35 +105,38 @@ export default function NotFound() {
       </div>
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
         <div className="space-y-8 max-w-5xl mx-auto">
-          <h1 
+          <h1
             ref={headlineRef}
             className="text-8xl md:text-9xl lg:text-[12rem] font-black leading-none will-change-transform"
           >
             404
           </h1>
-          <p 
+          <p
             ref={subtextRef}
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-200 will-change-transform"
           >
             Page Not Found
           </p>
-          <p 
+          <p
             ref={descriptionRef}
             className="text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl mx-auto text-gray-300 font-medium will-change-transform"
           >
             Looks like this page got lost. Let&apos;s get you back on track.
           </p>
-          <div ref={buttonRef} className="flex justify-center gap-4 will-change-transform">
+          <div
+            ref={buttonRef}
+            className="flex justify-center gap-4 will-change-transform"
+          >
             <Link href="/">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 className={cn(
                   "text-lg md:text-xl px-8 py-6 text-white border-white bg-transparent",
                   "hover:bg-white/10 hover:border-white",
                   "shadow-lg hover:shadow-xl",
                   "transition-all duration-300",
-                  "font-bold"
+                  "font-bold",
                 )}
               >
                 Go Home
@@ -145,4 +148,3 @@ export default function NotFound() {
     </section>
   );
 }
-

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (globalThis.window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,18 +19,20 @@ interface AnimatedTextProps {
 
 export function AnimatedText({
   children,
-  className = '',
+  className = "",
   delay = 0,
   duration = 1,
   stagger = 0.1,
   split = false,
 }: AnimatedTextProps) {
   const textRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null);
+  const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(
+    null,
+  );
 
   // Set initial hidden state synchronously before paint to prevent flash
   useLayoutEffect(() => {
-    if (textRef.current && typeof window !== 'undefined') {
+    if (textRef.current && typeof window !== "undefined") {
       try {
         // Only set hidden if element is not already in viewport
         const rect = textRef.current.getBoundingClientRect();
@@ -45,7 +47,7 @@ export function AnimatedText({
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     if (!textRef.current) return;
 
     const element = textRef.current;
@@ -85,35 +87,44 @@ export function AnimatedText({
         gsap.set(element, { opacity: 1, y: 0 });
         return;
       }
-      
+
       // More accurate viewport detection - check if element is past the 80% trigger point
       const triggerPoint = viewportHeight * 0.8;
       const isPastTriggerPoint = rect.top < triggerPoint;
       const isInViewport = rect.top < viewportHeight && rect.bottom > 0;
-      const isAtBottomOfPage = documentHeight <= viewportHeight || (scrollTop + viewportHeight >= documentHeight - 50);
+      const isAtBottomOfPage =
+        documentHeight <= viewportHeight ||
+        scrollTop + viewportHeight >= documentHeight - 50;
       // Check if element is near bottom (within 500px for better detection)
       const isNearBottom = rect.top < viewportHeight + 500;
       // Check if element is already visible in viewport (more lenient check)
-      const isAlreadyVisible = rect.top < viewportHeight * 1.5 && rect.bottom > -200;
+      const isAlreadyVisible =
+        rect.top < viewportHeight * 1.5 && rect.bottom > -200;
       // Check if element is in the last 20% of the page (footer area)
       const elementTop = rect.top + scrollTop;
       const pageBottom = documentHeight;
       const isInLastQuarter = elementTop > pageBottom * 0.75;
-      
+
       // Determine if element should be shown immediately
       // For elements at bottom of page, be more lenient with detection
-      const shouldShowImmediately = isInViewport || isAtBottomOfPage || isPastTriggerPoint || isNearBottom || isAlreadyVisible || isInLastQuarter;
+      const shouldShowImmediately =
+        isInViewport ||
+        isAtBottomOfPage ||
+        isPastTriggerPoint ||
+        isNearBottom ||
+        isAlreadyVisible ||
+        isInLastQuarter;
 
-      if (split && typeof children === 'string') {
+      if (split && typeof children === "string") {
         // Split text into words for word-by-word animation
-        const words = children.split(' ').filter(Boolean);
+        const words = children.split(" ").filter(Boolean);
         if (words.length === 0) return;
 
         element.innerHTML = words
           .map((word) => `<span class="inline-block">${word}</span>`)
-          .join(' ');
+          .join(" ");
 
-        const wordSpans = element.querySelectorAll('span');
+        const wordSpans = element.querySelectorAll("span");
 
         // Set initial hidden state for word spans
         gsap.set(wordSpans, { opacity: 0, y: 50 });
@@ -122,24 +133,21 @@ export function AnimatedText({
         if (shouldShowImmediately) {
           gsap.set(wordSpans, { opacity: 1, y: 0 });
         } else {
-          const animation = gsap.to(
-            wordSpans,
-            {
-              opacity: 1,
-              y: 0,
-              duration,
-              delay,
-              stagger,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: element,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-                once: true,
-                refreshPriority: -1,
-              },
-            }
-          );
+          const animation = gsap.to(wordSpans, {
+            opacity: 1,
+            y: 0,
+            duration,
+            delay,
+            stagger,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              toggleActions: "play none none none",
+              once: true,
+              refreshPriority: -1,
+            },
+          });
 
           animationRef.current = animation;
         }
@@ -160,36 +168,34 @@ export function AnimatedText({
         const elementTop = rect.top + scrollTop;
         const pageBottom = documentHeight;
         const isInLastQuarter = elementTop > pageBottom * 0.75;
-        const isNearPageBottom = rect.top > viewportHeight * 0.3 || isInLastQuarter;
-        
+        const isNearPageBottom =
+          rect.top > viewportHeight * 0.3 || isInLastQuarter;
+
         // For elements at bottom of page, use more aggressive trigger
-        const startTrigger = isNearPageBottom ? 'top bottom' : 'top 80%';
-        
-        const animation = gsap.to(
-          element,
-          {
-            opacity: 1,
-            y: 0,
-            duration,
-            delay,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: element,
-              start: startTrigger,
-              toggleActions: 'play none none none',
-              once: true,
-              refreshPriority: -1,
-              onEnter: () => {
-                // Ensure animation plays when entering viewport
-                animation?.play();
-              },
-              onEnterBack: () => {
-                // Ensure animation plays when scrolling back up
-                animation?.play();
-              },
+        const startTrigger = isNearPageBottom ? "top bottom" : "top 80%";
+
+        const animation = gsap.to(element, {
+          opacity: 1,
+          y: 0,
+          duration,
+          delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: element,
+            start: startTrigger,
+            toggleActions: "play none none none",
+            once: true,
+            refreshPriority: -1,
+            onEnter: () => {
+              // Ensure animation plays when entering viewport
+              animation?.play();
             },
-          }
-        );
+            onEnterBack: () => {
+              // Ensure animation plays when scrolling back up
+              animation?.play();
+            },
+          },
+        });
 
         // Check if element is already past trigger point after animation setup
         // If so, manually trigger the animation immediately
@@ -197,17 +203,23 @@ export function AnimatedText({
           setTimeout(() => {
             try {
               const currentRect = element.getBoundingClientRect();
-              const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const currentScrollTop =
+                window.pageYOffset || document.documentElement.scrollTop;
               const currentElementTop = currentRect.top + currentScrollTop;
               const currentPageBottom = document.documentElement.scrollHeight;
-              
+
               // More aggressive check for bottom elements
-              if (isInLastQuarter || currentElementTop > currentPageBottom * 0.75) {
+              if (
+                isInLastQuarter ||
+                currentElementTop > currentPageBottom * 0.75
+              ) {
                 // Element is in last quarter, show immediately
                 animation?.play();
               } else {
                 // Check if past trigger point
-                const currentTriggerPoint = isNearPageBottom ? viewportHeight : viewportHeight * 0.8;
+                const currentTriggerPoint = isNearPageBottom
+                  ? viewportHeight
+                  : viewportHeight * 0.8;
                 if (currentRect.top < currentTriggerPoint) {
                   animation?.play();
                 } else {
@@ -240,7 +252,10 @@ export function AnimatedText({
       // Kill any remaining ScrollTriggers for this element
       try {
         for (const trigger of ScrollTrigger.getAll()) {
-          if (trigger.vars?.trigger === element || trigger.trigger === element) {
+          if (
+            trigger.vars?.trigger === element ||
+            trigger.trigger === element
+          ) {
             trigger.kill();
           }
         }
@@ -256,4 +271,3 @@ export function AnimatedText({
     </div>
   );
 }
-

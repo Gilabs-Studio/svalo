@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { type Locale } from '@/i18n';
-import { Button } from '@/components/ui/button';
-import { getMessages } from '../lib/get-messages';
-import { cn } from '@/lib/utils';
-import { useParallax } from '../hooks/useParallax';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { type Locale } from "@/i18n";
+import { Button } from "@/components/ui/button";
+import { getMessages } from "../lib/get-messages";
+import { cn } from "@/lib/utils";
+import { useParallax } from "../hooks/useParallax";
+import gsap from "gsap";
 
 interface HeroProps {
   readonly locale: Locale;
@@ -35,14 +35,14 @@ export function Hero({ locale }: HeroProps) {
 
     // Animate headline word by word
     if (headlineRef.current) {
-      const words = t.headline.split(' ');
+      const words = t.headline.split(" ");
       const wordSpans = words
         .map((word) => `<span class="inline-block mr-2">${word}</span>`)
-        .join('');
-      
+        .join("");
+
       headlineRef.current.innerHTML = wordSpans;
 
-      const spans = headlineRef.current.querySelectorAll('span');
+      const spans = headlineRef.current.querySelectorAll("span");
       timeline.fromTo(
         spans,
         {
@@ -56,8 +56,8 @@ export function Hero({ locale }: HeroProps) {
           rotationX: 0,
           duration: 0.7,
           stagger: 0.05,
-          ease: 'power3.out',
-        }
+          ease: "power3.out",
+        },
       );
     }
 
@@ -73,9 +73,9 @@ export function Hero({ locale }: HeroProps) {
           opacity: 1,
           y: 0,
           duration: 0.3,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.4'
+        "-=0.4",
       );
     }
 
@@ -91,9 +91,9 @@ export function Hero({ locale }: HeroProps) {
           opacity: 1,
           y: 0,
           duration: 0.2,
-          ease: 'power3.out',
+          ease: "power3.out",
         },
-        '-=0.2'
+        "-=0.2",
       );
     }
 
@@ -109,20 +109,20 @@ export function Hero({ locale }: HeroProps) {
           opacity: 1,
           scale: 1,
           duration: 0.4,
-          ease: 'back.out(1.2)',
+          ease: "back.out(1.2)",
         },
-        '-=0.1'
+        "-=0.1",
       );
     }
   }, [t.headline]);
 
   return (
-    <section id="hero-section" className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="hero-section"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
       <div className="absolute inset-0 z-0">
-        <div 
-          ref={imageRef}
-          className="absolute inset-0 w-full h-full"
-        >
+        <div ref={imageRef} className="absolute inset-0 w-full h-full">
           <Image
             src="/image/hero.webp"
             alt="Hero background"
@@ -136,36 +136,39 @@ export function Hero({ locale }: HeroProps) {
       </div>
       <div className="relative z-10 container mx-auto px-4 text-left text-white">
         <div className="space-y-8 max-w-5xl">
-          <h1 
+          <h1
             ref={headlineRef}
             className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight will-change-transform"
             aria-label={t.headline}
           >
             {t.headline}
           </h1>
-          <p 
+          <p
             ref={subtextRef}
             className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-200 will-change-transform max-w-3xl"
           >
             {t.subtext}
           </p>
-          <p 
+          <p
             ref={descriptionRef}
             className="text-lg md:text-xl mb-12 max-w-2xl text-gray-300 font-medium will-change-transform"
           >
             {t.description}
           </p>
-          <div ref={buttonRef} className="flex flex-wrap gap-4 justify-start will-change-transform">
+          <div
+            ref={buttonRef}
+            className="flex flex-wrap gap-4 justify-start will-change-transform"
+          >
             <Link href={`/${locale}/auth/register`}>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 className={cn(
                   "text-lg md:text-xl px-8 py-6 text-white border-white bg-transparent",
                   "hover:bg-white/10 hover:border-white",
                   "shadow-lg hover:shadow-xl",
                   "transition-all duration-300",
-                  "font-bold"
+                  "font-bold",
                 )}
               >
                 {t.cta.startApplication}
@@ -177,4 +180,3 @@ export function Hero({ locale }: HeroProps) {
     </section>
   );
 }
-

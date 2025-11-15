@@ -1,9 +1,15 @@
-import { type Locale } from '@/i18n';
-import { getMessages } from '@/features/landing/lib/get-messages';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
-import { locales } from '@/i18n';
-import { notFound } from 'next/navigation';
+import { type Locale } from "@/i18n";
+import { getMessages } from "@/features/landing/lib/get-messages";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
+import { locales } from "@/i18n";
+import { notFound } from "next/navigation";
 
 export default async function AboutPage({
   params,
@@ -22,19 +28,15 @@ export default async function AboutPage({
     notFound();
   }
 
-  const values = t.values ? [
-    t.values.precision,
-    t.values.excellence,
-    t.values.tradition,
-  ] : [];
+  const values = t.values
+    ? [t.values.precision, t.values.excellence, t.values.tradition]
+    : [];
 
   return (
     <div className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {t.title}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.title}</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t.subtitle}
           </p>
@@ -90,4 +92,3 @@ export default async function AboutPage({
     </div>
   );
 }
-

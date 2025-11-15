@@ -1,4 +1,5 @@
 # Product Catalog Module PRD
+
 ## Business Logic & Rules
 
 **Version:** 1.0  
@@ -28,11 +29,13 @@ The Product Catalog Module manages all financing products available on the Savlo
 "Secure financing using your vehicle's ownership document (BPKB) as collateral. Quick process for your urgent needs."
 
 **Key Features:**
+
 - Quick approval process
 - Vehicle collateral-based
 - For urgent financing needs
 
 **Business Rules:**
+
 - Only available to individuals (not businesses)
 - Requires valid BPKB in applicant's name
 - Vehicle must be fully paid
@@ -53,11 +56,13 @@ The Product Catalog Module manages all financing products available on the Savlo
 "Secure financing using your property certificate (SHM/SHGB) as collateral. Up to 65% of property value, max IDR 5B."
 
 **Key Features:**
+
 - Property collateral-based
 - Up to 65% LTV (Loan-to-Value)
 - Maximum amount: IDR 5 Billion
 
 **Business Rules:**
+
 - Only available to individuals (not businesses)
 - Requires valid SHM or SHGB certificate
 - Maximum financing: min(65% of property value, IDR 5B)
@@ -79,12 +84,14 @@ The Product Catalog Module manages all financing products available on the Savlo
 "Improve your cash flow by financing your accounts payable invoices up to IDR 2 Billion. Pay your suppliers on time."
 
 **Key Features:**
+
 - Accounts Payable invoice financing
 - Maximum amount: IDR 2 Billion
 - Minimum amount: IDR 500 Million
 - Financing range: IDR 500M – IDR 2B
 
 **Business Rules:**
+
 - Only available to businesses (PT/CV)
 - Must be based in Jabodetabek
 - Minimum 2 years in operation
@@ -93,6 +100,7 @@ The Product Catalog Module manages all financing products available on the Savlo
 - No account type restriction (available to all Savlo users)
 
 **Eligibility Requirements:**
+
 - Based in Jabodetabek ✅
 - Corporate only (PT/CV) ✅
 - Minimum 2 years in operation ✅
@@ -114,12 +122,14 @@ The Product Catalog Module manages all financing products available on the Savlo
 "Unlock working capital tied up in your accounts receivable. Get access to funds up to IDR 5 Billion."
 
 **Key Features:**
+
 - Accounts Receivable invoice financing
 - Maximum amount: IDR 5 Billion
 - Minimum amount: IDR 300 Million
 - Financing range: IDR 300M – IDR 5B
 
 **Business Rules:**
+
 - Only available to businesses (PT/CV)
 - Must be based in Jabodetabek, Surabaya, or Bali
 - Minimum 2 years in operation
@@ -128,6 +138,7 @@ The Product Catalog Module manages all financing products available on the Savlo
 - No account type restriction (available to all Savlo users)
 
 **Eligibility Requirements:**
+
 - Based in Jabodetabek, Surabaya, or Bali ✅
 - Corporate only (PT/CV) ✅
 - Minimum 2 years in operation ✅
@@ -149,12 +160,14 @@ The Product Catalog Module manages all financing products available on the Savlo
 "For businesses that often find it difficult to meet standard financing requirement, this solution is designed for you."
 
 **Key Features:**
+
 - Flexible eligibility
 - Personalized solutions
 - Premium service
 - Unlimited consultation
 
 **Business Rules:**
+
 - Only available to businesses (PT/CV)
 - **REQUIRES Savlo+ membership** (premium account)
 - Flexible eligibility (case-by-case assessment)
@@ -163,6 +176,7 @@ The Product Catalog Module manages all financing products available on the Savlo
 - Access to secret financial institutions
 
 **Eligibility Requirements:**
+
 - Savlo+ membership required ✅
 - Business entity (PT/CV) ✅
 - Flexible eligibility (case-by-case) ✅
@@ -174,6 +188,7 @@ The Product Catalog Module manages all financing products available on the Savlo
 ### 3.1 Availability Rules
 
 **Product is available if ALL conditions are met:**
+
 1. Product status is `ACTIVE`
 2. User type matches product target user type
 3. User account type meets product requirement
@@ -183,26 +198,26 @@ The Product Catalog Module manages all financing products available on the Savlo
 ### 3.2 Product Filtering Logic
 
 **Filter by User Type:**
+
 ```typescript
-if (user.userType === 'INDIVIDUAL') {
-  availableProducts = [
-    BPKB_FINANCING,
-    PROPERTY_FINANCING
-  ];
-} else if (user.userType === 'BUSINESS') {
+if (user.userType === "INDIVIDUAL") {
+  availableProducts = [BPKB_FINANCING, PROPERTY_FINANCING];
+} else if (user.userType === "BUSINESS") {
   availableProducts = [
     AP_INVOICE_FINANCING,
     AR_INVOICE_FINANCING,
-    ...(user.accountType === 'SAVLO_PLUS' ? [ECOSYSTEM_BANKING] : [])
+    ...(user.accountType === "SAVLO_PLUS" ? [ECOSYSTEM_BANKING] : []),
   ];
 }
 ```
 
 **Filter by Account Type:**
+
 - `SAVLO` users: Can access BPKB, Property, AP Invoice, AR Invoice
 - `SAVLO_PLUS` users: Can access all products including Ecosystem Banking
 
 **Filter by Location:**
+
 - AP Invoice: Jabodetabek only
 - AR Invoice: Jabodetabek, Surabaya, or Bali
 - Property: Jabodetabek only
@@ -212,12 +227,14 @@ if (user.userType === 'INDIVIDUAL') {
 ### 3.3 Product Display Logic
 
 **Landing Page Display:**
+
 - Show all 5 products
 - Mark Ecosystem Banking as "Savlo+" (premium)
 - Mark others as "Savlo" (free tier)
 - Show "Learn More" button for each product
 
 **Product Card Information:**
+
 - Product name
 - Brand (Savlo or Savlo+)
 - Description
@@ -232,15 +249,16 @@ if (user.userType === 'INDIVIDUAL') {
 
 **Comparison Table Structure:**
 
-| Feature | Savlo | Savlo+ |
-|---------|-------|--------|
-| Overview | Digital financing gateway | Premium ecosystem program |
-| Eligibility | Standard requirements | Flexible eligibility |
-| Financing Partners | Multi-finance & Fintech | Secret Financial Institutions |
-| Value Propositions | Efficient access, free consultation | Personalized solution, unlimited consultation |
-| Products Available | BPKB, Property, AP Invoice, AR Invoice | All + Ecosystem Banking |
+| Feature            | Savlo                                  | Savlo+                                        |
+| ------------------ | -------------------------------------- | --------------------------------------------- |
+| Overview           | Digital financing gateway              | Premium ecosystem program                     |
+| Eligibility        | Standard requirements                  | Flexible eligibility                          |
+| Financing Partners | Multi-finance & Fintech                | Secret Financial Institutions                 |
+| Value Propositions | Efficient access, free consultation    | Personalized solution, unlimited consultation |
+| Products Available | BPKB, Property, AP Invoice, AR Invoice | All + Ecosystem Banking                       |
 
 **Business Rules:**
+
 - Comparison table displayed on landing page
 - Clear distinction between free and premium tiers
 - Ecosystem Banking only visible to Savlo+ users
@@ -252,17 +270,22 @@ if (user.userType === 'INDIVIDUAL') {
 ```typescript
 interface Product {
   id: string;
-  code: 'BPKB_FINANCING' | 'PROPERTY_FINANCING' | 'AP_INVOICE_FINANCING' | 'AR_INVOICE_FINANCING' | 'ECOSYSTEM_BANKING';
+  code:
+    | "BPKB_FINANCING"
+    | "PROPERTY_FINANCING"
+    | "AP_INVOICE_FINANCING"
+    | "AR_INVOICE_FINANCING"
+    | "ECOSYSTEM_BANKING";
   name: string;
-  brand: 'Savlo' | 'Savlo+';
+  brand: "Savlo" | "Savlo+";
   description: string;
-  targetUserType: 'INDIVIDUAL' | 'BUSINESS';
-  accountTypeRequired: 'SAVLO' | 'SAVLO_PLUS' | 'BOTH';
+  targetUserType: "INDIVIDUAL" | "BUSINESS";
+  accountTypeRequired: "SAVLO" | "SAVLO_PLUS" | "BOTH";
   minAmount: number | null;
   maxAmount: number | null;
   eligibilityRequirements: string[];
   locationRestrictions: string[]; // ['Jabodetabek', 'Surabaya', 'Bali']
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -278,29 +301,35 @@ interface Product {
 function isProductAvailable(
   product: Product,
   user: User,
-  userLocation: string
+  userLocation: string,
 ): boolean {
   // Check product status
-  if (product.status !== 'ACTIVE') return false;
-  
+  if (product.status !== "ACTIVE") return false;
+
   // Check user type
-  if (product.targetUserType !== 'BOTH' && 
-      product.targetUserType !== user.userType) {
+  if (
+    product.targetUserType !== "BOTH" &&
+    product.targetUserType !== user.userType
+  ) {
     return false;
   }
-  
+
   // Check account type
-  if (product.accountTypeRequired === 'SAVLO_PLUS' && 
-      user.accountType !== 'SAVLO_PLUS') {
+  if (
+    product.accountTypeRequired === "SAVLO_PLUS" &&
+    user.accountType !== "SAVLO_PLUS"
+  ) {
     return false;
   }
-  
+
   // Check location
-  if (product.locationRestrictions.length > 0 &&
-      !product.locationRestrictions.includes(userLocation)) {
+  if (
+    product.locationRestrictions.length > 0 &&
+    !product.locationRestrictions.includes(userLocation)
+  ) {
     return false;
   }
-  
+
   return true;
 }
 ```
@@ -309,8 +338,8 @@ function isProductAvailable(
 
 ```typescript
 function getAvailableProducts(user: User, userLocation: string): Product[] {
-  return allProducts.filter(product => 
-    isProductAvailable(product, user, userLocation)
+  return allProducts.filter((product) =>
+    isProductAvailable(product, user, userLocation),
   );
 }
 ```
@@ -320,13 +349,13 @@ function getAvailableProducts(user: User, userLocation: string): Product[] {
 ```typescript
 function filterProductsByCategory(
   products: Product[],
-  category: 'INDIVIDUAL' | 'BUSINESS' | 'ALL'
+  category: "INDIVIDUAL" | "BUSINESS" | "ALL",
 ): Product[] {
-  if (category === 'ALL') return products;
-  
-  return products.filter(product => 
-    product.targetUserType === category || 
-    product.targetUserType === 'BOTH'
+  if (category === "ALL") return products;
+
+  return products.filter(
+    (product) =>
+      product.targetUserType === category || product.targetUserType === "BOTH",
   );
 }
 ```
@@ -338,6 +367,7 @@ function filterProductsByCategory(
 ### 7.1 Application Form Routes
 
 **Route Mapping:**
+
 - BPKB Financing → `/apply/bpkb-financing`
 - Property Financing → `/apply/property-financing`
 - AP Invoice Financing → `/apply/ap-invoice-financing`
@@ -345,6 +375,7 @@ function filterProductsByCategory(
 - Ecosystem Banking → `/apply/ecosystem-banking`
 
 **Business Rules:**
+
 - Route must check product availability before allowing access
 - If product not available, redirect to landing page with error message
 - If user not logged in, redirect to login (then return to form)
@@ -356,6 +387,7 @@ function filterProductsByCategory(
 ### 8.1 Landing Page Product Display
 
 **Display Order:**
+
 1. BPKB-based Financing
 2. Property-based Financing
 3. AP Invoice Financing
@@ -363,6 +395,7 @@ function filterProductsByCategory(
 5. Ecosystem Banking Solutions (Savlo+)
 
 **Visual Indicators:**
+
 - Free tier products: "Savlo" badge
 - Premium product: "Savlo+" badge
 - "Learn More" button for each product
@@ -370,6 +403,7 @@ function filterProductsByCategory(
 ### 8.2 Product Detail Display
 
 **Information to Display:**
+
 - Product name
 - Brand (Savlo/Savlo+)
 - Description
@@ -385,6 +419,7 @@ function filterProductsByCategory(
 ### 9.1 Product Selection Validation
 
 **Before allowing application:**
+
 1. User must be logged in
 2. Product must be available for user
 3. User must meet eligibility requirements
@@ -393,6 +428,7 @@ function filterProductsByCategory(
 ### 9.2 Product Access Control
 
 **Access Rules:**
+
 - Public: Can view product information
 - Authenticated: Can view and apply (if eligible)
 - Premium: Can access Ecosystem Banking (Savlo+ only)
@@ -406,6 +442,7 @@ function filterProductsByCategory(
 **Scenario:** User tries to access unavailable product
 
 **Response:**
+
 - Show error message: "This product is not available for your account type"
 - Redirect to landing page
 - Suggest alternative products if available
@@ -415,6 +452,7 @@ function filterProductsByCategory(
 **Scenario:** User doesn't meet eligibility requirements
 
 **Response:**
+
 - Show eligibility requirements
 - Highlight missing requirements
 - Suggest upgrade to Savlo+ (if applicable)
@@ -425,6 +463,7 @@ function filterProductsByCategory(
 ## 11. Testing Requirements
 
 **Test Cases:**
+
 - [ ] Individual users see only BPKB and Property products
 - [ ] Business users see Invoice products
 - [ ] Savlo+ users see all products including Ecosystem Banking
@@ -438,7 +477,6 @@ function filterProductsByCategory(
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-01-27 | Initial | Created Product Catalog Module PRD |
-
+| Version | Date       | Author  | Changes                            |
+| ------- | ---------- | ------- | ---------------------------------- |
+| 1.0     | 2025-01-27 | Initial | Created Product Catalog Module PRD |

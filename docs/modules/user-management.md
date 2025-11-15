@@ -1,4 +1,5 @@
 # User Management Module PRD
+
 ## Business Logic & Rules
 
 **Version:** 1.0  
@@ -24,9 +25,9 @@ interface User {
   password: string; // Hashed, never plain text
   fullName: string;
   phoneNumber: string; // Unique
-  userType: 'INDIVIDUAL' | 'BUSINESS';
-  accountType: 'SAVLO' | 'SAVLO_PLUS';
-  languagePreference: 'en' | 'id'; // Default: 'en'
+  userType: "INDIVIDUAL" | "BUSINESS";
+  accountType: "SAVLO" | "SAVLO_PLUS";
+  languagePreference: "en" | "id"; // Default: 'en'
   registrationDate: Date;
   lastLogin: Date;
   isActive: boolean;
@@ -58,6 +59,7 @@ interface UserSession {
 **Step 1: Registration Form**
 
 **Required Fields:**
+
 - Email - Required, unique, valid email format
 - Password - Required, min 8 characters, must contain letter and number
 - Confirm Password - Required, must match password
@@ -71,32 +73,38 @@ interface UserSession {
 **Validation Rules:**
 
 **Email:**
+
 - Must be valid email format
 - Must be unique (check against database)
 - Error: "Email sudah terdaftar" / "Email already registered"
 
 **Password:**
+
 - Minimum 8 characters
 - Must contain at least one letter
 - Must contain at least one number
 - Error: "Password minimal 8 karakter, harus mengandung huruf dan angka"
 
 **Phone Number:**
+
 - Indonesian format: +62 or 08XX
 - Must be unique
 - Error: "Nomor HP sudah terdaftar" / "Phone number already registered"
 
 **User Type:**
+
 - Must select Individual or Business
 - Determines available products
 
 **Account Type:**
+
 - Savlo (Free) - Default
 - Savlo+ (Premium) - Requires payment/upgrade (if applicable)
 
 ### 3.2 Registration Business Rules
 
 **Business Rules:**
+
 1. Email must be unique across all users
 2. Phone number must be unique across all users
 3. Password must be hashed before storage (never store plain text)
@@ -107,6 +115,7 @@ interface UserSession {
 8. User status set to `isActive: true` on registration
 
 **Registration Flow:**
+
 ```
 1. User fills registration form
    ↓
@@ -136,16 +145,19 @@ interface UserSession {
 ### 4.1 Login Process
 
 **Login Form Fields:**
+
 - Email - Required
 - Password - Required
 - Remember Me - Optional checkbox
 
 **Validation:**
+
 - Email must exist in database
 - Password must match (compare hashed)
 - User must be active (`isActive: true`)
 
 **Login Flow:**
+
 ```
 1. User enters email and password
    ↓
@@ -171,6 +183,7 @@ interface UserSession {
 ### 4.2 Authentication Business Rules
 
 **Security Rules:**
+
 1. Passwords must be hashed (bcrypt, argon2, etc.)
 2. Never store plain text passwords
 3. Session tokens must be secure (JWT with expiration)
@@ -179,6 +192,7 @@ interface UserSession {
 6. Use HTTPS only for authentication
 
 **Session Management:**
+
 - Session expires after inactivity (e.g., 30 minutes)
 - "Remember Me" extends session (e.g., 30 days)
 - Session stored in secure HTTP-only cookie
@@ -191,12 +205,14 @@ interface UserSession {
 ### 5.1 Session Creation
 
 **On Login:**
+
 - Generate secure session token (JWT)
 - Set expiration time
 - Store session in database (optional)
 - Set HTTP-only cookie
 
 **Session Token Structure:**
+
 ```typescript
 interface JWTPayload {
   userId: string;
@@ -211,6 +227,7 @@ interface JWTPayload {
 ### 5.2 Session Validation
 
 **On Each Request:**
+
 - Extract session token from cookie/header
 - Validate token signature
 - Check token expiration
@@ -220,12 +237,14 @@ interface JWTPayload {
 ### 5.3 Session Termination
 
 **Logout:**
+
 - Invalidate session token
 - Clear session cookie
 - Clear session from database (if stored)
 - Redirect to login page
 
 **Automatic Logout:**
+
 - On session expiration
 - On password change
 - On account deactivation
@@ -237,12 +256,14 @@ interface JWTPayload {
 ### 6.1 Account Types
 
 **Savlo (Free Tier):**
+
 - Default account type
 - Access to: BPKB, Property, AP Invoice, AR Invoice
 - Standard eligibility requirements
 - Free consultation (limited)
 
 **Savlo+ (Premium Tier):**
+
 - Premium account type
 - Access to: All products including Ecosystem Banking
 - Flexible eligibility
@@ -252,12 +273,14 @@ interface JWTPayload {
 ### 6.2 Account Upgrade
 
 **Upgrade Process:**
+
 - User can upgrade from Savlo to Savlo+
 - Upgrade may require payment (if applicable)
 - Upgrade unlocks Ecosystem Banking product
 - Account type updated in user profile
 
 **Upgrade Business Rules:**
+
 - Can upgrade anytime
 - Cannot downgrade (once Savlo+, always Savlo+)
 - Upgrade date recorded
@@ -270,12 +293,14 @@ interface JWTPayload {
 ### 7.1 Profile Information
 
 **Editable Fields:**
+
 - Full Name
 - Phone Number (with verification)
 - Language Preference
 - Password (change password)
 
 **Non-Editable Fields:**
+
 - Email (cannot change)
 - User Type (cannot change)
 - Registration Date
@@ -284,6 +309,7 @@ interface JWTPayload {
 ### 7.2 Profile Update Rules
 
 **Business Rules:**
+
 1. Full name can be updated
 2. Phone number can be updated (must verify uniqueness)
 3. Language preference can be updated
@@ -298,16 +324,19 @@ interface JWTPayload {
 ### 8.1 Password Change
 
 **Change Password Form:**
+
 - Current Password - Required
 - New Password - Required, min 8 chars, letter + number
 - Confirm New Password - Required, must match
 
 **Validation:**
+
 - Current password must be correct
 - New password must meet requirements
 - New password must be different from current
 
 **Business Rules:**
+
 - Password must be hashed before storage
 - Invalidate all sessions on password change (security)
 - Require re-login after password change
@@ -315,6 +344,7 @@ interface JWTPayload {
 ### 8.2 Password Reset
 
 **Reset Password Flow:**
+
 1. User requests password reset
 2. System sends reset link to email
 3. User clicks link (valid for 1 hour)
@@ -323,6 +353,7 @@ interface JWTPayload {
 6. All sessions invalidated
 
 **Business Rules:**
+
 - Reset link expires after 1 hour
 - Reset link can only be used once
 - Reset link invalidated after use
@@ -334,11 +365,13 @@ interface JWTPayload {
 ### 9.1 User Types
 
 **Individual:**
+
 - For personal financing needs
 - Can access: BPKB, Property products
 - Requires personal documents (KTP, etc.)
 
 **Business:**
+
 - For business financing needs
 - Can access: AP Invoice, AR Invoice, Ecosystem Banking
 - Requires business documents (NPWP, Akta, etc.)
@@ -346,6 +379,7 @@ interface JWTPayload {
 ### 9.2 User Type Rules
 
 **Business Rules:**
+
 1. User type selected during registration
 2. User type cannot be changed after registration
 3. User type determines available products
@@ -358,15 +392,18 @@ interface JWTPayload {
 ### 10.1 Language Preference
 
 **Supported Languages:**
+
 - English (en) - Default
 - Indonesian (id)
 
 **Storage:**
+
 - Saved in user profile
 - Default: English (en)
 - Can be changed anytime
 
 **Usage:**
+
 - Used for all UI text
 - Used for error messages
 - Used for email notifications (if applicable)
@@ -374,6 +411,7 @@ interface JWTPayload {
 ### 10.2 Language Preference Rules
 
 **Business Rules:**
+
 1. Default language is English
 2. Language preference saved to user profile
 3. Language preference persists across sessions
@@ -386,12 +424,14 @@ interface JWTPayload {
 ### 11.1 Protected Routes
 
 **Routes Requiring Authentication:**
+
 - `/my-applications` - User dashboard
 - `/apply/*` - All application forms
 - `/profile` - User profile
 - `/settings` - User settings
 
 **Access Control:**
+
 - Check if user is authenticated
 - If not authenticated, redirect to login
 - After login, return to original URL
@@ -399,25 +439,31 @@ interface JWTPayload {
 ### 11.2 Role-Based Access
 
 **Product Access:**
+
 - Individual users: BPKB, Property
 - Business users: AP Invoice, AR Invoice, Ecosystem Banking
 - Savlo+ users: All products
 
 **Access Check:**
+
 ```typescript
 function canAccessProduct(user: User, product: Product): boolean {
   // Check user type
-  if (product.targetUserType !== 'BOTH' && 
-      product.targetUserType !== user.userType) {
+  if (
+    product.targetUserType !== "BOTH" &&
+    product.targetUserType !== user.userType
+  ) {
     return false;
   }
-  
+
   // Check account type
-  if (product.accountTypeRequired === 'SAVLO_PLUS' && 
-      user.accountType !== 'SAVLO_PLUS') {
+  if (
+    product.accountTypeRequired === "SAVLO_PLUS" &&
+    user.accountType !== "SAVLO_PLUS"
+  ) {
     return false;
   }
-  
+
   return true;
 }
 ```
@@ -429,6 +475,7 @@ function canAccessProduct(user: User, product: Product): boolean {
 ### 12.1 Registration Errors
 
 **Error Scenarios:**
+
 - Email already exists → "Email sudah terdaftar"
 - Phone already exists → "Nomor HP sudah terdaftar"
 - Invalid email format → "Format email tidak valid"
@@ -438,6 +485,7 @@ function canAccessProduct(user: User, product: Product): boolean {
 ### 12.2 Login Errors
 
 **Error Scenarios:**
+
 - Email not found → "Email tidak terdaftar"
 - Wrong password → "Password salah"
 - Account inactive → "Akun tidak aktif"
@@ -446,6 +494,7 @@ function canAccessProduct(user: User, product: Product): boolean {
 ### 12.3 Session Errors
 
 **Error Scenarios:**
+
 - Session expired → Redirect to login
 - Invalid token → Redirect to login
 - User not found → Redirect to login
@@ -484,6 +533,7 @@ function canAccessProduct(user: User, product: Product): boolean {
 ## 14. Testing Requirements
 
 **Test Cases:**
+
 - [ ] User registration works correctly
 - [ ] Email uniqueness validation works
 - [ ] Phone number uniqueness validation works
@@ -501,7 +551,6 @@ function canAccessProduct(user: User, product: Product): boolean {
 
 ## Document History
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-01-27 | Initial | Created User Management Module PRD |
-
+| Version | Date       | Author  | Changes                            |
+| ------- | ---------- | ------- | ---------------------------------- |
+| 1.0     | 2025-01-27 | Initial | Created User Management Module PRD |

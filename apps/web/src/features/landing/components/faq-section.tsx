@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import Link from 'next/link';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface FAQSectionProps {
   readonly locale: Locale;
@@ -28,11 +28,11 @@ interface FAQCategory {
 export function FAQSection({ locale }: FAQSectionProps) {
   const messages = getMessages(locale);
   const t = messages.faq;
-  
+
   if (!t) {
     return null;
   }
-  
+
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
 
   const toggleItem = (categoryIndex: number, itemIndex: number) => {
@@ -135,30 +135,30 @@ export function FAQSection({ locale }: FAQSectionProps) {
                 </AnimatedHeading>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {t.howToApply.steps.map((step: { title: string; description: string }, index: number) => (
-                <div
-                  key={index}
-                  className="overflow-hidden"
-                >
-                  <AnimatedText delay={index * 0.1}>
-                    <div className="bg-muted/30 rounded-xl p-6 h-full space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                          <span className="text-xl font-bold text-primary">
-                            {index + 1}
-                          </span>
+                {t.howToApply.steps.map(
+                  (
+                    step: { title: string; description: string },
+                    index: number,
+                  ) => (
+                    <div key={index} className="overflow-hidden">
+                      <AnimatedText delay={index * 0.1}>
+                        <div className="bg-muted/30 rounded-xl p-6 h-full space-y-4">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                              <span className="text-xl font-bold text-primary">
+                                {index + 1}
+                              </span>
+                            </div>
+                            <h3 className="text-lg font-bold">{step.title}</h3>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {step.description}
+                          </p>
                         </div>
-                        <h3 className="text-lg font-bold">
-                          {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {step.description}
-                      </p>
+                      </AnimatedText>
                     </div>
-                  </AnimatedText>
-                </div>
-              ))}
+                  ),
+                )}
               </div>
             </section>
           )}
@@ -184,7 +184,11 @@ export function FAQSection({ locale }: FAQSectionProps) {
                   </AnimatedText>
                 </div>
                 <div className="overflow-hidden">
-                  <Link href={t.contactCta.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <Link
+                    href={t.contactCta.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button
                       size="lg"
                       className="text-lg px-8 py-6 font-semibold bg-[#25D366] hover:bg-[#20ba5a] text-white"
@@ -201,4 +205,3 @@ export function FAQSection({ locale }: FAQSectionProps) {
     </div>
   );
 }
-

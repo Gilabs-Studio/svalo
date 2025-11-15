@@ -1,63 +1,67 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Locale } from '@/i18n';
-import { useAuthStore } from '@/features/auth/stores/useAuthStore';
-import { AnimatedHeading } from '@/features/landing/components/animated-heading';
-import { AnimatedText } from '@/features/landing/components/animated-text';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { 
-  User, 
-  CreditCard, 
-  Car, 
-  FileText, 
-  CheckCircle2, 
-  Upload, 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { type Locale } from "@/i18n";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { AnimatedHeading } from "@/features/landing/components/animated-heading";
+import { AnimatedText } from "@/features/landing/components/animated-text";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  User,
+  CreditCard,
+  Car,
+  FileText,
+  CheckCircle2,
+  Upload,
   Link as LinkIcon,
-  X 
-} from 'lucide-react';
+  X,
+} from "lucide-react";
 
 interface BPKBFinancingPageProps {
   params: Promise<{ locale: Locale }>;
 }
 
 export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>("en");
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(1);
-  const [documentMethod, setDocumentMethod] = useState<'gdrive' | 'manual'>('gdrive');
-  const [manualDocuments, setManualDocuments] = useState<Record<string, File | null>>({});
+  const [documentMethod, setDocumentMethod] = useState<"gdrive" | "manual">(
+    "gdrive",
+  );
+  const [manualDocuments, setManualDocuments] = useState<
+    Record<string, File | null>
+  >({});
   const [formData, setFormData] = useState({
     // Data Diri
-    namaLengkap: '',
-    noKtp: '',
-    noHp: '',
-    usiaKonsumen: '',
-    alamatSurvey: '',
-    kelurahan: '',
-    kecamatan: '',
+    namaLengkap: "",
+    noKtp: "",
+    noHp: "",
+    usiaKonsumen: "",
+    alamatSurvey: "",
+    kelurahan: "",
+    kecamatan: "",
     // Data Kendaraan
-    jenisKendaraan: '',
-    merkKendaraan: '',
-    tipeKendaraan: '',
-    tahunKendaraan: '',
-    noPlatKendaraan: '',
-    atasNamaKendaraan: '',
-    statusKendaraan: '',
-    statusBpkb: '',
-    statusPajak: '',
-    asuransiKendaraan: '',
+    jenisKendaraan: "",
+    merkKendaraan: "",
+    tipeKendaraan: "",
+    tahunKendaraan: "",
+    noPlatKendaraan: "",
+    atasNamaKendaraan: "",
+    statusKendaraan: "",
+    statusBpkb: "",
+    statusPajak: "",
+    asuransiKendaraan: "",
     // Informasi Pinjaman
-    jumlahPinjaman: '',
-    tenorPelunasan: '',
+    jumlahPinjaman: "",
+    tenorPelunasan: "",
     // Documents
-    googleDriveUrl: '',
+    googleDriveUrl: "",
   });
 
   useEffect(() => {
@@ -75,7 +79,9 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
   }
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData({
       ...formData,
@@ -91,19 +97,19 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
   };
 
   const requiredDocuments = [
-    { id: 'fotoKtp', name: 'Foto KTP' },
-    { id: 'fotoBpkb', name: 'Foto BPKB' },
-    { id: 'fotoStnk', name: 'Foto STNK' },
-    { id: 'fotoKendaraanDepan', name: 'Foto Kendaraan (Depan)' },
-    { id: 'fotoKendaraanBelakang', name: 'Foto Kendaraan (Belakang)' },
-    { id: 'fotoKendaraanKanan', name: 'Foto Kendaraan (Kanan)' },
-    { id: 'fotoKendaraanKiri', name: 'Foto Kendaraan (Kiri)' },
+    { id: "fotoKtp", name: "Foto KTP" },
+    { id: "fotoBpkb", name: "Foto BPKB" },
+    { id: "fotoStnk", name: "Foto STNK" },
+    { id: "fotoKendaraanDepan", name: "Foto Kendaraan (Depan)" },
+    { id: "fotoKendaraanBelakang", name: "Foto Kendaraan (Belakang)" },
+    { id: "fotoKendaraanKanan", name: "Foto Kendaraan (Kanan)" },
+    { id: "fotoKendaraanKiri", name: "Foto Kendaraan (Kiri)" },
   ];
 
   const steps = [
-    { number: 1, title: 'BPKB Info', icon: Car },
-    { number: 2, title: 'Documents', icon: FileText },
-    { number: 3, title: 'Review', icon: CheckCircle2 },
+    { number: 1, title: "BPKB Info", icon: Car },
+    { number: 2, title: "Documents", icon: FileText },
+    { number: 3, title: "Review", icon: CheckCircle2 },
   ];
 
   const renderStepContent = () => {
@@ -389,14 +395,14 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
               <FileText className="w-5 h-5 text-primary" />
               <h3 className="text-xl font-bold">Documents</h3>
             </div>
-            
+
             {/* Document Method Selection */}
             <div className="space-y-4">
               <div className="flex gap-4">
                 <Button
                   type="button"
-                  variant={documentMethod === 'gdrive' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('gdrive')}
+                  variant={documentMethod === "gdrive" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("gdrive")}
                   className="flex-1"
                 >
                   <LinkIcon className="w-4 h-4 mr-2" />
@@ -404,8 +410,8 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
                 </Button>
                 <Button
                   type="button"
-                  variant={documentMethod === 'manual' ? 'default' : 'outline'}
-                  onClick={() => setDocumentMethod('manual')}
+                  variant={documentMethod === "manual" ? "default" : "outline"}
+                  onClick={() => setDocumentMethod("manual")}
                   className="flex-1"
                 >
                   <Upload className="w-4 h-4 mr-2" />
@@ -413,7 +419,7 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
                 </Button>
               </div>
 
-              {documentMethod === 'gdrive' ? (
+              {documentMethod === "gdrive" ? (
                 <div className="space-y-2">
                   <Label htmlFor="googleDriveUrl">Google Drive URL</Label>
                   <Input
@@ -426,7 +432,8 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
                     required
                   />
                   <p className="text-xs text-muted-foreground">
-                    Pastikan link memiliki izin viewing (Siapa saja yang memiliki link)
+                    Pastikan link memiliki izin viewing (Siapa saja yang
+                    memiliki link)
                   </p>
                 </div>
               ) : (
@@ -532,10 +539,7 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
               </AnimatedHeading>
             </div>
             <div className="overflow-visible">
-              <AnimatedText
-                delay={0.1}
-                className="text-muted-foreground"
-              >
+              <AnimatedText delay={0.1} className="text-muted-foreground">
                 Follow the steps below to complete your application.
               </AnimatedText>
             </div>
@@ -551,16 +555,18 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
                 <div key={step.number} className="flex items-center">
                   <div
                     className={`flex items-center gap-2 ${
-                      isActive || isCompleted ? 'text-primary' : 'text-muted-foreground'
+                      isActive || isCompleted
+                        ? "text-primary"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                         isActive
-                          ? 'bg-primary text-primary-foreground scale-110'
+                          ? "bg-primary text-primary-foreground scale-110"
                           : isCompleted
-                          ? 'bg-primary/20 text-primary'
-                          : 'bg-muted'
+                            ? "bg-primary/20 text-primary"
+                            : "bg-muted"
                       }`}
                     >
                       {isCompleted ? (
@@ -576,7 +582,7 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
                   {index < steps.length - 1 && (
                     <div
                       className={`h-px w-12 sm:w-16 mx-2 transition-colors ${
-                        isCompleted ? 'bg-primary' : 'bg-border'
+                        isCompleted ? "bg-primary" : "bg-border"
                       }`}
                     />
                   )}
@@ -605,7 +611,7 @@ export default function BPKBFinancingPage({ params }: BPKBFinancingPageProps) {
               disabled={currentStep === 3}
               className="min-w-[100px]"
             >
-              {currentStep === 3 ? 'Submit Application' : 'Next'}
+              {currentStep === 3 ? "Submit Application" : "Next"}
             </Button>
           </div>
         </div>

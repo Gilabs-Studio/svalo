@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { type Locale } from '@/i18n';
-import { getMessages } from '../lib/get-messages';
-import { AnimatedHeading } from './animated-heading';
-import { AnimatedText } from './animated-text';
-import { MapPin, Phone, Clock } from 'lucide-react';
-import Link from 'next/link';
+import { type Locale } from "@/i18n";
+import { getMessages } from "../lib/get-messages";
+import { AnimatedHeading } from "./animated-heading";
+import { AnimatedText } from "./animated-text";
+import { MapPin, Phone, Clock } from "lucide-react";
+import Link from "next/link";
 
 interface ContactSectionProps {
   readonly locale: Locale;
@@ -32,7 +32,10 @@ export function ContactSection({ locale }: ContactSectionProps) {
                 </AnimatedHeading>
               </div>
               <div className="overflow-hidden">
-                <AnimatedText delay={0.1} className="text-gray-600 leading-relaxed">
+                <AnimatedText
+                  delay={0.1}
+                  className="text-gray-600 leading-relaxed"
+                >
                   {t.tagline}
                 </AnimatedText>
               </div>
@@ -41,7 +44,10 @@ export function ContactSection({ locale }: ContactSectionProps) {
             {/* Contact Info */}
             <div className="space-y-6">
               <div className="overflow-hidden">
-                <AnimatedText delay={0.1} className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                <AnimatedText
+                  delay={0.1}
+                  className="text-sm font-semibold text-gray-500 uppercase tracking-wider"
+                >
                   Contact
                 </AnimatedText>
               </div>
@@ -60,16 +66,14 @@ export function ContactSection({ locale }: ContactSectionProps) {
                   <AnimatedText delay={0.3}>
                     <div className="flex items-start gap-3">
                       <Clock className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
-                      <p className="text-gray-700 leading-relaxed">
-                        {t.hours}
-                      </p>
+                      <p className="text-gray-700 leading-relaxed">{t.hours}</p>
                     </div>
                   </AnimatedText>
                 </div>
                 <div className="overflow-hidden">
                   <AnimatedText delay={0.4}>
                     <Link
-                      href={`tel:${t.phone.replaceAll(/\s/g, '')}`}
+                      href={`tel:${t.phone.replaceAll(/\s/g, "")}`}
                       className="flex items-start gap-3 text-gray-700 hover:text-gray-900 transition-colors"
                     >
                       <Phone className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
@@ -83,7 +87,10 @@ export function ContactSection({ locale }: ContactSectionProps) {
             {/* Quick Links */}
             <div className="space-y-6">
               <div className="overflow-hidden">
-                <AnimatedText delay={0.1} className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                <AnimatedText
+                  delay={0.1}
+                  className="text-sm font-semibold text-gray-500 uppercase tracking-wider"
+                >
                   Quick Links
                 </AnimatedText>
               </div>
@@ -134,7 +141,10 @@ export function ContactSection({ locale }: ContactSectionProps) {
             {/* Social Links */}
             <div className="space-y-6">
               <div className="overflow-hidden">
-                <AnimatedText delay={0.1} className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                <AnimatedText
+                  delay={0.1}
+                  className="text-sm font-semibold text-gray-500 uppercase tracking-wider"
+                >
                   Follow Us
                 </AnimatedText>
               </div>
@@ -156,7 +166,14 @@ export function ContactSection({ locale }: ContactSectionProps) {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       >
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <rect
+                          x="2"
+                          y="2"
+                          width="20"
+                          height="20"
+                          rx="5"
+                          ry="5"
+                        />
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                       </svg>
@@ -204,4 +221,3 @@ export function ContactSection({ locale }: ContactSectionProps) {
     </footer>
   );
 }
-

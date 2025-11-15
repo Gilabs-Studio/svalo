@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { type Locale } from '@/i18n';
-import { getMessages } from '@/features/landing/lib/get-messages';
-import { NavbarWrapper } from '@/features/landing/components/navbar-wrapper';
-import { WhatsAppFab } from '@/features/landing/components/whatsapp-fab';
+import type { Metadata } from "next";
+import { type Locale } from "@/i18n";
+import { getMessages } from "@/features/landing/lib/get-messages";
+import { NavbarWrapper } from "@/features/landing/components/navbar-wrapper";
+import { WhatsAppFab } from "@/features/landing/components/whatsapp-fab";
 
 export async function generateMetadata({
   params,
@@ -37,4 +37,3 @@ export default async function AuthLayout({
     </>
   );
 }
-
