@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
 import { AuthLayout } from '@/features/auth/components/auth-layout';
 import { DemoCredentials } from '@/features/auth/components/demo-credentials';
+import { getMessages } from '@/features/auth/lib/get-messages';
 import { LogIn, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 
@@ -20,6 +21,7 @@ export default function AuthPage({ params }: AuthPageProps) {
   const [locale, setLocale] = useState<Locale>('en');
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const router = useRouter();
+  const messages = getMessages(locale);
 
   useEffect(() => {
     params.then((p) => {
@@ -63,7 +65,7 @@ export default function AuthPage({ params }: AuthPageProps) {
     if (success) {
       router.push(`/${locale}/dashboard`);
     } else {
-      setLoginError('Invalid email or password');
+      setLoginError(messages.login.error);
       setIsLoginLoading(false);
     }
   };
@@ -73,12 +75,12 @@ export default function AuthPage({ params }: AuthPageProps) {
     setRegisterError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setRegisterError('Passwords do not match');
+      setRegisterError(messages.register.errors.passwordMismatch);
       return;
     }
 
     if (formData.password.length < 8) {
-      setRegisterError('Password must be at least 8 characters');
+      setRegisterError(messages.register.errors.passwordTooShort);
       return;
     }
 
@@ -103,11 +105,11 @@ export default function AuthPage({ params }: AuthPageProps) {
       locale={locale}
       mode={mode}
       onModeChange={setMode}
-      title={mode === 'login' ? 'Welcome Back' : 'Create Account'}
+      title={mode === 'login' ? messages.login.title : messages.register.title}
       subtitle={
         mode === 'login'
-          ? 'Sign in to access your dashboard and manage your applications'
-          : 'Start your financing journey with Savlo'
+          ? messages.login.subtitle
+          : messages.register.subtitle
       }
       icon={
         mode === 'login' ? (
@@ -131,7 +133,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder={messages.login.email}
               required
               disabled={isLoginLoading}
               className="h-11"
@@ -142,7 +144,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder={messages.login.password}
               required
               disabled={isLoginLoading}
               className="h-11"
@@ -157,14 +159,14 @@ export default function AuthPage({ params }: AuthPageProps) {
                 className="w-4 h-4 rounded border-gray-300"
               />
               <label htmlFor="remember" className="text-muted-foreground cursor-pointer">
-                Remember me
+                {messages.login.rememberMe}
               </label>
             </div>
             <Link
               href="#"
               className="text-primary hover:underline text-sm"
             >
-              Forgot password?
+              {messages.login.forgotPassword}
             </Link>
           </div>
 
@@ -174,12 +176,12 @@ export default function AuthPage({ params }: AuthPageProps) {
             size="lg"
             disabled={isLoginLoading}
           >
-            {isLoginLoading ? 'Signing in...' : 'Sign In'}
+            {isLoginLoading ? messages.login.signingIn : messages.login.signIn}
           </Button>
 
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <span>Need demo credentials?</span>
-            <DemoCredentials />
+            <span>{messages.login.demoCredentials}</span>
+            <DemoCredentials locale={locale} />
           </div>
         </form>
       ) : (
@@ -197,7 +199,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="text"
               value={formData.fullName}
               onChange={handleInputChange}
-              placeholder="Full Name"
+              placeholder={messages.register.fullName}
               required
               disabled={isRegisterLoading}
               className="h-11"
@@ -209,7 +211,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="email"
               value={formData.email}
               onChange={handleInputChange}
-              placeholder="Email"
+              placeholder={messages.register.email}
               required
               disabled={isRegisterLoading}
               className="h-11"
@@ -221,7 +223,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="tel"
               value={formData.phoneNumber}
               onChange={handleInputChange}
-              placeholder="Phone Number"
+              placeholder={messages.register.phoneNumber}
               required
               disabled={isRegisterLoading}
               className="h-11"
@@ -237,7 +239,7 @@ export default function AuthPage({ params }: AuthPageProps) {
                 disabled={isRegisterLoading}
                 className="h-11"
               >
-                <option value="">User Type</option>
+                <option value="">{messages.register.userType}</option>
                 <option value="INDIVIDUAL">Individual</option>
                 <option value="BUSINESS">Business</option>
               </Select>
@@ -261,7 +263,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="Password (min. 8 characters)"
+              placeholder={messages.register.passwordHint}
               required
               disabled={isRegisterLoading}
               className="h-11"
@@ -273,7 +275,7 @@ export default function AuthPage({ params }: AuthPageProps) {
               type="password"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              placeholder="Confirm Password"
+              placeholder={messages.register.confirmPassword}
               required
               disabled={isRegisterLoading}
               className="h-11"
@@ -288,13 +290,13 @@ export default function AuthPage({ params }: AuthPageProps) {
               className="mt-1 w-4 h-4 rounded border-gray-300"
             />
             <label htmlFor="terms" className="text-muted-foreground cursor-pointer leading-relaxed">
-              I agree to the{' '}
+              {messages.register.terms}{' '}
               <Link href="/terms" className="text-primary hover:underline">
-                Terms of Service
+                {messages.register.termsLink}
               </Link>{' '}
               and{' '}
               <Link href="/privacy" className="text-primary hover:underline">
-                Privacy Policy
+                {messages.register.privacyLink}
               </Link>
             </label>
           </div>
@@ -305,7 +307,7 @@ export default function AuthPage({ params }: AuthPageProps) {
             size="lg"
             disabled={isRegisterLoading}
           >
-            {isRegisterLoading ? 'Creating account...' : 'Create Account'}
+            {isRegisterLoading ? messages.register.creatingAccount : messages.register.createAccount}
           </Button>
         </form>
       )}

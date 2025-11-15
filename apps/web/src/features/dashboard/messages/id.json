@@ -1,0 +1,244 @@
+{
+  "title": "Dashboard",
+  "welcome": "Selamat datang kembali, {name}",
+  "applications": {
+    "title": "Aplikasi",
+    "description": "Pilih opsi pembiayaan untuk memulai aplikasi Anda",
+    "startApplication": "Mulai Aplikasi"
+  },
+  "bpkb": {
+    "title": "Pembiayaan BPKB",
+    "description": "Aplikasi pembiayaan berbasis kendaraan"
+  },
+  "property": {
+    "title": "Pembiayaan Berbasis Properti",
+    "description": "Pembiayaan berbasis sertifikat properti"
+  },
+  "apInvoice": {
+    "title": "Pembiayaan Invoice AP",
+    "description": "Pembiayaan invoice Accounts Payable"
+  },
+  "arInvoice": {
+    "title": "Pembiayaan Invoice AR",
+    "description": "Pembiayaan invoice Accounts Receivable"
+  },
+  "forms": {
+    "steps": {
+      "registration": "Registrasi",
+      "info": "Info Perusahaan",
+      "bpkbInfo": "Info BPKB",
+      "propertyInfo": "Info Properti",
+      "documents": "Dokumen",
+      "review": "Tinjauan"
+    },
+    "common": {
+      "registration": {
+        "title": "Registrasi",
+        "description": "Anda sudah masuk. Lanjutkan ke langkah berikutnya."
+      },
+      "documents": {
+        "title": "Dokumen",
+        "method": {
+          "gdrive": "Link Google Drive",
+          "manual": "Unggah Manual"
+        },
+        "gdrive": {
+          "label": "URL Google Drive",
+          "placeholder": "https://drive.google.com/drive/folders/...",
+          "hint": "Pastikan link memiliki izin viewing (Siapa saja yang memiliki link)"
+        },
+        "manual": {
+          "description": "Upload dokumen sesuai kategori:",
+          "descriptionSingle": "Upload dokumen satu per satu:",
+          "sections": {
+            "a": "A. Perusahaan",
+            "b": "B. Keuangan",
+            "c": "C. Dokumen PO & Invoice",
+            "d": "D. Personal Guarantee",
+            "e": "E. Lain-lain"
+          }
+        }
+      },
+      "review": {
+        "title": "Tinjauan",
+        "submit": "Kirim Aplikasi"
+      },
+      "navigation": {
+        "previous": "Sebelumnya",
+        "next": "Selanjutnya"
+      }
+    },
+    "apInvoice": {
+      "title": "Aplikasi Pembiayaan Invoice AP",
+      "subtitle": "Ikuti langkah-langkah di bawah ini untuk menyelesaikan aplikasi Anda.",
+      "companyInfo": {
+        "title": "Informasi Perusahaan",
+        "description": "Harap berikan nama legal perusahaan Anda.",
+        "namaPtCv": "Nama PT/CV",
+        "placeholder": "Contoh: PT. Example Company",
+        "eligibility": {
+          "title": "Persyaratan Kelayakan",
+          "items": [
+            "Berbasis di Jabodetabek",
+            "Hanya Korporat (PT/CV)",
+            "Minimal 2 tahun beroperasi",
+            "Rentang Pembiayaan: IDR 500M – IDR 2B",
+            "Harus memiliki laporan keuangan positif"
+          ]
+        }
+      },
+      "documents": {
+        "required": [
+          { "id": "aktaPendirian", "name": "Akta Pendirian & Perubahan", "section": "A" },
+          { "id": "skMenkumham", "name": "SK Menkumham, NPWP PT", "section": "A" },
+          { "id": "ktpNpwpPengurus", "name": "KTP & NPWP Pengurus", "section": "A" },
+          { "id": "nibIzin", "name": "NIB & izin pendukung", "section": "A" },
+          { "id": "companyProfile", "name": "Company Profile", "section": "A" },
+          { "id": "laporanKeuangan", "name": "Laporan Keuangan 2 Tahun + YTD", "section": "B" },
+          { "id": "mutasiRekening", "name": "Mutasi Rekening 6 Bulan", "section": "B" },
+          { "id": "poCustomer", "name": "PO Customer (3 sample)", "section": "C" },
+          { "id": "invoiceCustomer", "name": "Invoice Customer (3 sample)", "section": "C" },
+          { "id": "historyInvoice", "name": "History invoice paid (3 sample)", "section": "C" },
+          { "id": "ktpPasangan", "name": "KTP + KTP Pasangan, KK", "section": "D" },
+          { "id": "aktaNikah", "name": "Akta Nikah", "section": "D" },
+          { "id": "listSupplier", "name": "List Supplier & Customer", "section": "E" },
+          { "id": "kontakPerson", "name": "Kontak Person (Email, No HP, PIC)", "section": "E" }
+        ]
+      },
+      "review": {
+        "companyInfo": "Informasi Perusahaan"
+      }
+    },
+    "arInvoice": {
+      "title": "Aplikasi Pembiayaan Invoice AR",
+      "subtitle": "Ikuti langkah-langkah di bawah ini untuk menyelesaikan aplikasi Anda.",
+      "companyInfo": {
+        "title": "Informasi Perusahaan",
+        "description": "Harap berikan nama legal perusahaan Anda.",
+        "namaPtCv": "Nama PT/CV",
+        "placeholder": "Contoh: PT. Example Company",
+        "eligibility": {
+          "title": "Persyaratan Kelayakan",
+          "items": [
+            "Berbasis di Jabodetabek, Surabaya, atau Bali",
+            "Hanya Korporat (PT/CV)",
+            "Minimal 2 tahun beroperasi",
+            "Rentang Pembiayaan: IDR 300M – IDR 5B",
+            "Harus memiliki laporan keuangan positif"
+          ]
+        }
+      },
+      "documents": {
+        "required": [
+          { "id": "aktaPendirian", "name": "Akta Pendirian & Perubahan", "section": "A" },
+          { "id": "skMenkumham", "name": "SK Menkumham, NPWP PT", "section": "A" },
+          { "id": "ktpNpwpPengurus", "name": "KTP & NPWP Pengurus", "section": "A" },
+          { "id": "nibIzin", "name": "NIB & izin pendukung", "section": "A" },
+          { "id": "companyProfile", "name": "Company Profile", "section": "A" },
+          { "id": "laporanKeuangan", "name": "Laporan Keuangan 2 Tahun + YTD", "section": "B" },
+          { "id": "mutasiRekening", "name": "Mutasi Rekening 6 Bulan", "section": "B" },
+          { "id": "poCustomer", "name": "PO Customer (3 sample)", "section": "C" },
+          { "id": "invoiceCustomer", "name": "Invoice Customer (3 sample)", "section": "C" },
+          { "id": "historyInvoice", "name": "History invoice paid (3 sample)", "section": "C" },
+          { "id": "ktpPasangan", "name": "KTP + KTP Pasangan, KK", "section": "D" },
+          { "id": "aktaNikah", "name": "Akta Nikah", "section": "D" },
+          { "id": "listSupplier", "name": "List Supplier & Customer", "section": "E" },
+          { "id": "kontakPerson", "name": "Kontak Person (Email, No HP, PIC)", "section": "E" }
+        ]
+      },
+      "review": {
+        "companyInfo": "Informasi Perusahaan"
+      }
+    },
+    "bpkb": {
+      "title": "Aplikasi Pembiayaan BPKB",
+      "subtitle": "Ikuti langkah-langkah di bawah ini untuk menyelesaikan aplikasi Anda.",
+      "bpkbInfo": {
+        "title": "Informasi BPKB",
+        "dataDiri": {
+          "title": "Data Diri",
+          "namaLengkap": "Nama Lengkap",
+          "noKtp": "No. KTP",
+          "noHp": "No. HP",
+          "usiaKonsumen": "Usia Konsumen",
+          "alamatSurvey": "Alamat Survey",
+          "kelurahan": "Kelurahan",
+          "kecamatan": "Kecamatan"
+        },
+        "dataKendaraan": {
+          "title": "Data Kendaraan",
+          "jenisKendaraan": "Jenis Kendaraan",
+          "merkKendaraan": "Merk Kendaraan",
+          "tipeKendaraan": "Tipe Kendaraan",
+          "tahunKendaraan": "Tahun Kendaraan",
+          "noPlatKendaraan": "No. Plat Kendaraan",
+          "atasNamaKendaraan": "Atas Nama Kendaraan",
+          "statusKendaraan": "Status Kendaraan",
+          "statusBpkb": "Status BPKB",
+          "statusPajak": "Status Pajak",
+          "asuransiKendaraan": "Asuransi Kendaraan"
+        },
+        "informasiPinjaman": {
+          "title": "Informasi Pinjaman",
+          "jumlahPinjaman": "Jumlah Pinjaman",
+          "tenorPelunasan": "Tenor Pelunasan"
+        }
+      },
+      "documents": {
+        "required": [
+          { "id": "fotoKtp", "name": "Foto KTP" },
+          { "id": "fotoBpkb", "name": "Foto BPKB" },
+          { "id": "fotoStnk", "name": "Foto STNK" },
+          { "id": "fotoKendaraanDepan", "name": "Foto Kendaraan (Depan)" },
+          { "id": "fotoKendaraanBelakang", "name": "Foto Kendaraan (Belakang)" },
+          { "id": "fotoKendaraanKanan", "name": "Foto Kendaraan (Kanan)" },
+          { "id": "fotoKendaraanKiri", "name": "Foto Kendaraan (Kiri)" }
+        ]
+      },
+      "review": {
+        "dataDiri": "Data Diri",
+        "dataKendaraan": "Data Kendaraan"
+      }
+    },
+    "property": {
+      "title": "Aplikasi Pembiayaan Berbasis Properti",
+      "subtitle": "Ikuti langkah-langkah di bawah ini untuk menyelesaikan aplikasi Anda.",
+      "propertyInfo": {
+        "title": "Informasi Properti",
+        "dataDiri": {
+          "title": "Data Diri",
+          "namaKonsumen": "Nama Konsumen",
+          "noHp": "No. HP",
+          "alamatProperti": "Alamat Properti",
+          "alamatLengkap": "Alamat Lengkap",
+          "kecamatan": "Kecamatan",
+          "kota": "Kota"
+        },
+        "informasiProperti": {
+          "title": "Informasi Properti & Pinjaman",
+          "jenisSertifikat": "Jenis Sertifikat",
+          "danaDibutuhkan": "Dana Dibutuhkan",
+          "kemampuanAngsuran": "Kemampuan Angsuran / Bulan",
+          "siapDisurvey": "Siap Di-survey?",
+          "tanggalPengajuan": "Tanggal Pengajuan",
+          "tanggalSubmission": "Tanggal Submission"
+        }
+      },
+      "documents": {
+        "required": [
+          { "id": "fotoKtp", "name": "Foto KTP" },
+          { "id": "sertifikatProperti", "name": "Sertifikat Properti (SHM/SHGB)" },
+          { "id": "imb", "name": "IMB (Izin Mendirikan Bangunan)" },
+          { "id": "pbb", "name": "PBB (Pajak Bumi dan Bangunan) Terbaru" },
+          { "id": "buktiRekening", "name": "Bukti Rekening Listrik/Air" }
+        ]
+      },
+      "review": {
+        "dataDiri": "Data Diri",
+        "informasiProperti": "Informasi Properti"
+      }
+    }
+  }
+}
+
+

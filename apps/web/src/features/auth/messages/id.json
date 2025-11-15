@@ -1,0 +1,56 @@
+{
+  "login": {
+    "title": "Selamat Datang Kembali",
+    "subtitle": "Masuk untuk mengakses dashboard dan mengelola aplikasi Anda",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "rememberMe": "Ingat saya",
+    "forgotPassword": "Lupa kata sandi?",
+    "signIn": "Masuk",
+    "signingIn": "Masuk...",
+    "error": "Email atau kata sandi tidak valid",
+    "demoCredentials": "Perlu kredensial demo?"
+  },
+  "register": {
+    "title": "Buat Akun",
+    "subtitle": "Mulai perjalanan pembiayaan Anda dengan Savlo",
+    "fullName": "Nama Lengkap",
+    "email": "Email",
+    "phoneNumber": "Nomor Telepon",
+    "userType": "Tipe Pengguna",
+    "accountType": "Tipe Akun",
+    "password": "Kata Sandi",
+    "confirmPassword": "Konfirmasi Kata Sandi",
+    "passwordHint": "Kata Sandi (min. 8 karakter)",
+    "terms": "Saya setuju dengan",
+    "termsLink": "Ketentuan Layanan",
+    "privacyLink": "Kebijakan Privasi",
+    "createAccount": "Buat Akun",
+    "creatingAccount": "Membuat akun...",
+    "errors": {
+      "passwordMismatch": "Kata sandi tidak cocok",
+      "passwordTooShort": "Kata sandi harus minimal 8 karakter"
+    }
+  },
+  "layout": {
+    "welcomeBack": "Selamat Datang Kembali",
+    "welcomeBackDescription": "Masuk untuk mengakses dashboard dan mengelola aplikasi pembiayaan Anda dengan mudah.",
+    "startJourney": "Mulai Perjalanan Anda",
+    "startJourneyDescription": "Bergabunglah dengan ribuan bisnis yang menggunakan Savlo untuk membuka solusi pembiayaan yang disesuaikan untuk pertumbuhan.",
+    "features": {
+      "secure": "Pemrosesan Aman & Cepat",
+      "tracking": "Pelacakan Aplikasi Real-time",
+      "trusted": "Dipercaya oleh 1000+ Bisnis"
+    },
+    "switchToRegister": "Belum punya akun?",
+    "switchToLogin": "Sudah punya akun?"
+  },
+  "demoCredentials": {
+    "title": "Kredensial Demo",
+    "individual": "Individu:",
+    "business": "Bisnis:",
+    "password": "Kata Sandi:"
+  }
+}
+
+

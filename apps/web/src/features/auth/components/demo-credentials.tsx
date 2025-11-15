@@ -2,12 +2,19 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { HelpCircle, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { type Locale } from '@/i18n';
+import { getMessages } from '../lib/get-messages';
 
-export function DemoCredentials() {
+interface DemoCredentialsProps {
+  readonly locale: Locale;
+}
+
+export function DemoCredentials({ locale }: DemoCredentialsProps) {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const messages = getMessages(locale);
+  const t = messages.demoCredentials;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,7 +55,7 @@ export function DemoCredentials() {
           className="absolute right-0 top-6 z-50 w-72 rounded-lg border bg-popover p-4 shadow-lg animate-in fade-in-0 zoom-in-95"
         >
           <div className="flex items-start justify-between mb-3">
-            <h4 className="text-sm font-semibold">Demo Credentials</h4>
+            <h4 className="text-sm font-semibold">{t.title}</h4>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
@@ -61,15 +68,15 @@ export function DemoCredentials() {
           <div className="space-y-2 text-xs">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between p-2 bg-muted/50 rounded">
-                <span className="text-muted-foreground">Individual:</span>
+                <span className="text-muted-foreground">{t.individual}</span>
                 <span className="font-mono text-foreground">user@example.com</span>
               </div>
               <div className="flex items-center justify-between p-2 bg-muted/50 rounded">
-                <span className="text-muted-foreground">Business:</span>
+                <span className="text-muted-foreground">{t.business}</span>
                 <span className="font-mono text-foreground">business@example.com</span>
               </div>
               <div className="text-center pt-1 text-muted-foreground">
-                Password: <span className="font-semibold font-mono">password123</span>
+                {t.password} <span className="font-semibold font-mono">password123</span>
               </div>
             </div>
           </div>

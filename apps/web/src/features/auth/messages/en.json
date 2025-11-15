@@ -1,0 +1,56 @@
+{
+  "login": {
+    "title": "Welcome Back",
+    "subtitle": "Sign in to access your dashboard and manage your applications",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "error": "Invalid email or password",
+    "demoCredentials": "Need demo credentials?"
+  },
+  "register": {
+    "title": "Create Account",
+    "subtitle": "Start your financing journey with Savlo",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "userType": "User Type",
+    "accountType": "Account Type",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordHint": "Password (min. 8 characters)",
+    "terms": "I agree to the",
+    "termsLink": "Terms of Service",
+    "privacyLink": "Privacy Policy",
+    "createAccount": "Create Account",
+    "creatingAccount": "Creating account...",
+    "errors": {
+      "passwordMismatch": "Passwords do not match",
+      "passwordTooShort": "Password must be at least 8 characters"
+    }
+  },
+  "layout": {
+    "welcomeBack": "Welcome Back",
+    "welcomeBackDescription": "Sign in to access your dashboard and manage your financing applications with ease.",
+    "startJourney": "Start Your Journey",
+    "startJourneyDescription": "Join thousands of businesses using Savlo to unlock financing solutions tailored for growth.",
+    "features": {
+      "secure": "Secure & Fast Processing",
+      "tracking": "Real-time Application Tracking",
+      "trusted": "Trusted by 1000+ Businesses"
+    },
+    "switchToRegister": "Don't have an account?",
+    "switchToLogin": "Already have an account?"
+  },
+  "demoCredentials": {
+    "title": "Demo Credentials",
+    "individual": "Individual:",
+    "business": "Business:",
+    "password": "Password:"
+  }
+}
+
+

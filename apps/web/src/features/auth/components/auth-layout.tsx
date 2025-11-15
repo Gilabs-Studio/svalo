@@ -8,6 +8,7 @@ import { useParallax } from '@/features/landing/hooks/useParallax';
 import gsap from 'gsap';
 import { AnimatedHeading } from '@/features/landing/components/animated-heading';
 import { AnimatedText } from '@/features/landing/components/animated-text';
+import { getMessages } from '../lib/get-messages';
 
 interface AuthLayoutProps {
   readonly locale: Locale;
@@ -28,6 +29,8 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
   const [isAnimating, setIsAnimating] = useState(false);
   const prevModeRef = useRef<'login' | 'register'>(mode);
   const [displayMode, setDisplayMode] = useState<'login' | 'register'>(mode);
+  const messages = getMessages(locale);
+  const t = messages.layout;
   
   // Store form content separately to prevent content change during fade out
   const [formContent, setFormContent] = useState({
@@ -225,7 +228,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           src="/image/hero.webp"
           alt="Auth background"
           fill
-          className="object-cover"
+          className="object-cover scale-110"
           priority
           quality={90}
           style={{
@@ -246,7 +249,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               as="h1"
               className="text-5xl md:text-6xl font-black leading-tight text-white"
             >
-              Welcome Back
+              {t.welcomeBack}
             </AnimatedHeading>
           </div>
           <div className="overflow-hidden">
@@ -254,7 +257,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               delay={0.1}
               className="text-xl md:text-2xl text-white/90 leading-relaxed"
             >
-              Sign in to access your dashboard and manage your financing applications with ease.
+              {t.welcomeBackDescription}
             </AnimatedText>
           </div>
           
@@ -262,15 +265,15 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           <div className="space-y-4 pt-4">
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Secure & Fast Processing</span>
+              <span className="text-lg">{t.features.secure}</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Real-time Application Tracking</span>
+              <span className="text-lg">{t.features.tracking}</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Trusted by 1000+ Businesses</span>
+              <span className="text-lg">{t.features.trusted}</span>
             </div>
           </div>
         </div>
@@ -288,7 +291,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               as="h1"
               className="text-5xl md:text-6xl font-black leading-tight text-white"
             >
-              Start Your Journey
+              {t.startJourney}
             </AnimatedHeading>
           </div>
           <div className="overflow-hidden">
@@ -296,7 +299,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               delay={0.1}
               className="text-xl md:text-2xl text-white/90 leading-relaxed"
             >
-              Join thousands of businesses using Savlo to unlock financing solutions tailored for growth.
+              {t.startJourneyDescription}
             </AnimatedText>
           </div>
           
@@ -304,15 +307,15 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           <div className="space-y-4 pt-4">
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Secure & Fast Processing</span>
+              <span className="text-lg">{t.features.secure}</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Real-time Application Tracking</span>
+              <span className="text-lg">{t.features.tracking}</span>
             </div>
             <div className="flex items-center gap-3 text-white/80">
               <div className="w-2 h-2 rounded-full bg-white" />
-              <span className="text-lg">Trusted by 1000+ Businesses</span>
+              <span className="text-lg">{t.features.trusted}</span>
             </div>
           </div>
         </div>
@@ -373,7 +376,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
           <div className="text-center text-sm">
             {isLogin ? (
               <>
-                <span className="text-muted-foreground">Don&apos;t have an account? </span>
+                <span className="text-muted-foreground">{t.switchToRegister} </span>
                 <button
                   type="button"
                   onClick={() => onModeChange('register')}
@@ -398,7 +401,7 @@ export function AuthLayout({ locale, children, title, subtitle, icon, mode, onMo
               </>
             ) : (
               <>
-                <span className="text-muted-foreground">Already have an account? </span>
+                <span className="text-muted-foreground">{t.switchToLogin} </span>
                 <button
                   type="button"
                   onClick={() => onModeChange('login')}
